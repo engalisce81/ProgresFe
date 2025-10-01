@@ -1,14 +1,10 @@
 # Build stage
 FROM node:18 AS build
 WORKDIR /app
-
-# Install yarn if not included (usually it's included in node image)
-RUN npm install -g yarn
-
+# نحذف هذا السطر: RUN npm install -g yarn
 COPY package*.json ./
 COPY yarn.lock ./
 RUN yarn install
-
 COPY . .
 RUN yarn build --configuration Production
 
