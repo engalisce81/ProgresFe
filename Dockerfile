@@ -1,12 +1,10 @@
 # Build stage
-FROM node:18 AS build
+FROM node:18-alpine AS build
 WORKDIR /app
-# نحذف هذا السطر: RUN npm install -g yarn
 COPY package*.json ./
-COPY yarn.lock ./
-RUN yarn install
+RUN npm ci --only=production
 COPY . .
-RUN yarn build --configuration Production
+RUN npm run build --configuration Production
 
 # Production stage
 FROM nginx:alpine
