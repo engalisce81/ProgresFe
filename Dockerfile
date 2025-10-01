@@ -1,10 +1,18 @@
 # Build stage
-FROM node:18-alpine AS build
+FROM node:18 AS build
 WORKDIR /app
+
+# Copy package files first to leverage Docker cache
 COPY package*.json ./
-RUN npm ci --only=production
+
+# Install all dependencies (including devDependencies for building)
+RUN npm install
+
+# Copy the rest of the application
 COPY . .
-RUN npm run build --configuration Production
+
+# Build the Angular app
+RUN npm run build -- --prod
 
 # Production stage
 FROM nginx:alpine
