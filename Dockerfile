@@ -2,17 +2,25 @@
 FROM node:18 AS build
 WORKDIR /app
 
-# Copy package files first to leverage Docker cache
+# نسخ package files أولاً
 COPY package*.json ./
 
-# Install all dependencies (including devDependencies for building)
+# عرض إصدارات Node و npm للمساعدة في التشخيص
+RUN echo "Node version:" && node --version
+RUN echo "NPM version:" && npm --version
+
+# تثبيت dependencies
 RUN npm install
 
-# Copy the rest of the application
+# نسخ باقي الملفات
 COPY . .
 
-# Build the Angular app
-RUN npm run build -- --prod
+# فحص بعض الملفات المهمة
+RUN echo "Contents of package.json:" && cat package.json
+RUN echo "Contents of angular.json:" && cat angular.json
+
+# محاولة بناء التطبيق مع output مفصل
+RUN npm run build --prod || (echo "Build failed, checking configurations..." && exit 1)
 
 # Production stage
 FROM nginx:alpine
