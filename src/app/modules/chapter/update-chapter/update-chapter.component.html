@@ -1,0 +1,71 @@
+<div class="update-container">
+  <div class="header">
+    <h2>Update Chapter</h2>
+    <button type="button" routerLink="/chapters" class="btn btn-secondary">Back to List</button>
+  </div>
+
+  <form [formGroup]="chapterForm" (ngSubmit)="submit()" class="chapter-form">
+    <!-- Basic Information -->
+    <div class="form-section">
+      <h3>Basic Information</h3>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="name">Chapter Name *</label>
+          <input
+            id="name"
+            type="text"
+            formControlName="name"
+            class="form-control"
+            [class.is-invalid]="chapterForm.get('name')?.invalid && chapterForm.get('name')?.touched"
+            placeholder="Enter chapter name"
+          />
+          @if (chapterForm.get('name')?.invalid && chapterForm.get('name')?.touched) {
+            <div class="error-message">Chapter name is required</div>
+          }
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="courseId">Course *</label>
+          <select
+            id="courseId"
+            formControlName="courseId"
+            class="form-control"
+            [class.is-invalid]="chapterForm.get('courseId')?.invalid && chapterForm.get('courseId')?.touched">
+            <option value="">-- Select Course --</option>
+              @for(c of courses; track $index)
+            {
+              <option [value]="c.id">{{ c.name }}</option>
+            }
+          </select>
+          @if (chapterForm.get('courseId')?.invalid && chapterForm.get('courseId')?.touched) {
+            <div class="error-message">Course is required</div>
+          }
+        </div>
+      </div>
+    </div>
+
+    <!-- Actions -->
+    <div class="form-actions">
+      <button type="button" routerLink="/chapters" class="btn btn-secondary" [disabled]="loading">
+        Cancel
+      </button>
+      <button type="submit" class="btn btn-primary" [disabled]="chapterForm.invalid || loading">
+        @if (loading) {
+          <span class="spinner"></span>
+          Updating...
+        } @else {
+          Update Chapter
+        }
+      </button>
+    </div>
+  </form>
+
+  @if (loading) {
+    <div class="loading-overlay">
+      <div class="loading-spinner">Processing...</div>
+    </div>
+  }
+</div>

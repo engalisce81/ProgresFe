@@ -1,0 +1,178 @@
+.subscribers-container {
+  max-width: 1100px;
+  margin: 30px auto;
+  padding: 25px;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+}
+
+.subscribers-container h2 {
+  font-size: 26px;
+  margin-bottom: 25px;
+  display: flex;
+  align-items: center;
+  color: #222;
+  border-bottom: 2px solid #eee;
+  padding-bottom: 10px;
+}
+
+.subscribers-container h2 i {
+  margin-right: 10px;
+  color: #0d6efd;
+  font-size: 28px;
+}
+
+.loading,
+.no-data {
+  text-align: center;
+  font-size: 16px;
+  color: #777;
+  margin: 30px 0;
+}
+
+.students-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 24px;
+}
+
+.student-card {
+  background: #fafafa;
+  border-radius: 12px;
+  padding: 18px;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.student-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.12);
+}
+
+.student-card img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #eee;
+  align-self: center;
+}
+
+.student-card .info {
+  text-align: center;
+}
+
+.student-card .info h3 {
+  margin: 8px 0 4px;
+  font-size: 18px;
+  font-weight: 600;
+  color: #222;
+}
+
+.student-card .info p {
+  margin: 4px 0;
+  font-size: 14px;
+  color: #555;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.student-card .info i {
+  color: #0d6efd;
+}
+
+.status {
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 10px;
+  font-size: 13px;
+  display: inline-block;
+}
+
+.status.active {
+  background: #e8f9ee;
+  color: #1b9c48;
+  border: 1px solid #a4e3b4;
+}
+
+.status.inactive {
+  background: #fdeaea;
+  color: #c62828;
+  border: 1px solid #f5bcbc;
+}
+
+/* ✅ Actions buttons under card */
+.actions {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.actions .btn {
+  padding: 6px 14px;
+  font-size: 13px;
+  border-radius: 6px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.btn-success {
+  background: #28a745;
+  border: none;
+  color: #fff;
+}
+
+.btn-success:hover {
+  background: #218838;
+}
+
+.btn-danger {
+  background: #dc3545;
+  border: none;
+  color: #fff;
+}
+
+.btn-danger:hover {
+  background: #b52a37;
+}
+
+/* ✅ Pagination */
+.pagination {
+  margin-top: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 14px;
+}
+
+.pagination button {
+  padding: 8px 18px;
+  border-radius: 6px;
+  background: #0d6efd;
+  border: none;
+  color: white;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background 0.2s ease;
+}
+
+.pagination button:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}
+
+.pagination button:hover:not(:disabled) {
+  background: #0b5ed7;
+}
+
+.pagination span {
+  font-size: 15px;
+  font-weight: 500;
+  color: #444;
+}

@@ -1,0 +1,124 @@
+<div class="create-container">
+  <div class="header">
+    <h2>Create New Course</h2>
+    <button type="button" routerLink="/courses" class="btn btn-secondary">Back to List</button>
+  </div>
+
+  <form [formGroup]="courseForm" (ngSubmit)="submit()" class="course-form">
+
+    <div class="form-section">
+      <h3>Basic Information</h3>
+
+      <!-- Course Name -->
+      <div class="form-row">
+        <div class="form-group">
+          <label for="name">Course Name *</label>
+          <input id="name" type="text" formControlName="name" class="form-control"
+                 [class.is-invalid]="courseForm.get('name')?.invalid && courseForm.get('name')?.touched"
+                 placeholder="Enter course name">
+          @if (courseForm.get('name')?.invalid && courseForm.get('name')?.touched) {
+            <div class="error-message">Course name is required</div>
+          }
+        </div>
+      </div>
+
+      <!-- Title -->
+      <div class="form-row">
+        <div class="form-group">
+          <label for="title">Title *</label>
+          <input id="title" type="text" formControlName="title" class="form-control"
+                 [class.is-invalid]="courseForm.get('title')?.invalid && courseForm.get('title')?.touched"
+                 placeholder="Enter title">
+          @if (courseForm.get('title')?.invalid && courseForm.get('title')?.touched) {
+            <div class="error-message">Title is required</div>
+          }
+        </div>
+      </div>
+
+      <!-- Description -->
+      <div class="form-row">
+        <div class="form-group">
+          <label for="description">Description</label>
+          <textarea id="description" formControlName="description" class="form-control" rows="3"
+                    placeholder="Enter course description"></textarea>
+        </div>
+      </div>
+
+      <!-- Price -->
+      <div class="form-row">
+        <div class="form-group">
+          <label for="price">Price *</label>
+          <input id="price" type="number" formControlName="price" class="form-control"
+                 [class.is-invalid]="courseForm.get('price')?.invalid && courseForm.get('price')?.touched">
+          @if (courseForm.get('price')?.invalid && courseForm.get('price')?.touched) {
+            <div class="error-message">Price is required</div>
+          }
+        </div>
+      </div>
+
+     
+
+      <!-- Subject -->
+      <div class="form-row">
+        <div class="form-group">
+          <label for="subjectId">Subject *</label>
+          <select id="subjectId" formControlName="subjectId" class="form-control"
+                  [class.is-invalid]="courseForm.get('subjectId')?.invalid && courseForm.get('subjectId')?.touched">
+            <option value="">-- Select Subject --</option>
+            @for (s of subjects; track s.id) {
+              <option [value]="s.id">{{ s.name }}</option>
+            }
+          </select>
+          @if (courseForm.get('subjectId')?.invalid && courseForm.get('subjectId')?.touched) {
+            <div class="error-message">Subject is required</div>
+          }
+        </div>
+      </div>
+
+      <!-- Logo -->
+      <div class="form-row">
+  <div class="form-group">
+    <label for="logo">Logo *</label>
+    <input id="logo" type="file" (change)="onFileSelected($event)" class="form-control" accept="image/*" required>
+    @if (logoPreview) {
+      <div class="logo-preview" style="margin-top:10px;">
+        <img [src]="logoPreview" alt="Logo Preview" style="max-width:150px;">
+      </div>
+    }
+  </div>
+</div>
+
+      <!-- Active & Lifetime -->
+      <div class="form-row">
+        <div class="form-group">
+          <label>
+            <input type="checkbox" formControlName="isActive"> Active
+          </label>
+          <label>
+            <input type="checkbox" formControlName="isLifetime"> Lifetime
+          </label>
+        </div>
+      </div>
+
+      <!-- Duration -->
+      <div class="form-row">
+        <div class="form-group">
+          <label for="durationInDays">Duration (Days)</label>
+          <input id="durationInDays" type="number" formControlName="durationInDays" class="form-control">
+        </div>
+      </div>
+
+    </div>
+
+    <div class="form-actions">
+      <button type="button" routerLink="/courses" class="btn btn-secondary" [disabled]="loading">Cancel</button>
+      <button type="submit" class="btn btn-primary" [disabled]="courseForm.invalid || loading">
+        @if (loading) {
+          <span class="spinner"></span> Creating...
+        } @else {
+          Create Course
+        }
+      </button>
+    </div>
+  </form>
+</div>

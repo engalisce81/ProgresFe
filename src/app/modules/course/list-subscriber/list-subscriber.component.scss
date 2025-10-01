@@ -1,0 +1,134 @@
+.subscribers-container {
+  max-width: 1000px;
+  margin: 20px auto;
+  padding: 20px;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.subscribers-container h2 {
+  font-size: 24px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  color: #333;
+  border-bottom: 2px solid #ddd;
+  padding-bottom: 8px;
+}
+
+.subscribers-container h2 i {
+  margin-right: 8px;
+  color: #0d6efd;
+}
+
+.loading,
+.no-data {
+  text-align: center;
+  font-size: 16px;
+  color: #777;
+  margin: 20px 0;
+}
+
+.students-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 20px;
+}
+
+.student-card {
+  background: #f9f9f9;
+  border-radius: 10px;
+  overflow: hidden;
+  padding: 16px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  display: flex;
+  gap: 15px;
+  align-items: flex-start;
+}
+
+.student-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.12);
+}
+
+.student-card img {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #ddd;
+}
+
+.student-card .info {
+  flex: 1;
+}
+
+.student-card .info h3 {
+  margin: 0;
+  font-size: 18px;
+  color: #222;
+}
+
+.student-card .info p {
+  margin: 4px 0;
+  font-size: 14px;
+  color: #555;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.student-card .info i {
+  color: #0d6efd;
+}
+
+.status {
+  font-weight: bold;
+  padding: 2px 8px;
+  border-radius: 8px;
+  font-size: 12px;
+}
+
+.status.active {
+  background: #d1f7d6;
+  color: #1b9c48;
+}
+
+.status.inactive {
+  background: #fddcdc;
+  color: #b3261e;
+}
+
+.pagination {
+  margin-top: 20px;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  align-items: center;
+}
+
+.pagination button {
+  padding: 8px 16px;
+  border-radius: 6px;
+  background: #0d6efd;
+  border: none;
+  color: white;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.pagination button:disabled {
+  background: #999;
+  cursor: not-allowed;
+}
+
+.pagination button:hover:not(:disabled) {
+  background: #0b5ed7;
+}
+
+.pagination span {
+  font-size: 14px;
+  font-weight: 500;
+}

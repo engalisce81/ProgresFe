@@ -1,0 +1,41 @@
+<div class="subscribers-container">
+  <h2><i class="bi bi-people"></i> Course Subscribers</h2>
+
+  @if (loading) {
+    <div class="loading">Loading...</div>
+  }
+
+  @if (!loading && students.length === 0) {
+    <div class="no-data">No subscribers yet</div>
+  }
+
+  <div class="students-grid">
+    @for (student of students; track student.id) {
+      <div class="student-card">
+        <img [src]="student.profilePictureUrl || 'assets/default-user.png'" alt="student image" />
+        <div class="info">
+          <h3>name student</h3>
+          <p><i class="bi bi-envelope"></i> email</p>
+          <p><i class="bi bi-calendar"></i> Subscribe Date: data</p>
+          <p><i class="bi bi-check-circle"></i> Status:
+            @if (student.isActive) {
+              <span class="status active">Active</span>
+            } @else {
+              <span class="status inactive">Inactive</span>
+            }
+          </p>
+        </div>
+      </div>
+    }
+  </div>
+
+  <div class="pagination">
+    <button class="btn btn-secondary" (click)="prevPage()" [disabled]="pageNumber === 1">
+      <i class="bi bi-arrow-left"></i> Previous
+    </button>
+    <span>Page {{ pageNumber }}</span>
+    <button class="btn btn-secondary" (click)="nextPage()" [disabled]="pageNumber * pageSize >= totalCount">
+      Next <i class="bi bi-arrow-right"></i>
+    </button>
+  </div>
+</div>

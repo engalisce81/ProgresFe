@@ -1,0 +1,105 @@
+.loading {
+  font-weight: bold;
+  color: #007bff;
+  text-align: center;
+  padding: 1rem;
+  font-size: 1.2em;
+}
+
+.loading {
+  font-weight: bold;
+  color: gray;
+}
+
+.quiz-card {
+  margin: 1rem 0;
+  padding: 1rem;
+  border: 2px solid #007bff;
+  border-radius: 8px;
+  background: #f8f9fa;
+}
+
+.question-card {
+  margin: 0.5rem 0;
+  padding: 0.7rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background: #fff;
+}
+
+.question-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.question-header .score {
+  margin-left: 10px;
+  font-size: 0.9em;
+  color: #555;
+}
+
+.question-header .type {
+  margin-left: 10px;
+  font-size: 0.85em;
+  color: #777;
+}
+
+.actions button {
+  margin-left: 5px;
+  border: none;
+  cursor: pointer;
+  padding: 5px 8px;
+  border-radius: 4px;
+}
+
+.actions .delete {
+  background: #dc3545;
+  color: white;
+}
+
+.answers {
+  margin-top: 8px;
+  padding-left: 20px;
+}
+
+.answers li {
+  margin: 4px 0;
+}
+
+.answers li.correct {
+  color: green;
+  font-weight: bold;
+}
+
+.answers li:not(.correct) {
+  color: #444;
+}
+
+.check {
+  margin-left: 5px;
+}
+
+.wrong {
+  margin-left: 5px;
+}
+.delete-confirm-banner {
+  background: #fff3cd;
+  color: #856404;
+  border: 1px solid #ffeeba;
+  padding: 10px 15px;
+  margin-bottom: 15px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  p {
+    margin: 0;
+    flex: 1;
+  }
+
+  .btn {
+    margin-left: 8px;
+  }
+}

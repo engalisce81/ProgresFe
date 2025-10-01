@@ -1,0 +1,50 @@
+@if (loading) {
+  <div class="loading">⏳ Loading...</div>
+}
+
+<!-- ✅ Banner للـ Confirm -->
+@if (confirmDelete.show) {
+  <div class="delete-confirm-banner">
+    <p>⚠️ Are you sure you want to delete <strong>{{ confirmDelete.question?.title }}</strong>?</p>
+    <button (click)="confirmDeleteYes()" class="btn btn-danger">Yes, Delete</button>
+    <button (click)="confirmDeleteCancel()" class="btn btn-secondary">Cancel</button>
+  </div>
+}
+
+@if (lecture) {
+  <h2>{{ lecture.title }}</h2>
+
+  @for (quiz of lecture.quizzes; track quiz.id) {
+    <div class="quiz-card">
+      <h3>📘 {{ quiz.title }}</h3>
+
+      @for (question of quiz.questions; track question.id) {
+        <div class="question-card">
+          <div class="question-header">
+            <strong>❓ {{ question.title }}</strong>
+            <span class="score">[{{ question.score }} pts]</span>
+            <span class="type">({{ question.questionTypeName }})</span>
+
+            <div class="actions">
+              <button (click)="editQuestion(question)">✏️ Edit</button>
+              <button (click)="deleteQuestion(question)" class="delete">🗑️ Delete</button>
+            </div>
+          </div>
+
+          <ul class="answers">
+            @for (ans of question.answers; track ans.id) {
+              <li [class.correct]="ans.isCorrect">
+                {{ ans.answer }}
+                @if (ans.isCorrect) {
+                  <span class="check">✅</span>
+                } @else {
+                  <span class="wrong">❌</span>
+                }
+              </li>
+            }
+          </ul>
+        </div>
+      }
+    </div>
+  }
+}
