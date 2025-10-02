@@ -10,97 +10,84 @@
     <div class="form-section">
       <h3>Basic Information</h3>
 
-      <div class="form-row">  
-        <!-- Subject Name -->
+      <!-- Subject Name -->
+      <div class="form-row">
         <div class="form-group">
           <label for="name">Subject Name *</label>
-          <input
-            id="name"
-            type="text"
-            formControlName="name"
-            class="form-control"
-            [class.is-invalid]="subjectForm.get('name')?.invalid && subjectForm.get('name')?.touched"
-            placeholder="Enter subject name">
-
+          <input id="name" type="text" formControlName="name" class="form-control"
+                 [class.is-invalid]="subjectForm.get('name')?.invalid && subjectForm.get('name')?.touched"
+                 placeholder="Enter subject name">
           @if (subjectForm.get('name')?.invalid && subjectForm.get('name')?.touched) {
-            <div class="error-message">
-              Subject name is required
-            </div>
+            <div class="error-message">Subject name is required</div>
           }
         </div>
       </div>
 
+      <!-- University -->
       <div class="form-row">
-        <!-- Term Dropdown -->
         <div class="form-group">
-          <label for="termId">Term *</label>
-          <select
-            id="termId"
-            formControlName="termId"
-            class="form-control"
-            [class.is-invalid]="subjectForm.get('termId')?.invalid && subjectForm.get('termId')?.touched">
-            <option value="">-- Select Term --</option>
-            @for(term of terms; track $index){<option [value]="term.id">{{ term.name }}</option>}
+          <label for="universityId">University *</label>
+          <select id="universityId" formControlName="universityId" class="form-control"
+                  (change)="onUniversityChange($event.target.value)">
+            <option value="">-- Select University --</option>
+            @for (uni of universities; track $index) {
+              <option [value]="uni.id">{{ uni.name }}</option>
+            }
           </select>
-
-          @if (subjectForm.get('termId')?.invalid && subjectForm.get('termId')?.touched) {
-            <div class="error-message">
-              Term is required
-            </div>
-          }
         </div>
       </div>
 
+      <!-- College -->
       <div class="form-row">
-        <!-- Grade Level Dropdown -->
+        <div class="form-group">
+          <label for="collegeId">College *</label>
+          <select id="collegeId" formControlName="collegeId" class="form-control"
+                  (change)="onCollegeChange($event.target.value)">
+            <option value="">-- Select College --</option>
+            @for (col of colleges; track $index) {
+              <option [value]="col.id">{{ col.name }}</option>
+            }
+          </select>
+        </div>
+      </div>
+
+      <!-- Grade Level -->
+      <div class="form-row">
         <div class="form-group">
           <label for="gradeLevelId">Grade Level *</label>
-          <select
-            id="gradeLevelId"
-            formControlName="gradeLevelId"
-            class="form-control"
-            [class.is-invalid]="subjectForm.get('gradeLevelId')?.invalid && subjectForm.get('gradeLevelId')?.touched">
+          <select id="gradeLevelId" formControlName="gradeLevelId" class="form-control">
             <option value="">-- Select Grade Level --</option>
-            @for(level of gradeLevels; track $index){<option [value]="level.id">{{ level.name }}</option>}
+            @for (level of gradeLevels; track $index) {
+              <option [value]="level.id">{{ level.name }}</option>
+            }
           </select>
+        </div>
+      </div>
 
-          @if (subjectForm.get('gradeLevelId')?.invalid && subjectForm.get('gradeLevelId')?.touched) {
-            <div class="error-message">
-              Grade Level is required
-            </div>
-          }
+      <!-- Term -->
+      <div class="form-row">
+        <div class="form-group">
+          <label for="termId">Term *</label>
+          <select id="termId" formControlName="termId" class="form-control">
+            <option value="">-- Select Term --</option>
+            @for (term of terms; track $index) {
+              <option [value]="term.id">{{ term.name }}</option>
+            }
+          </select>
         </div>
       </div>
     </div>
 
     <!-- Form Actions -->
     <div class="form-actions">
-      <button
-        type="button"
-        routerLink="/subjects"
-        class="btn btn-secondary"
-        [disabled]="loading">
-        Cancel
-      </button>
-
-      <button
-        type="submit"
-        class="btn btn-primary"
-        [disabled]="subjectForm.invalid || loading">
+      <button type="button" routerLink="/subjects" class="btn btn-secondary" [disabled]="loading">Cancel</button>
+      <button type="submit" class="btn btn-primary" [disabled]="subjectForm.invalid || loading">
         @if (loading) {
-          <span class="spinner"></span>
-          Creating...
+          <span class="spinner"></span> Creating...
         } @else {
           Create Subject
         }
       </button>
     </div>
   </form>
-
-  <!-- Loading Overlay -->
-  @if (loading) {
-    <div class="loading-overlay">
-      <div class="loading-spinner">Processing...</div>
-    </div>
-  }
 </div>

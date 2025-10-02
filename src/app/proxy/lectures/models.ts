@@ -23,6 +23,7 @@ export interface LectureDto extends EntityDto<string> {
   chapterName?: string;
   quizTime: number;
   quizTryCount: number;
+  quizCount: number;
   isVisible: boolean;
 }
 

@@ -33,9 +33,13 @@ const routes: Routes = [
     path: 'chapters',
     loadChildren: () => import('./modules/chapter/chapter.module').then(m => m.ChapterModule),
   },
- 
-  
-  
+  {
+    path: 'accountc',
+    loadChildren: () => import('./modules/account/account.module').then(m => m.AccountModule),
+  },
+
+
+
   {
     path: 'account',
     loadChildren: () => import('@abp/ng.account').then(m => m.AccountModule.forLazy()),

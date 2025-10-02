@@ -1,6 +1,7 @@
 import * as AccountCustoms from './account-customs';
 import * as Chapters from './chapters';
 import * as Courses from './courses';
+import * as Emails from './emails';
 import * as Lectures from './lectures';
 import * as LookUp from './look-up';
 import * as MediaItems from './media-items';
@@ -12,4 +13,4 @@ import * as Quizzes from './quizzes';
 import * as Response from './response';
 import * as Universites from './universites';
 import * as Volo from './volo';
-export { AccountCustoms, Chapters, Courses, Lectures, LookUp, MediaItems, Microsoft, ProfileUsers, QuestionAnswer, Questions, Quizzes, Response, Universites, Volo };
+export { AccountCustoms, Chapters, Courses, Emails, Lectures, LookUp, MediaItems, Microsoft, ProfileUsers, QuestionAnswer, Questions, Quizzes, Response, Universites, Volo };

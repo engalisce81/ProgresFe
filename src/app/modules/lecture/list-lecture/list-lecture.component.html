@@ -40,6 +40,13 @@
         <th>#</th>
         <th>Title</th>
         <th>Chapter</th>
+        <th>Content</th>
+        <th>Video</th>
+        <th>Pdf</th>
+        <th>QuizTime</th>
+        <th>QuizTryCount</th>
+        <th>QuizCount</th>
+        <th>Visible</th>
         <th>Actions</th>
       </tr>
     </thead>
@@ -51,27 +58,31 @@
           <i class="fas fa-video me-1"></i> {{lec.title}}
         </td>
         <td>{{lec.chapterName}}</td>
+        <td>{{lec.content}}</td>
+        <td> <a [href]="lec.videoUrl" target="_blank"> video </a></td>
+        <td> <a [href]="lec.pdfUrl" target="_blank"> Pdf </a></td>
+        <td>{{lec.quizTime}}</td>
+        <td>{{lec.quizTryCount}}</td>
+        <td>{{lec.quizCount}}</td>
+        @if(lec.isVisible){
+        <td> Visbile</td>
+        }@else{
+        <td> not Visible</td>
+        }
         <td class="actions">
-        
-        <!-- زر عرض الأسئلة -->
-<button 
-  [routerLink]="['/lectures/questions', lectures[i].id]" 
-  class="btn btn-view" 
-  title="View Questions">
-  <i class="bi bi-card-list"></i> <!-- بدل eye -->
-</button>
-
-<!-- زر إنشاء سؤال -->
-<button 
-  [routerLink]="['/lectures/createquestion', lectures[i].id]" 
-  class="btn btn-view" 
-  title="Create Question">
-  <i class="bi bi-plus-circle"></i> <!-- بدل eye -->
-</button>
- <button [routerLink]="['/lectures/view', lectures[i].id]" class="btn btn-view" title="View">
-            <i class="bi bi-eye"></i>
+          <!-- زر عرض الأسئلة -->
+          <button [routerLink]="['/lectures/questions', lec.id]" class="btn btn-view" title="View Questions">
+            <i class="bi bi-card-list"></i> <!-- بدل eye -->
           </button>
-          <button [routerLink]="['/lectures/update', lectures[i].id]" class="btn btn-edit" title="Edit">
+
+          <!-- زر إنشاء سؤال -->
+          <button [routerLink]="['/lectures/createquestion', lec.id]" class="btn btn-view"
+            title="Create Question">
+            <i class="bi bi-plus-circle"></i> <!-- بدل eye -->
+          </button>
+
+          <button [routerLink]="['/lectures/view', lec.id]" class="btn btn-view" title="View"><i class="bi bi-eye"></i> </button>
+          <button [routerLink]="['/lectures/update', lec.id]" class="btn btn-edit" title="Edit">
             <i class="bi bi-pencil"></i>
           </button>
           <button (click)="confirmDelete(lectures[i])" class="btn btn-delete" title="Delete">
@@ -87,18 +98,12 @@
   @if (totalCount > pageSize) {
   <div class="pagination">
     <!-- Previous -->
-    <button 
-      class="btn btn-previous" 
-      [disabled]="pageIndex === 1" 
-      (click)="onPageChange(pageIndex - 1)">
+    <button class="btn btn-previous" [disabled]="pageIndex === 1" (click)="onPageChange(pageIndex - 1)">
       Previous
     </button>
 
     <!-- Next -->
-    <button 
-      class="btn btn-next" 
-      [disabled]="pageIndex === totalPages" 
-      (click)="onPageChange(pageIndex + 1)">
+    <button class="btn btn-next" [disabled]="pageIndex === totalPages" (click)="onPageChange(pageIndex + 1)">
       Next
     </button>
   </div>

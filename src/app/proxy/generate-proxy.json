@@ -934,6 +934,80 @@
               },
               "allowAnonymous": true,
               "implementFrom": "Dev.Acadmy.AccountCustoms.AccountcustomAppService"
+            },
+            "SendNotificationToEmailAsyncByInput": {
+              "uniqueName": "SendNotificationToEmailAsyncByInput",
+              "name": "SendNotificationToEmailAsync",
+              "httpMethod": "POST",
+              "url": "api/app/accountcustom/send-notification-to-email",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "input",
+                  "typeAsString": "Dev.Acadmy.Emails.CreateEmailDto, Dev.Acadmy.Application.Contracts",
+                  "type": "Dev.Acadmy.Emails.CreateEmailDto",
+                  "typeSimple": "Dev.Acadmy.Emails.CreateEmailDto",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "input",
+                  "name": "input",
+                  "jsonName": null,
+                  "type": "Dev.Acadmy.Emails.CreateEmailDto",
+                  "typeSimple": "Dev.Acadmy.Emails.CreateEmailDto",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "Body",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "Dev.Acadmy.Response.ResponseApi<Dev.Acadmy.Emails.EmailDto>",
+                "typeSimple": "Dev.Acadmy.Response.ResponseApi<Dev.Acadmy.Emails.EmailDto>"
+              },
+              "allowAnonymous": true,
+              "implementFrom": "Dev.Acadmy.AccountCustoms.AccountcustomAppService"
+            },
+            "CheckCodeAsyncByInput": {
+              "uniqueName": "CheckCodeAsyncByInput",
+              "name": "CheckCodeAsync",
+              "httpMethod": "POST",
+              "url": "api/app/accountcustom/check-code",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "input",
+                  "typeAsString": "Dev.Acadmy.Emails.UpdateEmailDto, Dev.Acadmy.Application.Contracts",
+                  "type": "Dev.Acadmy.Emails.UpdateEmailDto",
+                  "typeSimple": "Dev.Acadmy.Emails.UpdateEmailDto",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "input",
+                  "name": "input",
+                  "jsonName": null,
+                  "type": "Dev.Acadmy.Emails.UpdateEmailDto",
+                  "typeSimple": "Dev.Acadmy.Emails.UpdateEmailDto",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "Body",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "Dev.Acadmy.Response.ResponseApi<Dev.Acadmy.Emails.EmailDto>",
+                "typeSimple": "Dev.Acadmy.Response.ResponseApi<Dev.Acadmy.Emails.EmailDto>"
+              },
+              "allowAnonymous": true,
+              "implementFrom": "Dev.Acadmy.AccountCustoms.AccountcustomAppService"
             }
           }
         },
@@ -8042,6 +8116,105 @@
         }
       ]
     },
+    "Dev.Acadmy.Emails.CreateEmailDto": {
+      "baseType": null,
+      "isEnum": false,
+      "enumNames": null,
+      "enumValues": null,
+      "genericArguments": null,
+      "properties": [
+        {
+          "name": "EmailAdrees",
+          "jsonName": null,
+          "type": "System.String",
+          "typeSimple": "string",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        }
+      ]
+    },
+    "Dev.Acadmy.Emails.EmailDto": {
+      "baseType": "Volo.Abp.Application.Dtos.EntityDto<System.Guid>",
+      "isEnum": false,
+      "enumNames": null,
+      "enumValues": null,
+      "genericArguments": null,
+      "properties": [
+        {
+          "name": "EmailAdrees",
+          "jsonName": null,
+          "type": "System.String",
+          "typeSimple": "string",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        },
+        {
+          "name": "Code",
+          "jsonName": null,
+          "type": "System.String",
+          "typeSimple": "string",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        },
+        {
+          "name": "IsAccept",
+          "jsonName": null,
+          "type": "System.Boolean",
+          "typeSimple": "boolean",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        }
+      ]
+    },
+    "Dev.Acadmy.Emails.UpdateEmailDto": {
+      "baseType": null,
+      "isEnum": false,
+      "enumNames": null,
+      "enumValues": null,
+      "genericArguments": null,
+      "properties": [
+        {
+          "name": "EmailAdrees",
+          "jsonName": null,
+          "type": "System.String",
+          "typeSimple": "string",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        },
+        {
+          "name": "Code",
+          "jsonName": null,
+          "type": "System.String",
+          "typeSimple": "string",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        }
+      ]
+    },
     "Dev.Acadmy.Lectures.CreateUpdateLectureDto": {
       "baseType": null,
       "isEnum": false,
@@ -8264,6 +8437,18 @@
         },
         {
           "name": "QuizTryCount",
+          "jsonName": null,
+          "type": "System.Int32",
+          "typeSimple": "number",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        },
+        {
+          "name": "QuizCount",
           "jsonName": null,
           "type": "System.Int32",
           "typeSimple": "number",
@@ -9913,6 +10098,54 @@
         },
         {
           "name": "GradeLevelName",
+          "jsonName": null,
+          "type": "System.String",
+          "typeSimple": "string",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        },
+        {
+          "name": "CollegeId",
+          "jsonName": null,
+          "type": "System.Guid",
+          "typeSimple": "string",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        },
+        {
+          "name": "CollegeName",
+          "jsonName": null,
+          "type": "System.String",
+          "typeSimple": "string",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        },
+        {
+          "name": "UniversityId",
+          "jsonName": null,
+          "type": "System.Guid",
+          "typeSimple": "string",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        },
+        {
+          "name": "UniversityName",
           "jsonName": null,
           "type": "System.String",
           "typeSimple": "string",

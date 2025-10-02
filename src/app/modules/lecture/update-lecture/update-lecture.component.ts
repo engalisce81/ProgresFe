@@ -32,9 +32,9 @@ export class UpdateLectureComponent {
   ) {
     this.lectureForm = this.fb.group({
       title: ['', Validators.required],
+      content:['', Validators.required],
       courseId: ['', Validators.required],
       chapterId: ['', Validators.required],
-      content: [''],
       videoUrl: [''],
       pdfUrl: [''],
       quizTime: [0, [Validators.required, Validators.min(1)]],
@@ -84,7 +84,7 @@ export class UpdateLectureComponent {
           pdfUrl: lec.data.pdfUrl,
           quizTime: lec.data.quizTime,
           quizTryCount: lec.data.quizTryCount,
-          quizCount: 0,
+          quizCount: lec.data.quizCount,
           isVisible: lec.data.isVisible
         });
 
