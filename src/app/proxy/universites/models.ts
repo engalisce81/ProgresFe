@@ -28,6 +28,10 @@ export interface SubjectDto extends EntityDto<string> {
   termName?: string;
   gradeLevelId?: string;
   gradeLevelName?: string;
+  collegeId?: string;
+  collegeName?: string;
+  universityId?: string;
+  universityName?: string;
 }
 
 export interface UniversityDto extends AuditedEntityDto<string> {

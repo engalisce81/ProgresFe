@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
 import { Router, ActivatedRoute, RouterLink } from '@angular/router';
 import { LookupDto } from '@proxy/look-up';
-import { SubjectService, CreateUpdateSubjectDto, CollegeService } from '@proxy/universites';
+import { SubjectService, CreateUpdateSubjectDto, CollegeService, UniversityService } from '@proxy/universites';
 
 @Component({
   selector: 'app-update-subject',
@@ -10,55 +10,108 @@ import { SubjectService, CreateUpdateSubjectDto, CollegeService } from '@proxy/u
   templateUrl: './update-subject.component.html',
   styleUrl: './update-subject.component.scss'
 })
+
 export class UpdateSubjectComponent {
- subjectForm: FormGroup;
+  subjectForm: FormGroup;
   loading = false;
-  terms: LookupDto[] = [];
+
+  universities: LookupDto[] = [];
+  colleges: LookupDto[] = [];
   gradeLevels: LookupDto[] = [];
+  terms: LookupDto[] = [];
+
   subjectId!: string;
 
   constructor(
     private fb: FormBuilder,
     private subjectService: SubjectService,
-    private gollegeService:CollegeService,
+    private universityService: UniversityService,
+    private collegeService: CollegeService,
+    private route: ActivatedRoute,
     private router: Router,
-    private route: ActivatedRoute
   ) {
     this.subjectForm = this.fb.group({
       name: ['', Validators.required],
-      termId: ['', Validators.required],
+      universityId: ['', Validators.required],
+      collegeId: ['', Validators.required],
       gradeLevelId: ['', Validators.required],
+      termId: ['', Validators.required],
     });
   }
 
   ngOnInit(): void {
     this.subjectId = this.route.snapshot.paramMap.get('id')!;
-    this.loadLookups();
+    this.loadUniversities();
+    this.loadTerms();
     this.loadSubject();
   }
 
-  loadLookups() {
-    this.gollegeService.getTermList().subscribe({
-      next: (res) => this.terms = res.items,
-      error: (err) => console.error('Error loading terms', err)
-    });
-
-    this.gollegeService.getGradeLevelList("3a1ca04e-c99e-70f6-a15e-190f320e8114").subscribe({
-      next: (res) => this.gradeLevels = res.items,
-      error: (err) => console.error('Error loading grade levels', err)
+  loadUniversities() {
+    this.universityService.getUniversitysList().subscribe({
+      next: (res) => this.universities = res.items,
+      error: (err) => console.error('Error loading universities', err)
     });
   }
 
   loadSubject() {
     this.subjectService.get(this.subjectId).subscribe({
       next: (subject) => {
-        this.subjectForm.patchValue({
-          name: subject.data.name,
-          termId: subject.data.termId,
-          gradeLevelId: subject.data.gradeLevelId,
-        });
+        this.subjectForm.patchValue(subject.data);
+
+       if (subject.data.universityId) {
+         this.onUniversityChange(subject.data.universityId, true);}
       },
       error: (err) => console.error('Error loading subject', err)
+    });
+  }
+
+  onUniversityChange(universityId: string, isEdit = false) {
+    this.colleges = [];
+    this.gradeLevels = [];
+    this.subjectForm.patchValue({ collegeId: '', gradeLevelId: '' });
+
+    if (!universityId) return;
+
+    this.collegeService.getCollegesList(universityId).subscribe({
+      next: (res) => {
+        this.colleges = res.items;
+
+        // لو تحديث: نعيد تحميل الـ GradeLevels
+        if (isEdit) {
+          const colId = this.subjectForm.get('collegeId')?.value;
+          if (colId) this.onCollegeChange(colId, true);
+        }
+      },
+      error: (err) => console.error('Error loading colleges', err)
+    });
+  }
+
+  onCollegeChange(collegeId: string, isEdit = false) {
+    this.gradeLevels = [];
+    this.subjectForm.patchValue({ gradeLevelId: '' });
+
+    if (!collegeId) return;
+
+    this.collegeService.getGradeLevelList(collegeId).subscribe({
+      next: (res) => {
+        this.gradeLevels = res.items;
+
+        // لو تحديث: نخلي الـ grade level يتملأ
+        if (isEdit) {
+          const gradeId = this.subjectForm.get('gradeLevelId')?.value;
+          if (gradeId) {
+            this.subjectForm.patchValue({ gradeLevelId: gradeId });
+          }
+        }
+      },
+      error: (err) => console.error('Error loading grade levels', err)
+    });
+  }
+
+  loadTerms() {
+    this.collegeService.getTermList().subscribe({
+      next: (res) => this.terms = res.items,
+      error: (err) => console.error('Error loading terms', err)
     });
   }
 
@@ -75,7 +128,7 @@ export class UpdateSubjectComponent {
       error: (err) => {
         this.loading = false;
         alert('Error: ' + err.message);
-      },
+      }
     });
   }
 }

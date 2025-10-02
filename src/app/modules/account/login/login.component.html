@@ -1,0 +1,58 @@
+<div class="login-container">
+  <div class="login-card">
+    <h2 class="login-title">Login</h2>
+
+    <form (ngSubmit)="login()" #loginForm="ngForm" class="login-form">
+      <!-- Username -->
+      <div class="form-group">
+        <label class="form-label">Username</label>
+        <input
+          type="text"
+          [(ngModel)]="username"
+          name="username"
+          required
+          class="form-input"
+        />
+      </div>
+
+      <!-- Password -->
+      <div class="form-group">
+        <label class="form-label">Password</label>
+        <input
+          type="password"
+          [(ngModel)]="password"
+          name="password"
+          required
+          class="form-input"
+        />
+      </div>
+
+      <!-- Remember Me -->
+      <div class="form-remember">
+        <input
+          type="checkbox"
+          [(ngModel)]="rememberMe"
+          name="rememberMe"
+          class="checkbox"
+        />
+        <label class="form-label">Remember Me</label>
+      </div>
+
+      <!-- Submit Button -->
+      <button
+        type="submit"
+        [disabled]="loginForm.invalid"
+        class="btn-submit"
+      >
+        Login
+      </button>
+    </form>
+
+    <!-- 🔹 رابط للتسجيل -->
+    <div class="register-link">
+      <p>Don’t have an account?
+        <a [routerLink]="['register']">Register here</a>
+      </p>
+    </div>
+  </div>
+</div>

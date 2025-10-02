@@ -31,9 +31,9 @@ lectureForm: FormGroup;
   ) {
     this.lectureForm = this.fb.group({
       title: ['', Validators.required],
+      content:['', Validators.required],
       courseId: ['', Validators.required], // جديد: الكورس لازم يتحدد
       chapterId: [{ value: '', disabled: true }, Validators.required], // disabled by default
-      content: [''],
       videoUrl: [''],
       pdfUrl: [''],
       quizTime: [0, [Validators.required, Validators.min(1)]],
