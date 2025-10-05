@@ -64,7 +64,7 @@ export class RegisterComponent {
     this.accountService.register(this.registerDto).subscribe({
       next: (res) => {
         alert('✅ Register success');
-        this.router.navigateByUrl('/login');
+        this.router.navigateByUrl('/accountc');
       },
       error: (err) => {
         console.error('❌ Register failed', err);

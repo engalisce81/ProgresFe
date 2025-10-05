@@ -30,12 +30,7 @@ export class AppComponent implements OnInit {
       });
       this.router.navigate(['/accountc']);
     } else {
-      this.authService.init().then(() => {
-        this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
-          this.router.navigate(['/']);
-        });
-      });
-
+      this.router.navigate(['/']);
     }
   }
 }
