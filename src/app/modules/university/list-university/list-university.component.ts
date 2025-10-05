@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { UniversityDto, UniversityService } from '@proxy/universites';
 
 @Component({
   selector: 'app-list-university',
-  imports: [FormsModule],
+  imports: [FormsModule ,RouterLink],
   templateUrl: './list-university.component.html',
   styleUrl: './list-university.component.scss'
 })

@@ -23,6 +23,17 @@
         </div>
       </div>
 
+      <div class="form-row">
+        <div class="form-group">
+          <label for="content">Lecture Content *</label>
+          <input id="content" type="text" formControlName="content" class="form-control"
+            [class.is-invalid]="lectureForm.get('content')?.invalid && lectureForm.get('content')?.touched"
+            placeholder="Enter lecture content">
+          @if (lectureForm.get('content')?.invalid && lectureForm.get('content')?.touched) {
+            <div class="error-message">Lecture content is required</div>
+          }
+        </div>
+      </div>
       <!-- Course Dropdown -->
       <div class="form-row">
         <div class="form-group">

@@ -13,9 +13,13 @@
       <div class="form-row">
         <div class="form-group">
           <label for="name">Course Name *</label>
-          <input id="name" type="text" formControlName="name" class="form-control"
-                 [class.is-invalid]="courseForm.get('name')?.invalid && courseForm.get('name')?.touched"
-                 placeholder="Enter course name">
+          <input
+            id="name"
+            type="text"
+            formControlName="name"
+            class="form-control"
+            [class.is-invalid]="courseForm.get('name')?.invalid && courseForm.get('name')?.touched"
+            placeholder="Enter course name" />
           @if (courseForm.get('name')?.invalid && courseForm.get('name')?.touched) {
             <div class="error-message">Course name is required</div>
           }
@@ -26,9 +30,13 @@
       <div class="form-row">
         <div class="form-group">
           <label for="title">Title *</label>
-          <input id="title" type="text" formControlName="title" class="form-control"
-                 [class.is-invalid]="courseForm.get('title')?.invalid && courseForm.get('title')?.touched"
-                 placeholder="Enter title">
+          <input
+            id="title"
+            type="text"
+            formControlName="title"
+            class="form-control"
+            [class.is-invalid]="courseForm.get('title')?.invalid && courseForm.get('title')?.touched"
+            placeholder="Enter title" />
           @if (courseForm.get('title')?.invalid && courseForm.get('title')?.touched) {
             <div class="error-message">Title is required</div>
           }
@@ -39,8 +47,13 @@
       <div class="form-row">
         <div class="form-group">
           <label for="description">Description</label>
-          <textarea id="description" formControlName="description" class="form-control" rows="3"
-                    placeholder="Enter course description"></textarea>
+          <textarea
+            id="description"
+            formControlName="description"
+            class="form-control"
+            rows="3"
+            placeholder="Enter course description">
+          </textarea>
         </div>
       </div>
 
@@ -48,22 +61,27 @@
       <div class="form-row">
         <div class="form-group">
           <label for="price">Price *</label>
-          <input id="price" type="number" formControlName="price" class="form-control"
-                 [class.is-invalid]="courseForm.get('price')?.invalid && courseForm.get('price')?.touched">
+          <input
+            id="price"
+            type="number"
+            formControlName="price"
+            class="form-control"
+            [class.is-invalid]="courseForm.get('price')?.invalid && courseForm.get('price')?.touched" />
           @if (courseForm.get('price')?.invalid && courseForm.get('price')?.touched) {
             <div class="error-message">Price is required</div>
           }
         </div>
       </div>
 
-     
-
       <!-- Subject -->
       <div class="form-row">
         <div class="form-group">
           <label for="subjectId">Subject *</label>
-          <select id="subjectId" formControlName="subjectId" class="form-control"
-                  [class.is-invalid]="courseForm.get('subjectId')?.invalid && courseForm.get('subjectId')?.touched">
+          <select
+            id="subjectId"
+            formControlName="subjectId"
+            class="form-control"
+            [class.is-invalid]="courseForm.get('subjectId')?.invalid && courseForm.get('subjectId')?.touched">
             <option value="">-- Select Subject --</option>
             @for (s of subjects; track s.id) {
               <option [value]="s.id">{{ s.name }}</option>
@@ -77,16 +95,22 @@
 
       <!-- Logo -->
       <div class="form-row">
-  <div class="form-group">
-    <label for="logo">Logo *</label>
-    <input id="logo" type="file" (change)="onFileSelected($event)" class="form-control" accept="image/*" required>
-    @if (logoPreview) {
-      <div class="logo-preview" style="margin-top:10px;">
-        <img [src]="logoPreview" alt="Logo Preview" style="max-width:150px;">
+        <div class="form-group">
+          <label for="logo">Logo *</label>
+          <input
+            id="logo"
+            type="file"
+            (change)="onFileSelected($event)"
+            class="form-control"
+            accept="image/*"
+            required />
+          @if (logoPreview) {
+            <div class="logo-preview" style="margin-top:10px;">
+              <img [src]="logoPreview" alt="Logo Preview" style="max-width:150px;">
+            </div>
+          }
+        </div>
       </div>
-    }
-  </div>
-</div>
 
       <!-- Active & Lifetime -->
       <div class="form-row">
@@ -106,6 +130,24 @@
           <label for="durationInDays">Duration (Days)</label>
           <input id="durationInDays" type="number" formControlName="durationInDays" class="form-control">
         </div>
+      </div>
+
+      <!-- Infos -->
+      <div class="form-section" formArrayName="infos">
+        <h3>Course Infos</h3>
+        @for (info of infos.controls; track $index) {
+          <div class="form-group">
+            <label>Info {{ $index + 1 }} *</label>
+            <div class="info-row">
+              <input type="text" class="form-control" [formControlName]="$index" placeholder="Enter info">
+              <button type="button" class="btn btn-danger" (click)="removeInfo($index)">Remove</button>
+            </div>
+            @if (info.invalid && info.touched) {
+              <div class="error-message">Info is required</div>
+            }
+          </div>
+        }
+        <button type="button" class="btn btn-secondary" (click)="addInfo()">+ Add Info</button>
       </div>
 
     </div>

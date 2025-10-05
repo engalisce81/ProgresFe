@@ -1,0 +1,66 @@
+
+<div class="main">
+<div class="register-container">
+  <h2>Register</h2>
+
+  <form (ngSubmit)="register()" #regForm="ngForm" class="register-form">
+
+    <!-- Full Name -->
+    <div>
+      <label>Full Name</label>
+      <input type="text" [(ngModel)]="registerDto.fullName" name="fullName" required />
+    </div>
+
+    <!-- Username -->
+    <div>
+      <label>Username</label>
+      <input type="text" [(ngModel)]="registerDto.userName" name="userName" required />
+    </div>
+
+    <!-- Password -->
+    <div>
+      <label>Password</label>
+      <input type="password" [(ngModel)]="registerDto.password" name="password" required />
+    </div>
+
+    <!-- Gender -->
+    <div>
+      <label>Gender</label>
+      <select [(ngModel)]="registerDto.gender" name="gender" required>
+        <option [ngValue]="true">Male</option>
+        <option [ngValue]="false">Female</option>
+      </select>
+    </div>
+
+    <!-- University -->
+    <div>
+      <label>University</label>
+      <select [(ngModel)]="registerDto.universityId" name="universityId"
+              (change)="onUniversityChange(registerDto.universityId)" required>
+        <option value="">-- Select University --</option>
+        @for (uni of universities; track uni.id) {
+          <option [value]="uni.id">{{ uni.name }}</option>
+        }
+      </select>
+    </div>
+
+    <!-- College -->
+    <div>
+      <label>College</label>
+      <select [(ngModel)]="registerDto.collegeId" name="collegeId" required>
+        <option value="">-- Select College --</option>
+        @for (col of colleges; track col.id) {
+          <option [value]="col.id">{{ col.name }}</option>
+        }
+      </select>
+    </div>
+
+    <!-- Submit -->
+    <button type="submit" [disabled]="regForm.invalid">Register</button>
+  </form>
+
+  @if (errorMessage) {
+    <p class="error">{{ errorMessage }}</p>
+  }
+</div>
+</div>
