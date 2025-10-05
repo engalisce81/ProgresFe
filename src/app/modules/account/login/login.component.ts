@@ -20,9 +20,6 @@ export class LoginComponent  {
 
   login() {
     this.loginService.login(this.username, this.password, this.rememberMe);
-    window.location.reload();
-    this.router.navigate(['/']);
-
   }
 
 }
