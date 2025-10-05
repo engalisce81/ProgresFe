@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormGroup, FormBuilder, Validators, ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, ReactiveFormsModule, FormsModule, FormArray } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { CourseService } from '@proxy/courses';
 import { CreateUpdateCourseDto } from '@proxy/courses/models';
@@ -39,7 +39,8 @@ courseForm: FormGroup;
       isActive: [true],
       isLifetime: [false],
       durationInDays: [0],
-      logoFile: [null, Validators.required] // إضافة Validator إلزامي للـ file
+      logoFile: [null, Validators.required],
+      infos: this.fb.array([this.fb.control('', Validators.required)]) // لازم واحدة على الأقل
     });
   }
 
@@ -47,7 +48,21 @@ courseForm: FormGroup;
     this.loadSubjects();
   }
 
-  
+  get infos(): FormArray {
+    return this.courseForm.get('infos') as FormArray;
+  }
+
+  addInfo() {
+    this.infos.push(this.fb.control('', Validators.required));
+  }
+
+  removeInfo(index: number) {
+    if (this.infos.length > 1) {
+      this.infos.removeAt(index);
+    } else {
+      alert('At least one info is required.');
+    }
+  }
 
   loadSubjects() {
     this.subjectService.getSubjectsWithCollegeList().subscribe(res => {
@@ -60,7 +75,7 @@ courseForm: FormGroup;
     if (!input.files?.length) return;
 
     this.logoFile = input.files[0];
-    this.courseForm.patchValue({ logoFile: this.logoFile }); // تحديث الفورم مع الملف
+    this.courseForm.patchValue({ logoFile: this.logoFile });
     this.courseForm.get('logoFile')?.updateValueAndValidity();
 
     const reader = new FileReader();
@@ -76,15 +91,20 @@ courseForm: FormGroup;
 
     this.loading = true;
 
-    // رفع الصورة أولاً
     this.uploadService.uploadImage(this.logoFile).subscribe({
       next: (res) => {
         const dto: CreateUpdateCourseDto = {
           ...this.courseForm.value,
-          logoUrl: res.data // الحصول على الرابط أو الـ ID من Upload API
+          logoUrl: res.data,
+          infos: this.infos.value.filter((i: string) => i.trim() !== '')
         };
 
-        // إرسال الكورس بعد رفع الصورة
+        if (dto.infos.length === 0) {
+          this.loading = false;
+          alert('At least one info is required.');
+          return;
+        }
+
         this.courseService.create(dto).subscribe({
           next: () => {
             this.loading = false;

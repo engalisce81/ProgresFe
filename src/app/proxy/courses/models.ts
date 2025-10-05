@@ -16,6 +16,7 @@ export interface CourseDto extends AuditedEntityDto<string> {
   isActive: boolean;
   isLifetime: boolean;
   durationInDays?: number;
+  infos: string[];
 }
 
 export interface CourseInfoDto extends AuditedEntityDto<string> {
@@ -62,6 +63,7 @@ export interface CreateUpdateCourseDto {
   isLifetime: boolean;
   durationInDays?: number;
   subjectId?: string;
+  infos: string[];
 }
 
 export interface CreateUpdateCourseInfoDto {

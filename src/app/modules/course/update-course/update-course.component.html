@@ -1,126 +1,195 @@
-<div class="update-container">
+<div class="create-container">
   <div class="header">
     <h2>Update Course</h2>
     <button type="button" routerLink="/courses" class="btn btn-secondary">Back to List</button>
   </div>
 
-  <form [formGroup]="courseForm" (ngSubmit)="submit()" class="course-form">
+  @if (!courseLoaded) {
+    <div class="loading">Loading course data...</div>
+  }
 
-    <div class="form-section">
-      <h3>Basic Information</h3>
+  @if (courseLoaded) {
+    <form [formGroup]="courseForm" (ngSubmit)="submit()" class="course-form">
 
-      <!-- Course Name -->
-      <div class="form-row">
-        <div class="form-group">
-          <label for="name">Course Name *</label>
-          <input id="name" type="text" formControlName="name" class="form-control"
-                 [class.is-invalid]="courseForm.get('name')?.invalid && courseForm.get('name')?.touched"
-                 placeholder="Enter course name">
-          @if (courseForm.get('name')?.invalid && courseForm.get('name')?.touched) {
-            <div class="error-message">Course name is required</div>
-          }
-        </div>
-      </div>
+      <div class="form-section">
+        <h3>Basic Information</h3>
 
-      <!-- Title -->
-      <div class="form-row">
-        <div class="form-group">
-          <label for="title">Title *</label>
-          <input id="title" type="text" formControlName="title" class="form-control"
-                 [class.is-invalid]="courseForm.get('title')?.invalid && courseForm.get('title')?.touched"
-                 placeholder="Enter title">
-          @if (courseForm.get('title')?.invalid && courseForm.get('title')?.touched) {
-            <div class="error-message">Title is required</div>
-          }
-        </div>
-      </div>
-
-      <!-- Description -->
-      <div class="form-row">
-        <div class="form-group">
-          <label for="description">Description</label>
-          <textarea id="description" formControlName="description" class="form-control" rows="3"
-                    placeholder="Enter course description"></textarea>
-        </div>
-      </div>
-
-      <!-- Price -->
-      <div class="form-row">
-        <div class="form-group">
-          <label for="price">Price *</label>
-          <input id="price" type="number" formControlName="price" class="form-control"
-                 [class.is-invalid]="courseForm.get('price')?.invalid && courseForm.get('price')?.touched">
-          @if (courseForm.get('price')?.invalid && courseForm.get('price')?.touched) {
-            <div class="error-message">Price is required</div>
-          }
-        </div>
-      </div>
-
-    
-
-      <!-- Subject -->
-      <div class="form-row">
-        <div class="form-group">
-          <label for="subjectId">Subject *</label>
-          <select id="subjectId" formControlName="subjectId" class="form-control"
-                  [class.is-invalid]="courseForm.get('subjectId')?.invalid && courseForm.get('subjectId')?.touched">
-            <option value="">-- Select Subject --</option>
-            @for (s of subjects; track s.id) {
-              <option [value]="s.id">{{ s.name }}</option>
+        <!-- Course Name -->
+        <div class="form-row">
+          <div class="form-group">
+            <label for="name">Course Name *</label>
+            <input
+              id="name"
+              type="text"
+              formControlName="name"
+              class="form-control"
+              [class.is-invalid]="isFieldInvalid('name')"
+              placeholder="Enter course name" />
+            @if (isFieldInvalid('name')) {
+              <div class="error-message">{{ getFieldError('name') }}</div>
             }
-          </select>
-          @if (courseForm.get('subjectId')?.invalid && courseForm.get('subjectId')?.touched) {
-            <div class="error-message">Subject is required</div>
-          }
+          </div>
         </div>
-      </div>
 
-      <!-- Logo -->
-      <div class="form-row">
-        <div class="form-group">
-          <label for="logo">Logo</label>
-          <input id="logo" type="file" (change)="onFileSelected($event)" class="form-control" accept="image/*">
+        <!-- Title -->
+        <div class="form-row">
+          <div class="form-group">
+            <label for="title">Title *</label>
+            <input
+              id="title"
+              type="text"
+              formControlName="title"
+              class="form-control"
+              [class.is-invalid]="isFieldInvalid('title')"
+              placeholder="Enter title" />
+            @if (isFieldInvalid('title')) {
+              <div class="error-message">{{ getFieldError('title') }}</div>
+            }
+          </div>
+        </div>
 
-          <!-- Logo Preview -->
-          @if (logoPreview || courseForm.value.logoUrl) {
-            <div class="logo-preview" style="margin-top:10px;">
-              <img [src]="logoPreview ? logoPreview : courseForm.value.logoUrl" alt="Logo Preview" style="max-width:150px;">
+        <!-- Description -->
+        <div class="form-row">
+          <div class="form-group">
+            <label for="description">Description</label>
+            <textarea
+              id="description"
+              formControlName="description"
+              class="form-control"
+              rows="3" 
+                [class.is-invalid]="isFieldInvalid('description')"
+              placeholder="Enter course description">
+            </textarea>
+             @if (isFieldInvalid('description')) {
+              <div class="error-message">{{ getFieldError('description') }}</div>
+            }
+          </div>
+        </div>
+
+        <!-- Price -->
+        <div class="form-row">
+          <div class="form-group">
+            <label for="price">Price *</label>
+            <input
+              id="price"
+              type="number"
+              formControlName="price"
+              class="form-control"
+              [class.is-invalid]="isFieldInvalid('price')" />
+            @if (isFieldInvalid('price')) {
+              <div class="error-message">{{ getFieldError('price') }}</div>
+            }
+          </div>
+        </div>
+
+        <!-- Subject -->
+        <div class="form-row">
+          <div class="form-group">
+            <label for="subjectId">Subject *</label>
+            <select
+              id="subjectId"
+              formControlName="subjectId"
+              class="form-control"
+              [class.is-invalid]="isFieldInvalid('subjectId')">
+              <option value="">-- Select Subject --</option>
+              @for (s of subjects; track s.id) {
+                <option [value]="s.id">{{ s.name }}</option>
+              }
+            </select>
+            @if (isFieldInvalid('subjectId')) {
+              <div class="error-message">{{ getFieldError('subjectId') }}</div>
+            }
+          </div>
+        </div>
+
+        <!-- Logo -->
+        <div class="form-row">
+          <div class="form-group">
+            <label for="logo">Logo</label>
+            <input
+              id="logo"
+              type="file"
+              (change)="onFileSelected($event)"
+              class="form-control"
+              accept="image/*" />
+            @if (logoPreview) {
+              <div class="logo-preview" style="margin-top:10px;">
+                <img [src]="logoPreview" alt="Logo Preview" style="max-width:150px;">
+                <div class="current-logo-note">Current logo - upload new to change</div>
+              </div>
+            }
+          </div>
+        </div>
+
+        <!-- Active & Lifetime -->
+        <div class="form-row">
+          <div class="form-group">
+            <label>
+              <input type="checkbox" formControlName="isActive"> Active
+            </label>
+            <label>
+              <input type="checkbox" formControlName="isLifetime"> Lifetime
+            </label>
+          </div>
+        </div>
+
+        <!-- Duration -->
+        <div class="form-row">
+          <div class="form-group">
+            <label for="durationInDays">Duration (Days)</label>
+            <input id="durationInDays" type="number" formControlName="durationInDays" class="form-control">
+          </div>
+        </div>
+
+        <!-- Infos -->
+        <div class="form-section" formArrayName="infos">
+          <h3>Course Infos *</h3>
+          @for (info of infos.controls; track $index; let i = $index) {
+            <div class="form-group">
+              <label>Info {{ i + 1 }}</label>
+              <div class="info-row">
+                <input 
+                  type="text" 
+                  class="form-control" 
+                  [formControlName]="i" 
+                  [class.is-invalid]="info.invalid && info.touched"
+                  placeholder="Enter info">
+                @if (infos.length > 1) {
+                  <button type="button" class="btn btn-danger" (click)="removeInfo(i)">Remove</button>
+                }
+              </div>
+              @if (info.invalid && info.touched) {
+                <div class="error-message">
+                  @if (info.errors?.['required'] || info.errors?.['empty']) { 
+                    Info is required and cannot be empty 
+                  }
+                </div>
+              }
             </div>
           }
+          
+          @if (infos.invalid && infos.touched) {
+            <div class="error-message">
+              @if (infos.errors?.['noInfos']) { At least one info is required }
+              @if (infos.errors?.['emptyInfo']) { All info fields must be filled }
+            </div>
+          }
+          
+          <button type="button" class="btn btn-secondary" (click)="addInfo()">+ Add Info</button>
         </div>
+
       </div>
 
-      <!-- Active & Lifetime -->
-      <div class="form-row">
-        <div class="form-group">
-          <label>
-            <input type="checkbox" formControlName="isActive"> Active
-          </label>
-          <label>
-            <input type="checkbox" formControlName="isLifetime"> Lifetime
-          </label>
-        </div>
+      <div class="form-actions">
+        <button type="button" routerLink="/courses" class="btn btn-secondary" [disabled]="loading">Cancel</button>
+        <button type="submit" class="btn btn-primary" [disabled]="!areRequiredFieldsValid() || loading">
+          @if (loading) {
+            <span class="spinner"></span> Updating...
+          } @else {
+            Update Course
+          }
+        </button>
       </div>
-
-      <!-- Duration -->
-      <div class="form-row">
-        <div class="form-group">
-          <label for="durationInDays">Duration (Days)</label>
-          <input id="durationInDays" type="number" formControlName="durationInDays" class="form-control">
-        </div>
-      </div>
-
-    </div>
-
-    <div class="form-actions">
-      <button type="button" routerLink="/courses" class="btn btn-secondary" [disabled]="loading">Cancel</button>
-      <button type="submit" class="btn btn-primary" [disabled]="courseForm.invalid || loading">
-        @if (loading) {
-          <span class="spinner"></span> Updating...
-        } @else {
-          Update Course
-        }
-      </button>
-    </div>
-  </form>
+    </form>
+  }
 </div>
