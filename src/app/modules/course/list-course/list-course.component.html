@@ -19,16 +19,18 @@
       <i class="bi bi-search"></i>
     </button>
 
-    <button routerLink="/courses/create" class="btn btn-success" title="Create">
+    <button routerLink="/courses/create" class="btn btn-create" title="Create">
       <i class="bi bi-plus-circle me-1"></i> Create
     </button>
   </div>
 
   <!-- Loading -->
   @if (loading){
-    <div class="loading-container">
-      <p class="loading-text">Loading...</p>
-    </div>
+     <div class="loading-container">
+  <div class="spinner"></div>
+  <p class="loading-text">Loading...</p>
+</div>
+
   }
 
   <!-- Table -->
@@ -58,7 +60,7 @@
                   <i class="bi bi-people"></i>
                 </button>
                 <button [routerLink]="['/courses/requestjoin', course.id]" class="btn btn-subscriber" title="RequestJoin">
-<i class="bi bi-person-dash"></i>
+                  <i class="bi bi-person-dash"></i>
                 </button>
                 <button [routerLink]="['/courses/update', course.id]" class="btn btn-edit" title="Edit">
                   <i class="bi bi-pencil"></i>

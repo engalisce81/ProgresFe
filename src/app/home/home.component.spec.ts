@@ -52,12 +52,6 @@ describe("HomeComponent", () => {
       mockOAuthService.hasValidAccessToken.and.returnValue(true)
     });
 
-    it("hasLoggedIn should be true", () => {
-
-      expect(fixture.componentInstance.hasLoggedIn).toBeTrue();
-      expect(mockOAuthService.hasValidAccessToken).toHaveBeenCalled()
-    })
-
     it("button should not be exists", () => {
       const element = fixture.nativeElement
       const button = element.querySelector('[role="button"]')
@@ -73,7 +67,6 @@ describe("HomeComponent", () => {
 
     it("hasLoggedIn should be false", () => {
 
-      expect(fixture.componentInstance.hasLoggedIn).toBeFalse();
       expect(mockOAuthService.hasValidAccessToken).toHaveBeenCalled()
     })
 

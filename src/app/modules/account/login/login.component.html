@@ -5,26 +5,34 @@
     <form (ngSubmit)="login()" #loginForm="ngForm" class="login-form">
       <!-- Username -->
       <div class="form-group">
-        <label class="form-label">Username</label>
+        <label class="form-label">Email</label>
         <input
           type="text"
           [(ngModel)]="username"
           name="username"
           required
           class="form-input"
+          placeholder="example..@test.com"
         />
       </div>
 
       <!-- Password -->
-      <div class="form-group">
+      <div class="form-group password-wrapper">
         <label class="form-label">Password</label>
         <input
-          type="password"
+          [type]="showPassword ? 'text' : 'password'"
           [(ngModel)]="password"
           name="password"
           required
           class="form-input"
+          placeholder="qws2@Es.."
         />
+        <i
+          class="bi toggle-password"
+          [ngClass]="showPassword ? 'bi-eye-slash' : 'bi-eye'"
+          (click)="togglePassword()"
+          title="Show/Hide Password"
+        ></i>
       </div>
 
       <!-- Remember Me -->
@@ -48,7 +56,7 @@
       </button>
     </form>
 
-    <!-- 🔹 رابط للتسجيل -->
+    <!-- Register Link -->
     <div class="register-link">
       <p>Don’t have an account?
         <a [routerLink]="['register']">Register here</a>

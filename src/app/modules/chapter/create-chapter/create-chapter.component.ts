@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { ChapterService, CreateUpdateChapterDto } from '@proxy/chapters';
 import { CourseService } from '@proxy/courses';
 import { LookupDto } from '@proxy/look-up';
 
 @Component({
   selector: 'app-create-chapter',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule ,RouterLink ],
   templateUrl: './create-chapter.component.html',
   styleUrl: './create-chapter.component.scss'
 })

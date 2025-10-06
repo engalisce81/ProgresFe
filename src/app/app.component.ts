@@ -29,8 +29,9 @@ export class AppComponent implements OnInit {
         key: eThemeLeptonXComponents.ApplicationLayout,
       });
       this.router.navigate(['/accountc']);
-    } else {
-      this.router.navigate(['/']);
+    } else{
+            this.router.navigate(['/']);
+
     }
   }
 }

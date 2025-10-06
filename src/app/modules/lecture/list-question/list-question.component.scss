@@ -1,105 +1,147 @@
-.loading {
-  font-weight: bold;
-  color: #007bff;
-  text-align: center;
-  padding: 1rem;
-  font-size: 1.2em;
-}
-
-.loading {
-  font-weight: bold;
-  color: gray;
+/* ============================= */
+/* Lecture / Quiz / Question CSS */
+/* ============================= */
+h2 {
+  color: var(--violet-900);
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
 }
 
 .quiz-card {
-  margin: 1rem 0;
-  padding: 1rem;
-  border: 2px solid #007bff;
-  border-radius: 8px;
-  background: #f8f9fa;
+  background: var(--bg-user);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-1);
+  padding: 1rem 1.5rem;
+  margin-bottom: 1.5rem;
 }
 
+.quiz-card h3 {
+  color: var(--purple-600);
+  margin-bottom: 1rem;
+}
+
+/* Question Card */
 .question-card {
-  margin: 0.5rem 0;
-  padding: 0.7rem;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  background: #fff;
+  background: var(--surface);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-1);
+  padding: 1rem;
+  margin-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  transition: transform 0.3s ease;
+}
+
+.question-card:hover {
+  transform: translateY(-2px);
 }
 
 .question-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.5rem;
 }
 
-.question-header .score {
-  margin-left: 10px;
-  font-size: 0.9em;
-  color: #555;
+.question-header strong {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: var(--question-view);
+  font-size: 1.05rem;
 }
 
-.question-header .type {
-  margin-left: 10px;
-  font-size: 0.85em;
-  color: #777;
+/* Score & Type */
+.score {
+  font-weight: 600;
+  color: var(--success);
 }
 
+.type {
+  font-style: italic;
+  color: var(--muted);
+}
+
+.actions{
+    display: flex;
+
+}
+
+/* Actions Buttons */
 .actions button {
-  margin-left: 5px;
   border: none;
+  padding: 0.3rem 0.6rem;
+  border-radius: var(--radius);
+  font-weight: 500;
   cursor: pointer;
-  padding: 5px 8px;
-  border-radius: 4px;
+  transition: all 0.3s ease;
+  margin-left: 0.3rem;
+  display: flex;
+  align-items: center;
+  gap: 0.2rem;
 }
 
-.actions .delete {
-  background: #dc3545;
-  color: white;
+.actions button:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-2);
 }
 
+.actions button.delete {
+  background: linear-gradient(
+    135deg,
+    color-mix(in oklab, #dc2626 70%, #fff),
+    color-mix(in oklab, #dc2626 60%, #b91c1c)
+  );
+  color: #fff;
+}
+
+.actions button:not(.delete) {
+  background: linear-gradient(
+    135deg,
+    color-mix(in oklab, var(--purple-600) 70%, #fff),
+    color-mix(in oklab, var(--bell-300) 60%, var(--purple-600))
+  );
+  color: #fff;
+}
+
+/* Answers List */
 .answers {
-  margin-top: 8px;
-  padding-left: 20px;
+  list-style: none;
+  padding-left: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
 }
 
 .answers li {
-  margin: 4px 0;
-}
-
-.answers li.correct {
-  color: green;
-  font-weight: bold;
-}
-
-.answers li:not(.correct) {
-  color: #444;
-}
-
-.check {
-  margin-left: 5px;
-}
-
-.wrong {
-  margin-left: 5px;
-}
-.delete-confirm-banner {
-  background: #fff3cd;
-  color: #856404;
-  border: 1px solid #ffeeba;
-  padding: 10px 15px;
-  margin-bottom: 15px;
-  border-radius: 6px;
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius);
   display: flex;
   align-items: center;
   justify-content: space-between;
-
-  p {
-    margin: 0;
-    flex: 1;
-  }
-
-  .btn {
-    margin-left: 8px;
-  }
+  background: var(--card);
+  transition: all 0.3s ease;
 }
+
+.answers li.correct {
+  border-left: 4px solid var(--success);
+}
+
+.answers li.incorrect {
+  border-left: 4px solid var(--warning);
+}
+
+.answers li .check i {
+  color: var(--success);
+  font-size: 1.1rem;
+}
+
+.answers li .wrong i {
+  color: var(--warning);
+  font-size: 1.1rem;
+}
+
+
+

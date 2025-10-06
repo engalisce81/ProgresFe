@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, ReactiveFormsModule, FormArray, AbstractControl } from '@angular/forms';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute, RouterLink } from '@angular/router';
 import { CourseDto, CourseService, CreateUpdateCourseDto } from '@proxy/courses';
 import { LookupDto } from '@proxy/look-up';
 import { MediaItemService } from '@proxy/media-items';
@@ -8,7 +8,7 @@ import { CollegeService, SubjectService } from '@proxy/universites';
 
 @Component({
   selector: 'app-update-course',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule , RouterLink ],
   templateUrl: './update-course.component.html',
   styleUrl: './update-course.component.scss'
 })

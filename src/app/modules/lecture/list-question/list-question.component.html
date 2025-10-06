@@ -1,44 +1,75 @@
+<!-- Loading Spinner -->
 @if (loading) {
-  <div class="loading">⏳ Loading...</div>
-}
-
-<!-- ✅ Banner للـ Confirm -->
-@if (confirmDelete.show) {
-  <div class="delete-confirm-banner">
-    <p>⚠️ Are you sure you want to delete <strong>{{ confirmDelete.question?.title }}</strong>?</p>
-    <button (click)="confirmDeleteYes()" class="btn btn-danger">Yes, Delete</button>
-    <button (click)="confirmDeleteCancel()" class="btn btn-secondary">Cancel</button>
+  <div class="loading-container">
+    <div class="spinner"></div>
+    <p class="loading-text">Loading...</p>
   </div>
 }
 
-@if (lecture) {
-  <h2>{{ lecture.title }}</h2>
+<!-- Confirm Delete Banner -->
+@if (confirmDelete.show) {
+  <div class="delete-confirm-card">
+    <p>
+      Are you sure you want to delete 
+      <strong>{{ confirmDelete.question?.title }}</strong>?
+    </p>
+    <div class="delete-confirm-actions">
+      <button class="btn btn-secondary" (click)="confirmDeleteCancel()">No</button>
+      <button class="btn btn-danger" (click)="confirmDeleteYes()">Yes</button>
+    </div>
+  </div>
+}
 
+<!-- Lecture Title -->
+@if (lecture) {
+  <h2>
+    <i class="bi bi-journal-text"></i> {{ lecture.title }}
+  </h2>
+
+  <!-- Quizzes -->
   @for (quiz of lecture.quizzes; track quiz.id) {
     <div class="quiz-card">
-      <h3>📘 {{ quiz.title }}</h3>
+      <h3>
+        <i class="bi bi-card-list"></i> {{ quiz.title }}
+      </h3>
 
+      <!-- Questions -->
       @for (question of quiz.questions; track question.id) {
         <div class="question-card">
           <div class="question-header">
-            <strong>❓ {{ question.title }}</strong>
-            <span class="score">[{{ question.score }} pts]</span>
-            <span class="type">({{ question.questionTypeName }})</span>
+            <strong>
+              <i class="bi bi-question-circle"></i> {{ question.title }}
+            </strong>
+            <span class="score">
+              <i class="bi bi-star-fill"></i> [{{ question.score }} pts]
+            </span>
+            <span class="type">
+              <i class="bi bi-tag"></i> ({{ question.questionTypeName }})
+            </span>
 
-            <div class="actions">
-              <button (click)="editQuestion(question)">✏️ Edit</button>
-              <button (click)="deleteQuestion(question)" class="delete">🗑️ Delete</button>
+            <div class="actions" >
+              <button (click)="editQuestion(question)">
+                <i class="bi bi-pencil-square"></i> 
+              </button>
+              <button (click)="deleteQuestion(question)" class="delete">
+                <i class="bi bi-trash-fill"></i> 
+              </button>
             </div>
           </div>
 
+          <!-- Answers -->
           <ul class="answers">
             @for (ans of question.answers; track ans.id) {
-              <li [class.correct]="ans.isCorrect">
-                {{ ans.answer }}
+              <li [ngClass]="ans.isCorrect ? 'correct' : 'incorrect'">
+                <span>{{ ans.answer }}</span>
                 @if (ans.isCorrect) {
-                  <span class="check">✅</span>
+                  <span class="check">
+                    <i class="bi bi-check-circle-fill"></i>
+                  </span>
                 } @else {
-                  <span class="wrong">❌</span>
+                  <span class="wrong">
+                    <i class="bi bi-x-circle-fill"></i>
+                  </span>
                 }
               </li>
             }

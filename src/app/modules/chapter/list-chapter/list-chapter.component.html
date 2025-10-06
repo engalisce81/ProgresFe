@@ -19,16 +19,17 @@
       <i class="bi bi-search"></i>
     </button>
 
-    <button routerLink="/chapters/create" class="btn btn-success" title="Create">
+    <button routerLink="/chapters/create" class="btn btn-create" title="Create">
       <i class="bi bi-plus-circle me-1"></i> Create
     </button>
   </div>
 
   <!-- Loading -->
   @if (loading){
-  <div class="loading-container">
-    <p class="loading-text">Loading...</p>
-  </div>
+   <div class="loading-container">
+  <div class="spinner"></div>
+  <p class="loading-text">Loading...</p>
+</div>
   }
 
   <!-- Table -->
@@ -50,9 +51,7 @@
           <i class="fas fa-book-open me-1"></i> {{ chapter.name }}
         </td>
         <td class="actions">
-          <button [routerLink]="['/chapters/view', chapter.id]" class="btn btn-view" title="View">
-            <i class="bi bi-eye"></i>
-          </button>
+         
           <button [routerLink]="['/chapters/update', chapter.id]" class="btn btn-edit" title="Edit">
             <i class="bi bi-pencil"></i>
           </button>
