@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { UniversityService, CreateUpdateUniversityDto } from '@proxy/universites';
 
 @Component({
   selector: 'app-create-university',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule ,RouterLink],
   templateUrl: './create-university.component.html',
   styleUrl: './create-university.component.scss'
 })

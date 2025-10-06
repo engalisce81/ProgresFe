@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute, RouterLink } from '@angular/router';
 import { LookupDto } from '@proxy/look-up';
 import { CollegeService, UniversityService, CreateUpdateCollegeDto } from '@proxy/universites';
 
 @Component({
   selector: 'app-update-college',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule ,RouterLink],
   templateUrl: './update-college.component.html',
   styleUrl: './update-college.component.scss'
 })

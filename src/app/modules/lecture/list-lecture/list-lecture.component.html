@@ -19,7 +19,7 @@
       <i class="bi bi-search"></i>
     </button>
 
-    <button routerLink="/lectures/create" class="btn btn-success" title="Create">
+    <button routerLink="/lectures/create" class="btn btn-create" title="Create">
       <i class="bi bi-plus-circle me-1"></i> Create
     </button>
   </div>
@@ -27,8 +27,10 @@
   <!-- Loading -->
   @if (loading){
   <div class="loading-container">
-    <p class="loading-text">Loading...</p>
-  </div>
+  <div class="spinner"></div>
+  <p class="loading-text">Loading...</p>
+</div>
+
   }
 
   <!-- Table -->
@@ -71,17 +73,16 @@
         }
         <td class="actions">
           <!-- زر عرض الأسئلة -->
-          <button [routerLink]="['/lectures/questions', lec.id]" class="btn btn-view" title="View Questions">
+          <button [routerLink]="['/lectures/questions', lec.id]" class="btn btn-view-questions" title="View Questions">
             <i class="bi bi-card-list"></i> <!-- بدل eye -->
           </button>
 
           <!-- زر إنشاء سؤال -->
-          <button [routerLink]="['/lectures/createquestion', lec.id]" class="btn btn-view"
+          <button [routerLink]="['/lectures/createquestion', lec.id]" class="btn btn-create-question"
             title="Create Question">
             <i class="bi bi-plus-circle"></i> <!-- بدل eye -->
           </button>
 
-          <button [routerLink]="['/lectures/view', lec.id]" class="btn btn-view" title="View"><i class="bi bi-eye"></i> </button>
           <button [routerLink]="['/lectures/update', lec.id]" class="btn btn-edit" title="Edit">
             <i class="bi bi-pencil"></i>
           </button>

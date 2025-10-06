@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { LookupDto } from '@proxy/look-up';
 import { SubjectService, CreateUpdateSubjectDto, CollegeService, UniversityService } from '@proxy/universites';
 
 @Component({
   selector: 'app-create-subject',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule ,RouterLink],
   templateUrl: './create-subject.component.html',
   styleUrl: './create-subject.component.scss'
 })

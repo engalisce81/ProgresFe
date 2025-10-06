@@ -1,7 +1,7 @@
-<div class="create-university-container">
+<div class="create-container">
   <div class="header">
     <h2>Create New University</h2>
-    <button type="button" routerLink="/universities" class="btn btn-secondary">Back to List</button>
+    <button type="button" routerLink="/universties" class="btn btn-secondary">Back to List</button>
   </div>
 
   <form [formGroup]="universityForm" (ngSubmit)="submit()" class="university-form">
@@ -35,7 +35,7 @@
     <div class="form-actions">
       <button
         type="button"
-        routerLink="/universities"
+        routerLink="/universties"
         class="btn btn-secondary"
         [disabled]="loading">
         Cancel

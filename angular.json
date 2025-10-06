@@ -110,6 +110,11 @@
                 "inject": true,
                 "bundleName": "ngx-datatable-material"
               },
+              {
+                  "input": "node_modules/bootstrap/dist/css/bootstrap.min.css",
+                  "inject": false,
+                  "bundleName": "bootstrap.min"
+              },
               "src/styles.scss"
             ],
             "scripts": []

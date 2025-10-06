@@ -3,10 +3,11 @@ import { FormGroup, FormBuilder, Validators, FormArray, ReactiveFormsModule } fr
 import { ActivatedRoute, Router } from '@angular/router';
 import { LectureWithQuizzesDto, LectureService } from '@proxy/lectures';
 import { QuestionService, QuestionWithAnswersDto } from '@proxy/questions';
+import { BaseCoreModule } from "@abp/ng.core";
 
 @Component({
   selector: 'app-list-question',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, BaseCoreModule],
   templateUrl: './list-question.component.html',
   styleUrl: './list-question.component.scss'
 })

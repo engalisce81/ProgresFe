@@ -1,4 +1,4 @@
-<div class="university-list-container" style="width: 100%;">
+<div class="list-container" style="width: 100%;">
 
   <!-- Delete confirmation -->
   @if (showDeleteConfirm){
@@ -19,7 +19,7 @@
       <i class="bi bi-search"></i>
     </button>
 
-    <button routerLink="/universties/create" class="btn btn-success" title="Create">
+    <button routerLink="/universties/create" class="btn btn-create" title="Create">
       <i class="bi bi-plus-circle me-1"></i> Create
     </button>
   </div>
@@ -27,20 +27,20 @@
   <!-- Loading -->
   @if (loading){
   <div class="loading-container">
-    <p class="loading-text">Loading...</p>
-  </div>
+  <div class="spinner"></div>
+  <p class="loading-text">Loading...</p>
+</div>
+
   }
 
   <!-- Table -->
   @if (!loading) {
   @if (universities.length > 0){
-  <table class="university-table" style="width: 100%;">
+  <table class="table" style="width: 100%;">
     <thead>
       <tr>
         <th>#</th>
         <th>Name</th>
-        <th>Location</th>
-        <th>Description</th>
         <th>Actions</th>
       </tr>
     </thead>
@@ -50,9 +50,6 @@
         <td>{{ (pageIndex - 1) * pageSize + i + 1 }}</td>
         <td>{{ uni.name }}</td>
         <td class="actions">
-          <button [routerLink]="['/universties/view', uni.id]" class="btn btn-view" title="View">
-            <i class="bi bi-eye"></i>
-          </button>
           <button [routerLink]="['/universties/update', uni.id]" class="btn btn-edit" title="Edit">
             <i class="bi bi-pencil"></i>
           </button>
