@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { GrowthOverYearDto, MemberDto } from '@proxy/homes';
 import { Chart, registerables } from 'chart.js';
 
 Chart.register(...registerables);
@@ -8,32 +9,39 @@ Chart.register(...registerables);
 })
 export class ChartService {
 
-  constructor() { }
+   initGrowthChart(canvasId: string, data: GrowthOverYearDto) {
+    const ctx = document.getElementById(canvasId) as HTMLCanvasElement;
+    if (!ctx) return;
 
-  initGrowthChart(canvasId: string) {
-    const growthCtx = document.getElementById(canvasId) as HTMLCanvasElement;
-    return new Chart(growthCtx, {
+    const months = data?.students?.map((m) => m.month) ?? [];
+    const studentData = data?.students?.map((m) => m.count) ?? [];
+    const teacherData = data?.teachers?.map((m) => m.count) ?? [];
+
+    new Chart(ctx, {
       type: 'line',
       data: {
-        labels: ['يناير', 'فبراير', 'مارس', 'أبريل', 'مايو', 'يونيو', 'يوليو', 'أغسطس', 'سبتمبر', 'أكتوبر', 'نوفمبر', 'ديسمبر'],
+        labels: months.length ? months : [
+          'January','February','March','April','May','June','July',
+          'August','September','October','November','December'
+        ],
         datasets: [
           {
-            label: 'الطلاب',
-            data: [1200, 1350, 1450, 1600, 1750, 1900, 2100, 2250, 2350, 2450, 2500, 2548],
+            label: 'Students',
+            data: studentData,
             borderColor: '#63D8F2',
             backgroundColor: 'rgba(99, 216, 242, 0.1)',
             tension: 0.3,
-            fill: true
+            fill: true,
           },
           {
-            label: 'المعلمين',
-            data: [80, 85, 90, 95, 100, 105, 110, 115, 118, 122, 125, 128],
+            label: 'Teachers',
+            data: teacherData,
             borderColor: '#7749A6',
             backgroundColor: 'rgba(119, 73, 166, 0.1)',
             tension: 0.3,
-            fill: true
-          }
-        ]
+            fill: true,
+          },
+        ],
       },
       options: {
         responsive: true,
@@ -41,48 +49,42 @@ export class ChartService {
         plugins: {
           legend: {
             position: 'top',
-            rtl: true,
             labels: {
               usePointStyle: true,
-              padding: 20
-            }
-          }
+              padding: 20,
+            },
+          },
         },
         scales: {
           y: {
-            beginAtZero: false,
-            grid: {
-              color: 'rgba(191, 195, 217, 0.1)'
-            }
+            beginAtZero: true,
+            grid: { color: 'rgba(191, 195, 217, 0.1)' },
           },
-          x: {
-            grid: {
-              display: false
-            }
-          }
-        }
-      }
+          x: { grid: { display: false } },
+        },
+      },
     });
   }
 
-  initCategoryChart(canvasId: string) {
-    const categoryCtx = document.getElementById(canvasId) as HTMLCanvasElement;
-    return new Chart(categoryCtx, {
+  initCategoryChart(canvasId: string, members: MemberDto[]) {
+    const ctx = document.getElementById(canvasId) as HTMLCanvasElement;
+    if (!ctx) return;
+
+    const labels = members?.map((m) => m.memberName) ?? [];
+    const counts = members?.map((m) => m.membersCount) ?? [];
+
+    new Chart(ctx, {
       type: 'doughnut',
       data: {
-        labels: ['تطوير الويب', 'البرمجة', 'التسويق', 'التصميم', 'اللغات'],
-        datasets: [{
-          data: [95, 80, 65, 55, 61],
-          backgroundColor: [
-            '#4B93BF',
-            '#7749A6',
-            '#A2A0D9',
-            '#63D8F2',
-            '#371559'
-          ],
-          borderWidth: 0,
-          hoverOffset: 15
-        }]
+        labels: labels.length ? labels : ['Web', 'Programming', 'Marketing'],
+        datasets: [
+          {
+            data: counts.length ? counts : [95, 80, 65],
+            backgroundColor: ['#4B93BF', '#7749A6', '#A2A0D9', '#63D8F2', '#371559'],
+            borderWidth: 0,
+            hoverOffset: 15,
+          },
+        ],
       },
       options: {
         responsive: true,
@@ -90,18 +92,15 @@ export class ChartService {
         plugins: {
           legend: {
             position: 'bottom',
-            rtl: true,
             labels: {
               usePointStyle: true,
               padding: 20,
-              font: {
-                size: 12
-              }
-            }
-          }
+              font: { size: 12 },
+            },
+          },
         },
-        cutout: '70%'
-      }
+        cutout: '70%',
+      },
     });
   }
 }

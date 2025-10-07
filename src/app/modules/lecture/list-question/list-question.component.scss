@@ -124,6 +124,22 @@ h2 {
   background: var(--card);
   transition: all 0.3s ease;
 }
+.lecture-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.quiz-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.quiz-actions{
+  display:  flex;
+}
 
 .answers li.correct {
   border-left: 4px solid var(--success);

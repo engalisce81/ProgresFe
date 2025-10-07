@@ -1,4 +1,5 @@
 import type { QuestionAnswerInfoDto, QuestionDetailesDto, QuestionWithAnswersDto } from '../questions/models';
+import type { EntityDto } from '@abp/ng.core';
 
 export interface QuizInfoDto {
   quizId?: string;
@@ -15,6 +16,15 @@ export interface QuizWithQuestionsDto {
   questions: QuestionWithAnswersDto[];
 }
 
+export interface CreateUpdateQuizDto {
+  createrId?: string;
+  title?: string;
+  description?: string;
+  quizTime: number;
+  quizTryCount: number;
+  lectureId?: string;
+}
+
 export interface QuizAnswerDto {
   quizId?: string;
   answers: QuestionAnswerInfoDto[];
@@ -26,6 +36,14 @@ export interface QuizDetailsDto {
   quizTime: number;
   quizTryCount: number;
   questions: QuestionDetailesDto[];
+}
+
+export interface QuizDto extends EntityDto<string> {
+  title?: string;
+  description?: string;
+  quizTime: number;
+  quizTryCount: number;
+  leactureName?: string;
 }
 
 export interface QuizResultDto {

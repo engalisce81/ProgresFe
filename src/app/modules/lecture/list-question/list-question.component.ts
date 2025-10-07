@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormArray, ReactiveFormsModule } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
-import { LectureWithQuizzesDto, LectureService } from '@proxy/lectures';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { LectureWithQuizzesDto, LectureService, QuizService } from '@proxy/lectures';
 import { QuestionService, QuestionWithAnswersDto } from '@proxy/questions';
 import { BaseCoreModule } from "@abp/ng.core";
 
 @Component({
   selector: 'app-list-question',
-  imports: [ReactiveFormsModule, BaseCoreModule],
+  imports: [ReactiveFormsModule, BaseCoreModule ],
   templateUrl: './list-question.component.html',
   styleUrl: './list-question.component.scss'
 })
@@ -16,14 +16,14 @@ export class ListQuestionComponent {
   lecture?: LectureWithQuizzesDto;
   loading = false;
 
-  // عشان نظهر الـ confirm
-  confirmDelete: { show: boolean; question?: QuestionWithAnswersDto } = { show: false };
+  confirmDelete: { show: boolean; id?: string; type?: 'quiz' | 'question'; title?: string } = { show: false };
 
   constructor(
     private route: ActivatedRoute,
     private lectureService: LectureService,
     private questionService: QuestionService,
-    private router:Router
+    private quizService:QuizService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -47,36 +47,65 @@ export class ListQuestionComponent {
     });
   }
 
-editQuestion(question: QuestionWithAnswersDto) {
-  this.router.navigate([
-    '/lectures/questions',
-    this.lectureId,
-    'update',
-    question.id
-  ]);
-}
-
-
-  deleteQuestion(question: QuestionWithAnswersDto) {
-    this.confirmDelete = { show: true, question };
+  // 🔹 إنشاء كويز جديد
+  createQuiz() {
+    this.router.navigate(['/lectures/questions', this.lectureId, 'quiz']);
   }
 
-  confirmDeleteYes() {
-    if (!this.confirmDelete.question?.id) return;
+  // 🔹 تعديل كويز
+  editQuiz(quiz: any) {
+    this.router.navigate(['/lectures/questions', this.lectureId, 'quiz', quiz.id]);
+  }
 
-    this.questionService.delete(this.confirmDelete.question.id).subscribe({
-      next: () => {
-        // حدث الليست بعد الحذف
-        this.lecture!.quizzes.forEach(qz => {
-          qz.questions = qz.questions.filter(q => q.id !== this.confirmDelete.question!.id);
-        });
-        this.confirmDelete = { show: false };
-      },
-      error: err => {
-        console.error('Error deleting question', err);
-        this.confirmDelete = { show: false };
-      }
-    });
+  // 🔹 حذف كويز
+  deleteQuiz(quiz: any) {
+    this.confirmDelete = { show: true, id: quiz.id, type: 'quiz', title: quiz.title };
+  }
+
+  // 🔹 تعديل سؤال
+  editQuestion(question: QuestionWithAnswersDto) {
+    this.router.navigate([
+      '/lectures/questions',
+      this.lectureId,
+      'update',
+      question.id
+    ]);
+  }
+
+  // 🔹 حذف سؤال
+  deleteQuestion(question: QuestionWithAnswersDto) {
+    this.confirmDelete = { show: true, id: question.id, type: 'question', title: question.title };
+  }
+
+  // 🔹 تنفيذ الحذف بعد التأكيد
+  confirmDeleteYes() {
+    if (!this.confirmDelete.id || !this.confirmDelete.type) return;
+
+    if (this.confirmDelete.type === 'quiz') {
+      this.quizService.delete(this.confirmDelete.id).subscribe({
+        next: () => {
+          this.lecture!.quizzes = this.lecture!.quizzes.filter(q => q.id !== this.confirmDelete.id);
+          this.confirmDelete = { show: false };
+        },
+        error: err => {
+          console.error('Error deleting quiz', err);
+          this.confirmDelete = { show: false };
+        }
+      });
+    } else if (this.confirmDelete.type === 'question') {
+      this.questionService.delete(this.confirmDelete.id).subscribe({
+        next: () => {
+          this.lecture!.quizzes.forEach(qz => {
+            qz.questions = qz.questions.filter(q => q.id !== this.confirmDelete.id);
+          });
+          this.confirmDelete = { show: false };
+        },
+        error: err => {
+          console.error('Error deleting question', err);
+          this.confirmDelete = { show: false };
+        }
+      });
+    }
   }
 
   confirmDeleteCancel() {
