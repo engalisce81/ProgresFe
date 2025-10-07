@@ -39,7 +39,7 @@ export class UpdateLectureComponent {
       pdfUrl: [''],
       quizTime: [0, [Validators.required, Validators.min(1)]],
       quizTryCount: [0, [Validators.required, Validators.min(1)]],
-      quizCount: [0, [Validators.required, Validators.min(1)]],
+      quizCount: [0],
       isVisible: [true]
     });
   }
@@ -131,7 +131,6 @@ export class UpdateLectureComponent {
 
   private updateLecture() {
     const dto: CreateUpdateLectureDto = this.lectureForm.value;
-
     this.lectureService.update(this.lectureId, dto).subscribe({
       next: () => {
         this.loading = false;

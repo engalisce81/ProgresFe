@@ -6,6 +6,8 @@ import { CreateLectureComponent } from './create-lecture/create-lecture.componen
 import { CreateQuestionComponent } from './create-question/create-question.component';
 import { ListQuestionComponent } from './list-question/list-question.component';
 import { UpdateQuestionComponent } from './update-question/update-question.component';
+import { CreateQuizComponent } from './create-quiz/create-quiz.component';
+import { UpdateQuizComponent } from './update-quiz/update-quiz.component';
 
 const routes: Routes = [
   {path:'',pathMatch:'full',component:ListLectureComponent},
@@ -13,9 +15,10 @@ const routes: Routes = [
   {path:'update/:id',pathMatch:'full',component:UpdateLectureComponent},
   {path:'createquestion/:id',pathMatch:'full',component:CreateQuestionComponent},
   {path:'questions/:id',pathMatch:'full',component:ListQuestionComponent},
-  { path: 'questions/:id/update/:qid',pathMatch:'full',component: UpdateQuestionComponent }
+  { path: 'questions/:id/update/:qid',pathMatch:'full',component: UpdateQuestionComponent },
+  {path:'questions/:id/quiz',pathMatch:'full',component:CreateQuizComponent},
+  {path:'questions/:id/quiz/:quizid',pathMatch:'full',component:UpdateQuizComponent},
 
-  
 ];
 
 @NgModule({

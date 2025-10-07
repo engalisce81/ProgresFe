@@ -36,7 +36,7 @@ universityForm: FormGroup;
     this.loading = true;
     this.universityService.get(this.universityId).subscribe({
       next: (university) => {
-        this.universityForm.patchValue(university);
+        this.universityForm.patchValue(university.data);
         this.loading = false;
       },
       error: (err) => {
