@@ -71,8 +71,9 @@ export class LoginService {
     localStorage.removeItem('access_token');
     localStorage.removeItem('refresh_token');
     localStorage.removeItem('expires_in');
-
-    this.router.navigateByUrl('/login'); // رجّع المستخدم لصفحة اللوجن
+    //this.authService.logout();
+    this.router.navigate(['/accountc']); // رجّع المستخدم لصفحة اللوجن
+    window.location.reload();
   }
 
   getAccessToken(): string | null {

@@ -1,7 +1,7 @@
 <div class="create-container">
   <div class="header">
     <h2>Create New Question</h2>
-    <button type="button" routerLink="/questions" class="btn btn-secondary">Back to List</button>
+    <button type="button" routerLink="/lectures/questions/{{lecId}}" class="btn btn-secondary">Back to List</button>
   </div>
 
   <form [formGroup]="questionForm" (ngSubmit)="submit()" class="question-form">
@@ -40,22 +40,7 @@
         </div>
       </div>
 
-      <!-- Quiz -->
-      <div class="form-row">
-        <div class="form-group">
-          <label for="quizId">Quiz *</label>
-          <select id="quizId" formControlName="quizId" class="form-control"
-            [class.is-invalid]="questionForm.get('quizId')?.invalid && questionForm.get('quizId')?.touched">
-            <option value="">-- Select Quiz --</option>
-            @for(quiz of quizzes; track $index) {
-              <option [value]="quiz.id">{{ quiz.name }}</option>
-            }
-          </select>
-          @if (questionForm.get('quizId')?.invalid && questionForm.get('quizId')?.touched) {
-            <div class="error-message">Quiz is required</div>
-          }
-        </div>
-      </div>
+     
 
       <!-- Question Bank -->
       <div class="form-row">
@@ -111,7 +96,7 @@
 
     <!-- Form Actions -->
     <div class="form-actions">
-      <button type="button" routerLink="/questions" class="btn btn-secondary" [disabled]="loading">
+      <button type="button" routerLink="/lectures/questions/{{ lecId }}" class="btn btn-secondary" [disabled]="loading">
         Cancel
       </button>
 

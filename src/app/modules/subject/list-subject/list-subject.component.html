@@ -43,6 +43,9 @@
         <th>Name</th>
         <th>Term</th>
         <th>Grade Level</th>
+        <th>College Name</th>
+        <th>Unvirsity Name</th>
+
         <th>Actions</th>
       </tr>
     </thead>
@@ -53,6 +56,11 @@
         <td>{{ subject.name }}</td>
         <td>{{ subject.termName }}</td>
         <td>{{ subject.gradeLevelName }}</td>
+        <td>{{ subject.collegeName }}</td>
+        <td>{{ subject.universityName }}</td>
+
+
+
         <td class="actions">
           <button [routerLink]="['/subjects/update', subject.id]" class="btn btn-edit" title="Edit">
             <i class="bi bi-pencil"></i>

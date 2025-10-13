@@ -1,11 +1,11 @@
 import { PagedResultDto } from '@abp/ng.core';
 import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { CourseStudentDto, CourseStudentService } from '@proxy/courses';
 
 @Component({
   selector: 'app-list-subscriber',
-  imports: [],
+  imports: [RouterLink],
   templateUrl: './list-subscriber.component.html',
   styleUrl: './list-subscriber.component.scss'
 })

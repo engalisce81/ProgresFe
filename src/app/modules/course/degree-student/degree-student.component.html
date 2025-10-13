@@ -1,0 +1,33 @@
+@if (!isLoading && studentDegree) {
+  <div class="degree-container">
+    <div class="student-header">
+      <img [src]="studentDegree.logoUrl || 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSUpsDK5dkH7envHCdUECqq0XzCWK1Dv96XcQ&s'" 
+           alt="student" class="student-img">
+      <div class="student-info">
+        <h2>{{ studentDegree.name }}</h2>
+        <p class="muted">Student Degree Summary</p>
+      </div>
+    </div>
+
+    @if (studentDegree.quizzes?.length) {
+      <div class="quiz-section">
+        @for (quiz of studentDegree.quizzes; track quiz) {
+          <div class="quiz-card">
+            <div class="quiz-header">
+              <h3>{{ quiz.quizName }}</h3>
+              <span class="lecture">{{ quiz.lectureName }}</span>
+            </div>
+            <div class="quiz-details">
+              <p><strong>Score:</strong> {{ quiz.quizScore }}%</p>
+              <p><strong>Tries:</strong> {{ quiz.tryCount }}</p>
+            </div>
+          </div>
+        }
+      </div>
+    } @else {
+      <p class="muted">No quizzes found for this student.</p>
+    }
+  </div>
+} @else {
+  <div class="loading">Loading student degree...</div>
+}

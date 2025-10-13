@@ -1,4 +1,6 @@
 import { AuthService, ConfigStateService, LoginParams, ReplaceableComponentsService } from '@abp/ng.core';
+import { eThemeLeptonXComponents } from '@abp/ng.theme.lepton-x';
+import { EmptyLayoutComponent } from '@abp/ng.theme.lepton-x/layouts';
 import { NgClass } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -11,12 +13,16 @@ import { LoginService } from 'src/app/service/loginService';
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
 })
-export class LoginComponent  {
+export class LoginComponent implements OnInit  {
    username = '';
   password = '';
   rememberMe = true;
  showPassword: boolean = false;
-  constructor(private loginService: LoginService,private authService:AuthService ,private router:Router) {}
+  constructor(private loginService: LoginService,private authService:AuthService ,private router:Router, private replaceableComponents: ReplaceableComponentsService
+) {}
+  ngOnInit(): void {
+    //window.location.reload();
+  }
   
 
   login() {

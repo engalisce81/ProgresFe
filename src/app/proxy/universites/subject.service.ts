@@ -62,6 +62,15 @@ export class SubjectService {
     { apiName: this.apiName,...config });
   
 
+  getSubjectsWithCollegeMobList = (collegeId: string, gradelevelId: string, config?: Partial<Rest.Config>) =>
+    this.restService.request<any, PagedResultDto<LookupDto>>({
+      method: 'GET',
+      url: '/api/app/subject/subjects-with-college-mob-list',
+      params: { collegeId, gradelevelId },
+    },
+    { apiName: this.apiName,...config });
+  
+
   update = (id: string, input: CreateUpdateSubjectDto, config?: Partial<Rest.Config>) =>
     this.restService.request<any, ResponseApi<SubjectDto>>({
       method: 'PUT',

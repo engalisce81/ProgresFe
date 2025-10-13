@@ -18,6 +18,8 @@ const routes: Routes = [
   { path: 'questions/:id/update/:qid',pathMatch:'full',component: UpdateQuestionComponent },
   {path:'questions/:id/quiz',pathMatch:'full',component:CreateQuizComponent},
   {path:'questions/:id/quiz/:quizid',pathMatch:'full',component:UpdateQuizComponent},
+  {path:'questions/:id/create/:quizid',pathMatch:'full',component:CreateQuestionComponent},
+
 
 ];
 

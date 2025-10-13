@@ -7,7 +7,7 @@ import { BaseCoreModule } from "@abp/ng.core";
 
 @Component({
   selector: 'app-list-question',
-  imports: [ReactiveFormsModule, BaseCoreModule ],
+  imports: [ReactiveFormsModule, BaseCoreModule ,RouterLink],
   templateUrl: './list-question.component.html',
   styleUrl: './list-question.component.scss'
 })

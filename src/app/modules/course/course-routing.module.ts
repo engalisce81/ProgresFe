@@ -5,13 +5,18 @@ import { CreateCourseComponent } from './create-course/create-course.component';
 import { UpdateCourseComponent } from './update-course/update-course.component';
 import { ListSubscriberComponent } from './list-subscriber/list-subscriber.component';
 import { ListRequestjoinComponent } from './list-requestjoin/list-requestjoin.component';
+import { DegreeStudentComponent } from './degree-student/degree-student.component';
+import { UpdateExamComponent } from './update-exam/update-exam.component';
 
 const routes: Routes = [
   {path:'',pathMatch:'full',component:ListCourseComponent},
   {path:'create',pathMatch:'full',component:CreateCourseComponent},
   {path:'update/:id',pathMatch:'full',component:UpdateCourseComponent},
-  {path:'subscriber/:id',pathMatch:'full',component:ListSubscriberComponent},
-  {path:'requestjoin/:id',pathMatch:'full',component:ListRequestjoinComponent},
+  {path: 'subscriber/:id',pathMatch:'full' ,  component: ListSubscriberComponent},
+  { path: 'subscriber/:id/degree/:userId' ,pathMatch:'full', component: DegreeStudentComponent },
+   {path:'requestjoin/:id',pathMatch:'full',component:ListRequestjoinComponent},
+  { path: 'bank/:bankId/exam/:examId' ,pathMatch:'full', component:UpdateExamComponent },
+
 
 
 
