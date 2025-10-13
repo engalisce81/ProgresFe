@@ -1,4 +1,4 @@
-import { ConfigStateService } from '@abp/ng.core/lib/services/config-state.service';
+import { ConfigStateService } from '@abp/ng.core';
 import { Component } from '@angular/core';
 import { FormsModule, NgModel, ReactiveFormsModule } from '@angular/forms';
 import { HomeService } from '@proxy/homes';
