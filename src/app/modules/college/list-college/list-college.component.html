@@ -50,7 +50,9 @@
         <td>{{ (pageIndex - 1) * pageSize + i + 1 }}</td>
         <td>{{ college.name }}</td>
         <td class="actions">
-         
+         <button [routerLink]="['/colleges/gradelevel', college.id]" class="btn btn-subscriber" title="Edit">
+         <i class="bi bi-mortarboard"></i>
+          </button>
           <button [routerLink]="['/colleges/update', college.id]" class="btn btn-edit" title="Edit">
             <i class="bi bi-pencil"></i>
           </button>

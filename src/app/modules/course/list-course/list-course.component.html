@@ -56,12 +56,22 @@
               <td>{{ course.collegeName }}</td>
               <td>{{ course.subjectName }}</td>
               <td class="actions">
+                <button  (click)="dublicate(course.id)" class="btn btn-subscriber" title="Dublicate">
+                  <i class="bi bi-arrow-repeat"></i>
+                </button>
                 <button [routerLink]="['/courses/subscriber', course.id]" class="btn btn-subscriber" title="Subscriber">
                   <i class="bi bi-people"></i>
                 </button>
+               
+               @if(hasRole("admin")){
                 <button [routerLink]="['/courses/requestjoin', course.id]" class="btn btn-subscriber" title="RequestJoin">
                   <i class="bi bi-person-dash"></i>
                 </button>
+              }
+                <button [routerLink]="['/courses/bank',course.questionBankId,'exam',course.examId]" class="btn btn-subscriber" title="exam">
+                  <i class="bi bi-journal-text"></i> <!-- Exam paper -->
+                </button>
+
                 <button [routerLink]="['/courses/update', course.id]" class="btn btn-edit" title="Edit">
                   <i class="bi bi-pencil"></i>
                 </button>

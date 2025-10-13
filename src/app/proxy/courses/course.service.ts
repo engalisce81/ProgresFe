@@ -29,6 +29,15 @@ export class CourseService {
     { apiName: this.apiName,...config });
   
 
+  duplicateCourse = (courseId: string, config?: Partial<Rest.Config>) =>
+    this.restService.request<any, string>({
+      method: 'POST',
+      responseType: 'text',
+      url: `/api/app/course/duplicate-course/${courseId}`,
+    },
+    { apiName: this.apiName,...config });
+  
+
   get = (id: string, config?: Partial<Rest.Config>) =>
     this.restService.request<any, ResponseApi<CourseDto>>({
       method: 'GET',
@@ -45,11 +54,11 @@ export class CourseService {
     { apiName: this.apiName,...config });
   
 
-  getCoursesInfoList = (pageNumber: number, pageSize: number, search: string, alreadyJoin: boolean, userId: string, subjectId: string, config?: Partial<Rest.Config>) =>
+  getCoursesInfoList = (pageNumber: number, pageSize: number, search: string, alreadyJoin: boolean, collegeId: string, subjectId: string, gradelevelId: string, config?: Partial<Rest.Config>) =>
     this.restService.request<any, PagedResultDto<CourseInfoHomeDto>>({
       method: 'GET',
       url: '/api/app/course/courses-info-list',
-      params: { pageNumber, pageSize, search, alreadyJoin, userId, subjectId },
+      params: { pageNumber, pageSize, search, alreadyJoin, collegeId, subjectId, gradelevelId },
     },
     { apiName: this.apiName,...config });
   

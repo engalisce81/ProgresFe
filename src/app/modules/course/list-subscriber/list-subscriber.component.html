@@ -12,11 +12,11 @@
   <div class="students-grid">
     @for (student of students; track student.id) {
       <div class="student-card">
-        <img [src]="student.profilePictureUrl || 'assets/default-user.png'" alt="student image" />
+        <img [src]="student.logoUrl || 'https://fastly.picsum.photos/id/137/4752/3168.jpg?hmac=dGsgAtPkFewFByZXZOmSg0U7Mohr43GyVu3n1AHVIyg'" alt="student image" />
         <div class="info">
-          <h3>name student</h3>
-          <p><i class="bi bi-envelope"></i> email</p>
-          <p><i class="bi bi-calendar"></i> Subscribe Date: data</p>
+          <h3>{{student.name}}</h3>
+          <p><i class="bi bi-envelope"></i> {{student.email}}</p>
+          <p><i class="bi bi-calendar"></i> {{student.creationTime}}</p>
           <p><i class="bi bi-check-circle"></i> Status:
             @if (student.isActive) {
               <span class="status active">Active</span>
@@ -24,6 +24,7 @@
               <span class="status inactive">Inactive</span>
             }
           </p>
+          <a [routerLink]="['degree',student.userId]">View Degree</a>
         </div>
       </div>
     }

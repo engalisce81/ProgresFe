@@ -1,3 +1,4 @@
+import { ConfigStateService } from '@abp/ng.core';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
@@ -17,18 +18,25 @@ export class ListCourseComponent {
   totalCount = 0;
   pageSize = 10;
   pageIndex = 1;
-
+roles:string []  =[] ;
   showDeleteConfirm = false;
   courseToDelete!: CourseDto;
 
   constructor(
     private courseService: CourseService,
-    private router: Router
-  ) {}
+    private router: Router,
+private config: ConfigStateService  ) {}
 
   ngOnInit(): void {
     this.loadCourses();
+      const user = this.config.getOne("currentUser");
+  console.log('Current user:', user);
+  this.roles = user?.roles ?? [];
+
   }
+  hasRole(role: string): boolean {
+  return this.roles.includes(role);
+}
 
   loadCourses(): void {
     this.loading = true;
@@ -82,5 +90,12 @@ export class ListCourseComponent {
 
   get totalPages(): number {
     return Math.ceil(this.totalCount / this.pageSize);
+  }
+
+  dublicate(id :string):void{
+    this.courseService.duplicateCourse(id).subscribe({
+      next:(next)=>  this.loadCourses(),
+    });
+   
   }
 }

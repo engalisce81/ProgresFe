@@ -26,7 +26,7 @@ collegeForm: FormGroup;
     this.collegeForm = this.fb.group({
       name: ['', Validators.required],
       universityId: ['', Validators.required],
-      gradeLevelCount: [0, [Validators.required, Validators.min(1)]],
+      gradeLevelCount: [0],
     });
   }
 

@@ -1,4 +1,4 @@
-import type { CourseStudentDto, CreateUpdateCourseStudentDto } from './models';
+import type { CourseStudentDto, CreateUpdateCourseStudentDto, StudentDegreeByCourseDto } from './models';
 import { RestService, Rest } from '@abp/ng.core';
 import type { PagedResultDto } from '@abp/ng.core';
 import { Injectable } from '@angular/core';
@@ -41,6 +41,15 @@ export class CourseStudentService {
       method: 'GET',
       url: '/api/app/course-student',
       params: { pageNumber, pageSize, isSubscribe, courseId, search },
+    },
+    { apiName: this.apiName,...config });
+  
+
+  getStudentDegreByCourse = (pageNumber: number, pageSize: number, courseId: string, userId: string, config?: Partial<Rest.Config>) =>
+    this.restService.request<any, PagedResultDto<StudentDegreeByCourseDto>>({
+      method: 'GET',
+      url: '/api/app/course-student/student-degre-by-course',
+      params: { pageNumber, pageSize, courseId, userId },
     },
     { apiName: this.apiName,...config });
   

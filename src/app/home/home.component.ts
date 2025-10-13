@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ChartService } from '../service/chartServices';
 import { HomesDto, HomeService } from '@proxy/homes';
+import { LoginService } from '../service/loginService';
 
 @Component({
   standalone: false,
@@ -23,12 +24,14 @@ export class HomeComponent implements OnInit {
 
   constructor(
     private homeService: HomeService,
-    private chartService: ChartService
+    private chartService: ChartService,
+    private loginService:LoginService
   ) {}
 
   ngOnInit() {
     this.loadHomeData();
   }
+
 
   private loadHomeData() {
     this.loading = true;

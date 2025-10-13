@@ -12,6 +12,12 @@ export interface CreateUpdateCollegeDto {
   gradeLevelCount: number;
 }
 
+export interface CreateUpdateGradeLevelDto {
+  name?: string;
+  collegeId?: string;
+  collegeName?: string;
+}
+
 export interface CreateUpdateSubjectDto {
   name?: string;
   termId?: string;
@@ -20,6 +26,12 @@ export interface CreateUpdateSubjectDto {
 
 export interface CreateUpdateUniversityDto {
   name?: string;
+}
+
+export interface GradeLevelDto extends EntityDto<string> {
+  name?: string;
+  collegeId?: string;
+  collegeName?: string;
 }
 
 export interface SubjectDto extends EntityDto<string> {

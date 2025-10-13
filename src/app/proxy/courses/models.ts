@@ -12,6 +12,8 @@ export interface CourseDto extends AuditedEntityDto<string> {
   collegeId?: string;
   collegeName?: string;
   subjectId?: string;
+  questionBankId?: string;
+  examId?: string;
   subjectName?: string;
   isActive: boolean;
   isLifetime: boolean;
@@ -38,6 +40,8 @@ export interface CourseInfoHomeDto {
   collegeName?: string;
   subjectId?: string;
   subjectName?: string;
+  gradelevelId?: string;
+  gradelevelName?: string;
   alreadyJoin: boolean;
   alreadyRequest: boolean;
   chapterCount: number;
@@ -47,7 +51,10 @@ export interface CourseInfoHomeDto {
 
 export interface CourseStudentDto extends EntityDto<string> {
   userId?: string;
-  userName?: string;
+  name?: string;
+  email?: string;
+  creationTime?: string;
+  logoUrl?: string;
   courseId?: string;
   courseName?: string;
   isSubscibe: boolean;
@@ -75,4 +82,18 @@ export interface CreateUpdateCourseStudentDto {
   userId?: string;
   courseId?: string;
   isSubscibe: boolean;
+}
+
+export interface StudentDegreeByCourseDto {
+  userId?: string;
+  name?: string;
+  logoUrl?: string;
+  quizzes: StudentQuizDto[];
+}
+
+export interface StudentQuizDto {
+  quizName?: string;
+  lectureName?: string;
+  quizScore: number;
+  tryCount: number;
 }

@@ -1,0 +1,100 @@
+:root {
+  --violet-900: #5E2E91;
+  --purple-600: #8C4CD6;
+  --bell-300: #C7B7F2;
+  --blue-500: #3A7BD5;
+  --sky-300: #6ECFF6;
+  --success: #16a34a;
+  --warning: #eab308;
+  --bg: #f9fafb;
+  --surface: #ffffff;
+  --text: #1f2937;
+  --muted: #4b5563;
+  --radius: 18px;
+  --shadow-1: 0 8px 18px rgba(119, 73, 166, 0.15);
+}
+
+.degree-container {
+  background: var(--bg);
+  min-height: 100vh;
+  padding: 2rem;
+  color: var(--text);
+}
+
+.student-header {
+  display: flex;
+  align-items: center;
+  background: var(--surface);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-1);
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.student-img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  margin-right: 1rem;
+}
+
+.student-info h2 {
+  margin: 0;
+  color: var(--violet-900);
+}
+
+.muted {
+  color: var(--muted);
+}
+
+.quiz-section {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1rem;
+}
+
+.quiz-card {
+  background: var(--surface);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-1);
+  padding: 1rem 1.5rem;
+  transition: transform 0.2s ease;
+}
+
+.quiz-card:hover {
+  transform: translateY(-4px);
+}
+
+.quiz-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.quiz-header h3 {
+  color: var(--purple-600);
+  margin: 0;
+}
+
+.lecture {
+  background: var(--bell-300);
+  padding: 0.3rem 0.6rem;
+  border-radius: 12px;
+  font-size: 0.85rem;
+  color: var(--violet-900);
+}
+
+.quiz-details {
+  margin-top: 0.8rem;
+  display: flex;
+  justify-content: space-between;
+  color: var(--text);
+  font-size: 0.9rem;
+}
+
+.loading {
+  text-align: center;
+  padding: 3rem;
+  font-size: 1.2rem;
+  color: var(--purple-600);
+}

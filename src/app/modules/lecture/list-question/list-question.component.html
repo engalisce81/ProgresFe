@@ -42,7 +42,12 @@
     <h3>
       <i class="bi bi-card-list"></i> {{ quiz.title }}
     </h3>
+      
     <div class="quiz-actions">
+      <button [routerLink]="['/lectures/questions',lectureId,'create', quiz.id]" class="btn btn-create-question"
+            title="Create Question">
+            <i class="bi bi-plus-circle"></i> <!-- بدل eye -->
+        </button>
       <button (click)="editQuiz(quiz)" class="btn btn-edit">
         <i class="bi bi-pencil-square"></i>
       </button>

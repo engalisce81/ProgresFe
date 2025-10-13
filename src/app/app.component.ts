@@ -4,6 +4,7 @@ import { eThemeLeptonXComponents } from '@abp/ng.theme.lepton-x';
 import { EmptyLayoutComponent } from '@abp/ng.theme.lepton-x/layouts';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { LogoutComponent } from './modules/account/logout/logout.component';
 
 @Component({
   standalone: false,
@@ -28,10 +29,16 @@ export class AppComponent implements OnInit {
         component: EmptyLayoutComponent,
         key: eThemeLeptonXComponents.ApplicationLayout,
       });
+
       this.router.navigate(['/accountc']);
     } else{
-            this.router.navigate(['/']);
 
+      this.router.navigate(['/']);
+
+      this.replaceableComponents.add({
+        component:LogoutComponent,
+        key: eThemeLeptonXComponents.NavItems,
+      });
     }
   }
 }

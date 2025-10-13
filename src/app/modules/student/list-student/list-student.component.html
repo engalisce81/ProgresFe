@@ -1,0 +1,94 @@
+<div class="list-container" style="width: 100%;">
+
+  <!-- Delete confirmation -->
+  @if (showDeleteConfirm) {
+    <div class="delete-confirm-card">
+      <p>Are you sure you want to delete <strong>{{ studentToDelete.fullName }}</strong>?</p>
+      <div class="delete-confirm-actions">
+        <button class="btn btn-secondary" (click)="cancelDelete()">No</button>
+        <button class="btn btn-danger" (click)="deleteStudent()">Yes</button>
+      </div>
+    </div>
+  }
+
+  <!-- Search and Create -->
+  <div class="toolbar">
+    <input type="text" [(ngModel)]="search" placeholder="Search students..." class="search-input"
+      (keyup.enter)="onSearchChange()" />
+    <button class="btn btn-search" (click)="onSearchChange()" title="Search">
+      <i class="bi bi-search"></i>
+    </button>
+
+    <button routerLink="/students/create" class="btn btn-create" title="Create">
+      <i class="bi bi-plus-circle me-1"></i> Create
+    </button>
+  </div>
+
+  <!-- Loading -->
+  @if (loading) {
+    <div class="loading-container">
+      <div class="spinner"></div>
+      <p class="loading-text">Loading...</p>
+    </div>
+  }
+
+  <!-- Table -->
+  @if (!loading) {
+    @if (students.length > 0) {
+      <table class="table" style="width: 100%;">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Full Name</th>
+            <th>Username</th>
+            <th>Gender</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (student of students; track student.id; let i = $index) {
+            <tr>
+              <td>{{ (pageIndex - 1) * pageSize + i + 1 }}</td>
+              <td>{{ student.fullName }}</td>
+              <td>{{ student.userName }}</td>
+              <td>{{ student.gender ? 'Male' : 'Female' }}</td>
+              <td class="actions">
+                <button [routerLink]="['/students/update', student.id]" class="btn btn-edit" title="Edit">
+                  <i class="bi bi-pencil"></i>
+                </button>
+                <button (click)="confirmDelete(student)" class="btn btn-delete" title="Delete">
+                  <i class="bi bi-trash"></i>
+                </button>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+
+      <!-- Pagination -->
+      @if (totalCount > pageSize) {
+        <div class="pagination">
+          <button 
+            class="btn btn-previous" 
+            [disabled]="pageIndex === 1" 
+            (click)="onPageChange(pageIndex - 1)">
+            Previous
+          </button>
+
+          <button 
+            class="btn btn-next" 
+            [disabled]="pageIndex === totalPages" 
+            (click)="onPageChange(pageIndex + 1)">
+            Next
+          </button>
+        </div>
+      }
+    }
+    @else {
+      <div class="no-data-message">
+        <p>No students found.</p>
+      </div>
+    }
+  }
+
+</div>
