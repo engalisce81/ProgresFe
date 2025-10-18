@@ -71,6 +71,14 @@ function configureRoutes(routesService: RoutesService) {
       layout: eLayoutType.application,
       requiredPolicy: 'Acadmy.Students',
     },
+    {
+      path: 'teachers',
+      name: 'Teachers',
+      iconClass: 'fas fa-chalkboard-teacher',
+      order: 9,
+      layout: eLayoutType.application,
+      requiredPolicy: 'Acadmy.Teachers',
+    },
     ]);
   };
 }

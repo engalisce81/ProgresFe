@@ -4,6 +4,7 @@ import type { LectureInfoDto } from '../lectures/models';
 export interface ChapterDto extends EntityDto<string> {
   name?: string;
   courseId?: string;
+  courseName?: string;
 }
 
 export interface CourseChaptersDto {

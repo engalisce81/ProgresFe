@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
 import { Router, ActivatedRoute, RouterLink } from '@angular/router';
 import { ChapterService } from '@proxy/chapters';
-import { LectureService, CreateUpdateLectureDto } from '@proxy/lectures';
+import { LectureService, CreateUpdateLectureDto, LectureDto } from '@proxy/lectures';
 import { LookupDto } from '@proxy/look-up';
 import { MediaItemService } from '@proxy/media-items';
 import { CourseService } from '@proxy/courses';
@@ -16,10 +16,14 @@ import { CourseService } from '@proxy/courses';
 export class UpdateLectureComponent {
  lectureForm: FormGroup;
   loading = false;
+  lectureId!: string;
+  lectureData!: LectureDto;
+
   courses: LookupDto[] = [];
   chapters: LookupDto[] = [];
-  pdfFile: File | null = null;
-  lectureId!: string;
+
+  pdfFiles: File[] = []; // ملفات جديدة
+  existingPdfs: string[] = []; // روابط PDF القديمة
 
   constructor(
     private fb: FormBuilder,
@@ -27,110 +31,137 @@ export class UpdateLectureComponent {
     private chapterService: ChapterService,
     private courseService: CourseService,
     private mediaItemService: MediaItemService,
-    private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ) {
     this.lectureForm = this.fb.group({
       title: ['', Validators.required],
-      content:['', Validators.required],
+      content: ['', Validators.required],
       courseId: ['', Validators.required],
-      chapterId: ['', Validators.required],
+      chapterId: [{ value: '', disabled: true }, Validators.required],
       videoUrl: [''],
-      pdfUrl: [''],
       quizTime: [0, [Validators.required, Validators.min(1)]],
       quizTryCount: [0, [Validators.required, Validators.min(1)]],
-      quizCount: [0],
+      quizCount: [0, [Validators.required, Validators.min(1)]],
       isVisible: [true]
     });
   }
 
   ngOnInit(): void {
-    this.lectureId = this.route.snapshot.paramMap.get('id')!;
+    this.lectureId = this.route.snapshot.params['id'];
     this.loadCourses();
     this.loadLecture();
-  }
-
-  loadCourses() {
-    this.courseService.getMyCoursesLookUp().subscribe({
-      next: (res) => this.courses = res.items,
-      error: (err) => console.error('Error loading courses', err)
-    });
-  }
-
-  onCourseChange() {
-    const courseId = this.lectureForm.get('courseId')?.value;
-    if (!courseId) {
-      this.chapters = [];
-      this.lectureForm.patchValue({ chapterId: '' });
-      return;
-    }
-
-    this.chapterService.getChaptersByCourseLookUp(courseId).subscribe({
-      next: (res) => this.chapters = res.items,
-      error: (err) => console.error('Error loading chapters', err)
-    });
   }
 
   loadLecture() {
     this.loading = true;
     this.lectureService.get(this.lectureId).subscribe({
       next: (lec) => {
+        this.lectureData = lec.data;
         this.lectureForm.patchValue({
           title: lec.data.title,
+          content: lec.data.content,
           courseId: lec.data.courseId,
           chapterId: lec.data.chapterId,
-          content: lec.data.content,
           videoUrl: lec.data.videoUrl,
-          pdfUrl: lec.data.pdfUrl,
           quizTime: lec.data.quizTime,
           quizTryCount: lec.data.quizTryCount,
           quizCount: lec.data.quizCount,
           isVisible: lec.data.isVisible
         });
 
+        this.existingPdfs = lec.data.pdfUrls || [];
+        this.loading = false;
+
+        // تحميل الشابترز بناءً على الكورس
         if (lec.data.courseId) {
           this.chapterService.getChaptersByCourseLookUp(lec.data.courseId).subscribe({
-            next: (res) => this.chapters = res.items
+            next: (res) => {
+              this.chapters = res.items;
+              this.lectureForm.get('chapterId')?.enable();
+            }
           });
         }
-
-        this.loading = false;
       },
-      error: (err) => {
-        console.error('Error loading lecture', err);
-        this.loading = false;
-      }
+      error: () => (this.loading = false)
     });
   }
 
-  onPdfSelected(event: any) {
-    if (event.target.files && event.target.files.length > 0) {
-      this.pdfFile = event.target.files[0];
+  loadCourses() {
+    this.courseService.getMyCoursesLookUp().subscribe({
+      next: (res) => (this.courses = res.items),
+      error: (err) => console.error('Error loading courses', err)
+    });
+  }
+
+  onCourseChange(event: any) {
+    const courseId = event.target.value;
+    if (!courseId) {
+      this.chapters = [];
+      this.lectureForm.get('chapterId')?.reset();
+      this.lectureForm.get('chapterId')?.disable();
+      return;
     }
+    this.chapterService.getChaptersByCourseLookUp(courseId).subscribe({
+      next: (res) => {
+        this.chapters = res.items;
+        this.lectureForm.get('chapterId')?.enable();
+      },
+      error: (err) => console.error('Error loading chapters', err)
+    });
+  }
+
+  onPdfSelected(event: Event) {
+    const input = event.target as HTMLInputElement;
+    if (!input.files || input.files.length === 0) return;
+
+    const newFiles = Array.from(input.files);
+    this.pdfFiles.push(...newFiles);
+    input.value = '';
+  }
+
+  removeExistingPdf(index: number) {
+    this.existingPdfs.splice(index, 1);
+  }
+
+  removeNewPdf(index: number) {
+    this.pdfFiles.splice(index, 1);
   }
 
   submit() {
     if (this.lectureForm.invalid) return;
     this.loading = true;
 
-    if (this.pdfFile) {
-      this.mediaItemService.uploadImage(this.pdfFile).subscribe({
+    if (this.pdfFiles.length > 0) {
+      this.mediaItemService.uploadImages(this.pdfFiles).subscribe({
         next: (uploadResult) => {
-          this.lectureForm.patchValue({ pdfUrl: uploadResult.data });
-          this.updateLecture();
+          const newPdfUrls = uploadResult.items;
+          const mergedUrls = [...this.existingPdfs, ...newPdfUrls];
+          this.updateLecture(mergedUrls);
         },
         error: (err) => {
           this.loading = false;
-          alert('Error uploading PDF: ' + err.message);
+          alert('Error uploading PDFs: ' + err.message);
         }
       });
     } else {
-      this.updateLecture();
+      this.updateLecture(this.existingPdfs);
     }
   }
 
-  private updateLecture() {
-    const dto: CreateUpdateLectureDto = this.lectureForm.value;
+  private updateLecture(pdfUrls: string[]) {
+    const dto: CreateUpdateLectureDto = {
+      title: this.lectureForm.value.title,
+      content: this.lectureForm.value.content,
+      chapterId: this.lectureForm.value.chapterId,
+      videoUrl: this.lectureForm.value.videoUrl,
+      quizTime: this.lectureForm.value.quizTime,
+      quizTryCount: this.lectureForm.value.quizTryCount,
+      quizCount: this.lectureForm.value.quizCount,
+      isVisible: this.lectureForm.value.isVisible,
+      pdfUrls: pdfUrls
+    };
+
     this.lectureService.update(this.lectureId, dto).subscribe({
       next: () => {
         this.loading = false;

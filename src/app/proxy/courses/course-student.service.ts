@@ -28,6 +28,14 @@ export class CourseStudentService {
     { apiName: this.apiName,...config });
   
 
+  deleteAllStudentInCourseByCourseId = (courseId: string, config?: Partial<Rest.Config>) =>
+    this.restService.request<any, void>({
+      method: 'DELETE',
+      url: `/api/app/course-student/all-student-in-course/${courseId}`,
+    },
+    { apiName: this.apiName,...config });
+  
+
   get = (id: string, config?: Partial<Rest.Config>) =>
     this.restService.request<any, ResponseApi<CourseStudentDto>>({
       method: 'GET',

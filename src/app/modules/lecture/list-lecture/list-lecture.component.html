@@ -42,6 +42,7 @@
         <th>#</th>
         <th>Title</th>
         <th>Chapter</th>
+        <th>Course</th>
         <th>Content</th>
         <th>Video</th>
         <th>Pdf</th>
@@ -60,9 +61,24 @@
           <i class="fas fa-video me-1"></i> {{lec.title}}
         </td>
         <td>{{lec.chapterName}}</td>
+        <td>{{lec.courseName}}</td>
+
         <td>{{lec.content}}</td>
         <td> <a [href]="lec.videoUrl" target="_blank"> video </a></td>
-        <td> <a [href]="lec.pdfUrl" target="_blank"> Pdf </a></td>
+      <td>
+  @if (lec.pdfUrls && lec.pdfUrls.length > 0) {
+    <span>
+      @for (pdf of lec.pdfUrls; track $index) {
+        <a [href]="pdf" target="_blank">Pdf {{ $index + 1 }}</a>
+        @if ($index < lec.pdfUrls.length - 1) { <span>, </span> }
+      }
+    </span>
+  }
+  @else {
+    <span>No PDFs</span>
+  }
+</td>
+
         <td>{{lec.quizTime}}</td>
         <td>{{lec.quizTryCount}}</td>
         <td>{{lec.quizCount}}</td>

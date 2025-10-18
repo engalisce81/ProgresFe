@@ -10,7 +10,7 @@ export const environment = {
     logoUrl: '',
   },
   oAuthConfig: {
-    issuer: 'https://dev-acadmy-httpapi-production.up.railway.app/',
+    issuer: 'https://dev-acadmy-httpapi-production-8cdc.up.railway.app/',
     redirectUri: baseUrl,
     clientId: 'Acadmy_App',
     responseType: 'code',
@@ -19,7 +19,7 @@ export const environment = {
   },
   apis: {
     default: {
-      url: 'https://dev-acadmy-httpapi-production.up.railway.app',
+      url: 'https://dev-acadmy-httpapi-production-8cdc.up.railway.app',
       rootNamespace: 'Dev.Acadmy',
     },
   },

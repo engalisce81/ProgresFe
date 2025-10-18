@@ -2498,6 +2498,43 @@
               "allowAnonymous": false,
               "implementFrom": "Dev.Acadmy.Courses.CourseStudentAppService"
             },
+            "DeleteAllStudentInCourseByCourseId": {
+              "uniqueName": "DeleteAllStudentInCourseByCourseId",
+              "name": "DeleteAllStudentInCourse",
+              "httpMethod": "DELETE",
+              "url": "api/app/course-student/all-student-in-course/{courseId}",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "courseId",
+                  "typeAsString": "System.Guid, System.Private.CoreLib",
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "courseId",
+                  "name": "courseId",
+                  "jsonName": null,
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "System.Void",
+                "typeSimple": "System.Void"
+              },
+              "allowAnonymous": false,
+              "implementFrom": "Dev.Acadmy.Courses.CourseStudentAppService"
+            },
             "GetStudentDegreByCourseAsyncByPageNumberAndPageSizeAndCourseIdAndUserId": {
               "uniqueName": "GetStudentDegreByCourseAsyncByPageNumberAndPageSizeAndCourseIdAndUserId",
               "name": "GetStudentDegreByCourseAsync",
@@ -3510,6 +3547,43 @@
               },
               "allowAnonymous": false,
               "implementFrom": "Dev.Acadmy.MediaItems.MediaItemAppService"
+            },
+            "UploadImagesAsyncByFiles": {
+              "uniqueName": "UploadImagesAsyncByFiles",
+              "name": "UploadImagesAsync",
+              "httpMethod": "POST",
+              "url": "api/app/media-item/upload-images",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "files",
+                  "typeAsString": "System.Collections.Generic.ICollection`1[[Microsoft.AspNetCore.Http.IFormFile, Microsoft.AspNetCore.Http.Features, Version=9.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60]], System.Private.CoreLib",
+                  "type": "System.Collections.Generic.ICollection<Microsoft.AspNetCore.Http.IFormFile>",
+                  "typeSimple": "[Microsoft.AspNetCore.Http.IFormFile]",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "files",
+                  "name": "files",
+                  "jsonName": null,
+                  "type": "System.Collections.Generic.ICollection<Microsoft.AspNetCore.Http.IFormFile>",
+                  "typeSimple": "[Microsoft.AspNetCore.Http.IFormFile]",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "FormFile",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "Volo.Abp.Application.Dtos.PagedResultDto<System.String>",
+                "typeSimple": "Volo.Abp.Application.Dtos.PagedResultDto<string>"
+              },
+              "allowAnonymous": false,
+              "implementFrom": "Dev.Acadmy.MediaItems.MediaItemAppService"
             }
           }
         },
@@ -4189,6 +4263,262 @@
               },
               "allowAnonymous": false,
               "implementFrom": "Dev.Acadmy.Students.StudentAppService"
+            }
+          }
+        },
+        "Dev.Acadmy.Teachers.TeacherAppService": {
+          "controllerName": "Teacher",
+          "controllerGroupName": "Teacher",
+          "isRemoteService": true,
+          "isIntegrationService": false,
+          "apiVersion": null,
+          "type": "Dev.Acadmy.Teachers.TeacherAppService",
+          "interfaces": [],
+          "actions": {
+            "CreateAsyncByInput": {
+              "uniqueName": "CreateAsyncByInput",
+              "name": "CreateAsync",
+              "httpMethod": "POST",
+              "url": "api/app/teacher",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "input",
+                  "typeAsString": "Dev.Acadmy.Teachers.CreateUpdateTeacherDto, Dev.Acadmy.Application.Contracts",
+                  "type": "Dev.Acadmy.Teachers.CreateUpdateTeacherDto",
+                  "typeSimple": "Dev.Acadmy.Teachers.CreateUpdateTeacherDto",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "input",
+                  "name": "input",
+                  "jsonName": null,
+                  "type": "Dev.Acadmy.Teachers.CreateUpdateTeacherDto",
+                  "typeSimple": "Dev.Acadmy.Teachers.CreateUpdateTeacherDto",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "Body",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "System.Void",
+                "typeSimple": "System.Void"
+              },
+              "allowAnonymous": false,
+              "implementFrom": "Dev.Acadmy.Teachers.TeacherAppService"
+            },
+            "UpdateAsyncByIdAndInput": {
+              "uniqueName": "UpdateAsyncByIdAndInput",
+              "name": "UpdateAsync",
+              "httpMethod": "PUT",
+              "url": "api/app/teacher/{id}",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "id",
+                  "typeAsString": "System.Guid, System.Private.CoreLib",
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                },
+                {
+                  "name": "input",
+                  "typeAsString": "Dev.Acadmy.Teachers.CreateUpdateTeacherDto, Dev.Acadmy.Application.Contracts",
+                  "type": "Dev.Acadmy.Teachers.CreateUpdateTeacherDto",
+                  "typeSimple": "Dev.Acadmy.Teachers.CreateUpdateTeacherDto",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "id",
+                  "name": "id",
+                  "jsonName": null,
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "input",
+                  "jsonName": null,
+                  "type": "Dev.Acadmy.Teachers.CreateUpdateTeacherDto",
+                  "typeSimple": "Dev.Acadmy.Teachers.CreateUpdateTeacherDto",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "Body",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "System.Void",
+                "typeSimple": "System.Void"
+              },
+              "allowAnonymous": false,
+              "implementFrom": "Dev.Acadmy.Teachers.TeacherAppService"
+            },
+            "DeleteAsyncById": {
+              "uniqueName": "DeleteAsyncById",
+              "name": "DeleteAsync",
+              "httpMethod": "DELETE",
+              "url": "api/app/teacher/{id}",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "id",
+                  "typeAsString": "System.Guid, System.Private.CoreLib",
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "id",
+                  "name": "id",
+                  "jsonName": null,
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "System.Void",
+                "typeSimple": "System.Void"
+              },
+              "allowAnonymous": false,
+              "implementFrom": "Dev.Acadmy.Teachers.TeacherAppService"
+            },
+            "GetTeacherListAsyncByPageNumberAndPageSizeAndSearch": {
+              "uniqueName": "GetTeacherListAsyncByPageNumberAndPageSizeAndSearch",
+              "name": "GetTeacherListAsync",
+              "httpMethod": "GET",
+              "url": "api/app/teacher/teacher-list",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "pageNumber",
+                  "typeAsString": "System.Int32, System.Private.CoreLib",
+                  "type": "System.Int32",
+                  "typeSimple": "number",
+                  "isOptional": false,
+                  "defaultValue": null
+                },
+                {
+                  "name": "pageSize",
+                  "typeAsString": "System.Int32, System.Private.CoreLib",
+                  "type": "System.Int32",
+                  "typeSimple": "number",
+                  "isOptional": false,
+                  "defaultValue": null
+                },
+                {
+                  "name": "search",
+                  "typeAsString": "System.String, System.Private.CoreLib",
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": true,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "pageNumber",
+                  "name": "pageNumber",
+                  "jsonName": null,
+                  "type": "System.Int32",
+                  "typeSimple": "number",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": ""
+                },
+                {
+                  "nameOnMethod": "pageSize",
+                  "name": "pageSize",
+                  "jsonName": null,
+                  "type": "System.Int32",
+                  "typeSimple": "number",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": ""
+                },
+                {
+                  "nameOnMethod": "search",
+                  "name": "search",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "Volo.Abp.Application.Dtos.PagedResultDto<Dev.Acadmy.Teachers.TeacherDto>",
+                "typeSimple": "Volo.Abp.Application.Dtos.PagedResultDto<Dev.Acadmy.Teachers.TeacherDto>"
+              },
+              "allowAnonymous": false,
+              "implementFrom": "Dev.Acadmy.Teachers.TeacherAppService"
+            },
+            "GetAsyncByUserId": {
+              "uniqueName": "GetAsyncByUserId",
+              "name": "GetAsync",
+              "httpMethod": "GET",
+              "url": "api/app/teacher",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "userId",
+                  "typeAsString": "System.Guid, System.Private.CoreLib",
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "userId",
+                  "name": "userId",
+                  "jsonName": null,
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "Dev.Acadmy.Response.ResponseApi<Dev.Acadmy.Teachers.TeacherDto>",
+                "typeSimple": "Dev.Acadmy.Response.ResponseApi<Dev.Acadmy.Teachers.TeacherDto>"
+              },
+              "allowAnonymous": false,
+              "implementFrom": "Dev.Acadmy.Teachers.TeacherAppService"
             }
           }
         },
@@ -8475,6 +8805,18 @@
           "minimum": null,
           "maximum": null,
           "regex": null
+        },
+        {
+          "name": "CourseName",
+          "jsonName": null,
+          "type": "System.String",
+          "typeSimple": "string",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
         }
       ]
     },
@@ -10091,18 +10433,6 @@
           "regex": null
         },
         {
-          "name": "PdfUrl",
-          "jsonName": null,
-          "type": "System.String",
-          "typeSimple": "string",
-          "isRequired": false,
-          "minLength": null,
-          "maxLength": null,
-          "minimum": null,
-          "maximum": null,
-          "regex": null
-        },
-        {
           "name": "ChapterId",
           "jsonName": null,
           "type": "System.Guid",
@@ -10161,6 +10491,18 @@
           "minimum": null,
           "maximum": null,
           "regex": null
+        },
+        {
+          "name": "PdfUrls",
+          "jsonName": null,
+          "type": "[System.String]",
+          "typeSimple": "[string]",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
         }
       ]
     },
@@ -10208,18 +10550,6 @@
           "regex": null
         },
         {
-          "name": "PdfUrl",
-          "jsonName": null,
-          "type": "System.String",
-          "typeSimple": "string",
-          "isRequired": false,
-          "minLength": null,
-          "maxLength": null,
-          "minimum": null,
-          "maximum": null,
-          "regex": null
-        },
-        {
           "name": "ChapterId",
           "jsonName": null,
           "type": "System.Guid",
@@ -10235,6 +10565,18 @@
           "name": "CourseId",
           "jsonName": null,
           "type": "System.Guid",
+          "typeSimple": "string",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        },
+        {
+          "name": "CourseName",
+          "jsonName": null,
+          "type": "System.String",
           "typeSimple": "string",
           "isRequired": false,
           "minLength": null,
@@ -10296,6 +10638,18 @@
           "jsonName": null,
           "type": "System.Boolean",
           "typeSimple": "boolean",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        },
+        {
+          "name": "PdfUrls",
+          "jsonName": null,
+          "type": "[System.String]",
+          "typeSimple": "[string]",
           "isRequired": false,
           "minLength": null,
           "maxLength": null,
@@ -11875,6 +12229,18 @@
       "genericArguments": null,
       "properties": [
         {
+          "name": "PhoneNumber",
+          "jsonName": null,
+          "type": "System.String",
+          "typeSimple": "string",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        },
+        {
           "name": "FullName",
           "jsonName": null,
           "type": "System.String",
@@ -11995,6 +12361,264 @@
           "name": "Id",
           "jsonName": null,
           "type": "System.Guid",
+          "typeSimple": "string",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        },
+        {
+          "name": "PhoneNumber",
+          "jsonName": null,
+          "type": "System.String",
+          "typeSimple": "string",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        },
+        {
+          "name": "FullName",
+          "jsonName": null,
+          "type": "System.String",
+          "typeSimple": "string",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        },
+        {
+          "name": "UserName",
+          "jsonName": null,
+          "type": "System.String",
+          "typeSimple": "string",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        },
+        {
+          "name": "Password",
+          "jsonName": null,
+          "type": "System.String",
+          "typeSimple": "string",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        },
+        {
+          "name": "Gender",
+          "jsonName": null,
+          "type": "System.Boolean",
+          "typeSimple": "boolean",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        },
+        {
+          "name": "CollegeId",
+          "jsonName": null,
+          "type": "System.Guid",
+          "typeSimple": "string",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        },
+        {
+          "name": "UniversityId",
+          "jsonName": null,
+          "type": "System.Guid",
+          "typeSimple": "string",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        },
+        {
+          "name": "GradeLevelId",
+          "jsonName": null,
+          "type": "System.Guid?",
+          "typeSimple": "string?",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        },
+        {
+          "name": "AccountTypeKey",
+          "jsonName": null,
+          "type": "System.Int32",
+          "typeSimple": "number",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        },
+        {
+          "name": "StudentMobileIP",
+          "jsonName": null,
+          "type": "System.String",
+          "typeSimple": "string",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        }
+      ]
+    },
+    "Dev.Acadmy.Teachers.CreateUpdateTeacherDto": {
+      "baseType": null,
+      "isEnum": false,
+      "enumNames": null,
+      "enumValues": null,
+      "genericArguments": null,
+      "properties": [
+        {
+          "name": "FullName",
+          "jsonName": null,
+          "type": "System.String",
+          "typeSimple": "string",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        },
+        {
+          "name": "PhoneNumber",
+          "jsonName": null,
+          "type": "System.String",
+          "typeSimple": "string",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        },
+        {
+          "name": "UserName",
+          "jsonName": null,
+          "type": "System.String",
+          "typeSimple": "string",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        },
+        {
+          "name": "Password",
+          "jsonName": null,
+          "type": "System.String",
+          "typeSimple": "string",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        },
+        {
+          "name": "Gender",
+          "jsonName": null,
+          "type": "System.Boolean",
+          "typeSimple": "boolean",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        },
+        {
+          "name": "CollegeId",
+          "jsonName": null,
+          "type": "System.Guid",
+          "typeSimple": "string",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        },
+        {
+          "name": "UniversityId",
+          "jsonName": null,
+          "type": "System.Guid",
+          "typeSimple": "string",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        },
+        {
+          "name": "AccountTypeKey",
+          "jsonName": null,
+          "type": "System.Int32",
+          "typeSimple": "number",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        }
+      ]
+    },
+    "Dev.Acadmy.Teachers.TeacherDto": {
+      "baseType": null,
+      "isEnum": false,
+      "enumNames": null,
+      "enumValues": null,
+      "genericArguments": null,
+      "properties": [
+        {
+          "name": "Id",
+          "jsonName": null,
+          "type": "System.Guid",
+          "typeSimple": "string",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        },
+        {
+          "name": "PhoneNumber",
+          "jsonName": null,
+          "type": "System.String",
           "typeSimple": "string",
           "isRequired": false,
           "minLength": null,

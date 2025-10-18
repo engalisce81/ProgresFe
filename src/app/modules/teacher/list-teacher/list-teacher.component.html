@@ -1,0 +1,90 @@
+<div class="list-container" style="width: 100%;">
+
+    <!-- Delete confirmation -->
+    @if (showDeleteConfirm) {
+    <div class="delete-confirm-card">
+        <p>Are you sure you want to delete <strong>{{ teacherToDelete.fullName }}</strong>?</p>
+        <div class="delete-confirm-actions">
+            <button class="btn btn-secondary" (click)="cancelDelete()">No</button>
+            <button class="btn btn-danger" (click)="deleteTeacher()">Yes</button>
+        </div>
+    </div>
+    }
+
+    <!-- Search and Create -->
+    <div class="toolbar">
+        <input type="text" [(ngModel)]="search" placeholder="Search teachers..." class="search-input"
+            (keyup.enter)="onSearchChange()" />
+        <button class="btn btn-search" (click)="onSearchChange()" title="Search">
+            <i class="bi bi-search"></i>
+        </button>
+
+        <button routerLink="/teachers/create" class="btn btn-create" title="Create">
+            <i class="bi bi-plus-circle me-1"></i> Create
+        </button>
+    </div>
+
+    <!-- Loading -->
+    @if (loading) {
+    <div class="loading-container">
+        <div class="spinner"></div>
+        <p class="loading-text">Loading...</p>
+    </div>
+    }
+
+    <!-- Table -->
+    @if (!loading) {
+    @if (teachers.length > 0) {
+    <table class="table" style="width: 100%;">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Full Name</th>
+                <th>Username</th>
+                <th>Phone</th>
+                <th>Gender</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (teacher of teachers; track teacher.id; let i = $index) {
+            <tr>
+                <td>{{ (pageIndex - 1) * pageSize + i + 1 }}</td>
+                <td>{{ teacher.fullName }}</td>
+                <td>{{ teacher.userName }}</td>
+                <td>{{ teacher.phoneNumber || '-' }}</td>
+                <td>{{ teacher.gender ? 'Male' : 'Female' }}</td>
+                <td class="actions">
+                    <button [routerLink]="['/teachers/update', teacher.id]" class="btn btn-edit" title="Edit">
+                        <i class="bi bi-pencil"></i>
+                    </button>
+                    <button (click)="confirmDelete(teacher)" class="btn btn-delete" title="Delete">
+                        <i class="bi bi-trash"></i>
+                    </button>
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+
+    <!-- Pagination -->
+    @if (totalCount > pageSize) {
+    <div class="pagination">
+        <button class="btn btn-previous" [disabled]="pageIndex === 1" (click)="onPageChange(pageIndex - 1)">
+            Previous
+        </button>
+
+        <button class="btn btn-next" [disabled]="pageIndex === totalPages" (click)="onPageChange(pageIndex + 1)">
+            Next
+        </button>
+    </div>
+    }
+    }
+    @else {
+    <div class="no-data-message">
+        <p>No teachers found.</p>
+    </div>
+    }
+    }
+
+</div>
