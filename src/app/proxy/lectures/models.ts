@@ -5,26 +5,27 @@ export interface CreateUpdateLectureDto {
   title?: string;
   content?: string;
   videoUrl?: string;
-  pdfUrl?: string;
   chapterId?: string;
   isVisible: boolean;
   quizTime: number;
   quizTryCount: number;
   quizCount: number;
+  pdfUrls: string[];
 }
 
 export interface LectureDto extends EntityDto<string> {
   title?: string;
   content?: string;
   videoUrl?: string;
-  pdfUrl?: string;
   chapterId?: string;
   courseId?: string;
+  courseName?: string;
   chapterName?: string;
   quizTime: number;
   quizTryCount: number;
   quizCount: number;
   isVisible: boolean;
+  pdfUrls: string[];
 }
 
 export interface LectureInfoDto {

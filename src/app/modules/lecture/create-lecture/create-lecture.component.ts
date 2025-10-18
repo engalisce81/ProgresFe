@@ -14,12 +14,11 @@ import { MediaItemService } from '@proxy/media-items/media-item.service';
   styleUrl: './create-lecture.component.scss'
 })
 export class CreateLectureComponent {
-lectureForm: FormGroup;
+ lectureForm: FormGroup;
   loading = false;
   chapters: LookupDto[] = [];
   courses: LookupDto[] = [];
-
-  pdfFile: File | null = null;
+  pdfFiles: File[] = []; // ✅ الآن يمكن رفع عدة ملفات متراكمة
 
   constructor(
     private fb: FormBuilder,
@@ -31,11 +30,10 @@ lectureForm: FormGroup;
   ) {
     this.lectureForm = this.fb.group({
       title: ['', Validators.required],
-      content:['', Validators.required],
-      courseId: ['', Validators.required], // جديد: الكورس لازم يتحدد
-      chapterId: [{ value: '', disabled: true }, Validators.required], // disabled by default
+      content: ['', Validators.required],
+      courseId: ['', Validators.required],
+      chapterId: [{ value: '', disabled: true }, Validators.required],
       videoUrl: [''],
-      pdfUrl: [''],
       quizTime: [0, [Validators.required, Validators.min(1)]],
       quizTryCount: [0, [Validators.required, Validators.min(1)]],
       quizCount: [0, [Validators.required, Validators.min(1)]],
@@ -56,14 +54,12 @@ lectureForm: FormGroup;
 
   onCourseChange(event: any) {
     const courseId = event.target.value;
-
     if (!courseId) {
       this.chapters = [];
       this.lectureForm.get('chapterId')?.reset();
       this.lectureForm.get('chapterId')?.disable();
       return;
     }
-
     this.chapterService.getChaptersByCourseLookUp(courseId).subscribe({
       next: (res) => {
         this.chapters = res.items;
@@ -73,40 +69,47 @@ lectureForm: FormGroup;
     });
   }
 
-  onPdfSelected(event: any) {
-    if (event.target.files && event.target.files.length > 0) {
-      this.pdfFile = event.target.files[0];
-    }
+ onPdfSelected(event: Event) {
+  const input = event.target as HTMLInputElement;
+  if (!input.files || input.files.length === 0) return;
+
+  const newFiles = Array.from(input.files);
+  this.pdfFiles.push(...newFiles); // نضيف الملفات الجديدة بدون حذف القديمة
+  input.value = ''; // نفرغ الـ input علشان يسمح باختيار نفس الملف تاني لو احتجت
+}
+
+
+  /** ✅ حذف ملف من الليست قبل الإرسال */
+  removePdf(index: number) {
+    this.pdfFiles.splice(index, 1);
   }
 
   submit() {
     if (this.lectureForm.invalid) return;
     this.loading = true;
 
-    if (this.pdfFile) {
-      this.mediaItemService.uploadImage(this.pdfFile).subscribe({
+    if (this.pdfFiles.length > 0) {
+      this.mediaItemService.uploadImages(this.pdfFiles).subscribe({
         next: (uploadResult) => {
-          this.lectureForm.patchValue({ pdfUrl: uploadResult.data });
-          this.createLecture();
+          this.createLecture(uploadResult.items);
         },
         error: (err) => {
           this.loading = false;
-          alert('Error uploading PDF: ' + err.message);
+          alert('Error uploading PDFs: ' + err.message);
         }
       });
     } else {
-      this.lectureForm.patchValue({ pdfUrl: '' });
-      this.createLecture();
+      this.createLecture([]);
     }
   }
 
-  private createLecture() {
+  private createLecture(pdfUrls: string[]) {
     const dto: CreateUpdateLectureDto = {
       title: this.lectureForm.value.title,
       chapterId: this.lectureForm.value.chapterId,
       content: this.lectureForm.value.content || '',
       videoUrl: this.lectureForm.value.videoUrl || '',
-      pdfUrl: this.lectureForm.value.pdfUrl,
+      pdfUrls: pdfUrls,
       quizTime: this.lectureForm.value.quizTime,
       quizTryCount: this.lectureForm.value.quizTryCount,
       quizCount: this.lectureForm.value.quizCount,

@@ -40,6 +40,8 @@
       <tr>
         <th>#</th>
         <th>Name</th>
+        <th>Course</th>
+
         <th>Actions</th>
       </tr>
     </thead>
@@ -49,6 +51,9 @@
         <td>{{ (pageIndex - 1) * pageSize + i + 1 }}</td>
         <td>
           <i class="fas fa-book-open me-1"></i> {{ chapter.name }}
+        </td>
+        <td>
+          <i class="fas fa-book-open me-1"></i> {{ chapter.courseName }}
         </td>
         <td class="actions">
          

@@ -79,13 +79,35 @@
       </div>
 
       <!-- PDF Upload -->
-      <div class="form-row">
-        <div class="form-group">
-          <label for="pdfFile">Upload PDF</label>
-          <input id="pdfFile" type="file" accept="application/pdf" class="form-control"
-            (change)="onPdfSelected($event)">
-        </div>
-      </div>
+      <!-- PDF Upload -->
+<div class="form-row">
+  <div class="form-group">
+    <label for="pdfFile">Upload PDFs</label>
+    <input
+      id="pdfFile"
+      type="file"
+      accept="application/pdf"
+      multiple
+      class="form-control"
+      (change)="onPdfSelected($event)"
+    />
+  </div>
+</div>
+
+<!-- ✅ عرض قائمة ملفات PDF المختارة -->
+ @if(pdfFiles.length > 0){
+<div class="form-row" >
+  <div class="form-group">
+    <label>Selected PDFs:</label>
+    <ul class="pdf-list">
+      @for (file of pdfFiles; track $index) {
+      <li class="pdf-item">
+        <span>{{ file.name }}</span>
+        <button type="button" class="btn btn-sm btn-danger" (click)="removePdf(i)">Remove</button>
+      </li>}
+    </ul>
+  </div>
+</div>}
 
       <!-- Quiz Settings -->
       <div class="form-row">

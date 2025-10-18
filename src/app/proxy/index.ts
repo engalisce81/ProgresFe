@@ -14,6 +14,7 @@ import * as Questions from './questions';
 import * as Quizzes from './quizzes';
 import * as Response from './response';
 import * as Students from './students';
+import * as Teachers from './teachers';
 import * as Universites from './universites';
 import * as Volo from './volo';
-export { AccountCustoms, Chapters, Courses, Emails, Exams, Homes, Lectures, LookUp, MediaItems, Microsoft, ProfileUsers, QuestionAnswer, Questions, Quizzes, Response, Students, Universites, Volo };
+export { AccountCustoms, Chapters, Courses, Emails, Exams, Homes, Lectures, LookUp, MediaItems, Microsoft, ProfileUsers, QuestionAnswer, Questions, Quizzes, Response, Students, Teachers, Universites, Volo };
