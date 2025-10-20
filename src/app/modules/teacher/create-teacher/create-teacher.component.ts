@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { LookupDto } from '@proxy/look-up';
 import { TeacherService, CreateUpdateTeacherDto } from '@proxy/teachers';
 import { UniversityService, CollegeService } from '@proxy/universites';
 
 @Component({
   selector: 'app-create-teacher',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule ,RouterLink],
   templateUrl: './create-teacher.component.html',
   styleUrl: './create-teacher.component.scss'
 })

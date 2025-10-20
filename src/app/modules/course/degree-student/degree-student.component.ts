@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { StudentDegreeByCourseDto, CourseStudentService } from '@proxy/courses';
+import { StudentDegreeByCourseDto, CourseStudentService, CourseService } from '@proxy/courses';
+import { LectureWithQuizzesDto } from '@proxy/lectures';
 
 @Component({
   selector: 'app-degree-student',
@@ -11,31 +12,33 @@ import { StudentDegreeByCourseDto, CourseStudentService } from '@proxy/courses';
 export class DegreeStudentComponent {
 courseId!: string;
   userId!: string;
-  studentDegree?: StudentDegreeByCourseDto;
+  studentLectures: LectureWithQuizzesDto[] = [];
+  totalCount = 0;
   isLoading = false;
 
   constructor(
     private route: ActivatedRoute,
-    private courseStudentService: CourseStudentService
+    private courseService: CourseService
   ) {}
 
   ngOnInit(): void {
-    this.courseId = this.route.snapshot.paramMap.get('id')!;        // من المسار subscriber/:id/degree/:userId
+    this.courseId = this.route.snapshot.paramMap.get('id')!;
     this.userId = this.route.snapshot.paramMap.get('userId')!;
-
-    this.loadDegree();
+    this.loadStudentQuizzes();
   }
 
-  loadDegree() {
+  loadStudentQuizzes(): void {
     this.isLoading = true;
-    this.courseStudentService.getStudentDegreByCourse(1, 50, this.courseId, this.userId)
+
+    this.courseService.getStudentQuizzesByCourse(this.courseId, this.userId, 1, 50)
       .subscribe({
         next: (res) => {
-          this.studentDegree = res.items[0]; // حسب نوع الـ API
+          this.studentLectures = res.items ?? [];
+          this.totalCount = res.totalCount ?? 0;
           this.isLoading = false;
         },
         error: (err) => {
-          console.error(err);
+          console.error('❌ Error loading quizzes:', err);
           this.isLoading = false;
         }
       });

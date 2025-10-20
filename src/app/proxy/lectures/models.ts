@@ -10,6 +10,7 @@ export interface CreateUpdateLectureDto {
   quizTime: number;
   quizTryCount: number;
   quizCount: number;
+  isFree: boolean;
   pdfUrls: string[];
 }
 
@@ -25,6 +26,7 @@ export interface LectureDto extends EntityDto<string> {
   quizTryCount: number;
   quizCount: number;
   isVisible: boolean;
+  isFree: boolean;
   pdfUrls: string[];
 }
 
@@ -33,7 +35,7 @@ export interface LectureInfoDto {
   title?: string;
   content?: string;
   videoUrl?: string;
-  pdfUrl?: string;
+  pdfUrls: string[];
   quiz: QuizInfoDto;
 }
 

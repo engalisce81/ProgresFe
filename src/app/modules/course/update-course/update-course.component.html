@@ -121,6 +121,20 @@
           </div>
         </div>
 
+
+<div class="form-row">
+  <div class="form-group">
+    <label for="introductionVideoUrl">Introduction Video URL</label>
+    <input
+      id="introductionVideoUrl"
+      type="text"
+      formControlName="introductionVideoUrl"
+      class="form-control"
+      placeholder="https://example.com/video.mp4" />
+  </div>
+</div>
+
+
         <!-- Active & Lifetime -->
         <div class="form-row">
           <div class="form-group">
@@ -132,6 +146,47 @@
             </label>
           </div>
         </div>
+        <!-- PDF & Video -->
+<div class="form-row">
+  <div class="form-group">
+    <label>
+      <input type="checkbox" formControlName="isPdf" /> Is PDF Course
+    </label>
+  </div>
+</div>
+
+@if (courseForm.get('isPdf')?.value) {
+  <div class="form-row">
+    <div class="form-group">
+      <label for="pdfFile">Upload PDF *</label>
+      <input
+        id="pdfFile"
+        type="file"
+        (change)="onPdfSelected($event)"
+        class="form-control"
+        accept="application/pdf"
+        required />
+
+      <!-- ✅ لو المستخدم رفع ملف PDF جديد -->
+      @if (pdfFileName) {
+        <div style="margin-top:5px;">📄 {{ pdfFileName }}</div>
+      }
+
+      <!-- ✅ لو فيه PDF موجود مسبقاً في الكورس -->
+      @else if (courseForm.get('pdfUrl')?.value) {
+        <div style="margin-top:5px;">
+          📘 Existing PDF:
+          <a
+            [href]="courseForm.get('pdfUrl')?.value"
+            target="_blank"
+            rel="noopener noreferrer">
+            Open PDF
+          </a>
+        </div>
+      }
+    </div>
+  </div>
+}
 
         <!-- Duration -->
         <div class="form-row">

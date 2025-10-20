@@ -2,7 +2,7 @@ import type { CreateUpdateLectureDto, LectureDto, LectureWithQuizzesDto } from '
 import { RestService, Rest } from '@abp/ng.core';
 import type { PagedResultDto } from '@abp/ng.core';
 import { Injectable } from '@angular/core';
-import type { QuizAnswerDto, QuizDetailsDto, QuizResultDto, QuizStudentDto } from '../quizzes/models';
+import type { LectureQuizResultDto, QuizAnswerDto, QuizDetailsDto, QuizResultDto, QuizStudentDto } from '../quizzes/models';
 import type { ResponseApi } from '../response/models';
 
 @Injectable({
@@ -42,6 +42,14 @@ export class LectureService {
     this.restService.request<any, ResponseApi<LectureDto>>({
       method: 'GET',
       url: `/api/app/lecture/${id}`,
+    },
+    { apiName: this.apiName,...config });
+  
+
+  getLectureQuizResults = (lectureId: string, config?: Partial<Rest.Config>) =>
+    this.restService.request<any, ResponseApi<LectureQuizResultDto>>({
+      method: 'GET',
+      url: `/api/app/lecture/lecture-quiz-results/${lectureId}`,
     },
     { apiName: this.apiName,...config });
   

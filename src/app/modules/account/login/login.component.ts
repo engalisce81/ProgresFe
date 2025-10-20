@@ -26,7 +26,7 @@ export class LoginComponent implements OnInit  {
   
 
   login() {
-    this.loginService.login(this.username, this.password, this.rememberMe);
+    this.loginService.login(this.username.trim(), this.password, this.rememberMe);
   }
    togglePassword() {
     this.showPassword = !this.showPassword;

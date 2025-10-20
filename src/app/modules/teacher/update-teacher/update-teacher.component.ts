@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { LookupDto } from '@proxy/look-up';
 import { TeacherService, CreateUpdateTeacherDto } from '@proxy/teachers';
 import { UniversityService, CollegeService } from '@proxy/universites';
 
 @Component({
   selector: 'app-update-teacher',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule ,RouterLink],
   templateUrl: './update-teacher.component.html',
   styleUrl: './update-teacher.component.scss'
 })
@@ -32,10 +32,11 @@ export class UpdateTeacherComponent {
       fullName: ['', Validators.required],
       userName: ['', Validators.required],
       password: [''], // optional for update
+      phoneNumber: ['', [Validators.required, Validators.pattern('^[0-9]{10,15}$')]],
       gender: ['', Validators.required],
       universityId: ['', Validators.required],
       collegeId: ['', Validators.required],
-      departmentId: ['', Validators.required],
+      departmentId: [''],
       accountTypeKey: [2], // 2 = Teacher
       teacherMobileIP: ['']
     });
@@ -54,13 +55,6 @@ export class UpdateTeacherComponent {
         this.departments = [];
       }
     });
-
-    this.teacherForm.get('collegeId')?.valueChanges.subscribe((collegeId) => {
-      if (collegeId) {
-        this.teacherForm.patchValue({ departmentId: '' });
-        this.departments = [];
-      }
-    });
   }
 
   loadTeacher() {
@@ -71,6 +65,7 @@ export class UpdateTeacherComponent {
         this.teacherForm.patchValue({
           fullName: teacher.data.fullName,
           userName: teacher.data.userName,
+          phoneNumber: teacher.data.phoneNumber,
           gender: teacher.data.gender,
           universityId: teacher.data.universityId,
           collegeId: teacher.data.collegeId,
@@ -98,8 +93,6 @@ export class UpdateTeacherComponent {
       error: (err) => console.error('Error loading colleges', err)
     });
   }
-
-  
 
   submit() {
     if (this.teacherForm.invalid) return;

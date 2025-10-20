@@ -79,6 +79,23 @@ function configureRoutes(routesService: RoutesService) {
       layout: eLayoutType.application,
       requiredPolicy: 'Acadmy.Teachers',
     },
+    {
+      path: 'questionbanks',
+      name: 'Questionbanks',
+      iconClass: 'fas fa-database',
+      order: 10,
+      layout: eLayoutType.application,
+      requiredPolicy: 'Acadmy.QuestionBanks',
+    },
+    {
+      path: 'enrollments',
+      name: 'Enrollments',
+      iconClass: 'fas fa-user-friends',
+      order: 11,
+      layout: eLayoutType.application,
+      requiredPolicy: 'Acadmy.QuestionBanks',
+    },
+    
     ]);
   };
 }

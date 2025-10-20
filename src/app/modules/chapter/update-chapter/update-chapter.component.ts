@@ -27,6 +27,7 @@ chapterForm: FormGroup;
     this.chapterForm = this.fb.group({
       name: ['', Validators.required],
       courseId: ['', Validators.required],
+      isFree: [false] 
     });
   }
 
@@ -49,6 +50,8 @@ chapterForm: FormGroup;
         this.chapterForm.patchValue({
           name: chapter.data.name,
           courseId: chapter.data.courseId,
+          isFree:chapter.data.isFree
+          
         });
       },
       error: (err) => console.error('Error loading chapter', err),

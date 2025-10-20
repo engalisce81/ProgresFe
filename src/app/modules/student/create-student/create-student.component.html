@@ -63,6 +63,22 @@
           }
         </div>
       </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="phoneNumber">Phone Number *</label>
+          <input
+            id="phoneNumber"
+            type="tel"
+            formControlName="phoneNumber"
+            class="form-control"
+            placeholder="Enter phone number"
+            [class.is-invalid]="studentForm.get('phoneNumber')?.invalid && studentForm.get('phoneNumber')?.touched">
+          @if (studentForm.get('phoneNumber')?.invalid && studentForm.get('phoneNumber')?.touched) {
+            <div class="error-message">Valid phone number is required</div>
+          }
+        </div>
+      </div>
+
 
       <!-- Gender -->
       <div class="form-row">

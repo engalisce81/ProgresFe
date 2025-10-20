@@ -25,6 +25,22 @@ export interface CreateUpdateQuizDto {
   lectureId?: string;
 }
 
+export interface LectureQuizResultDto {
+  lectureId?: string;
+  lectureTitle?: string;
+  quizzes: QuizResultDetailDto[];
+}
+
+export interface QuestionResultDto {
+  questionId?: string;
+  questionText?: string;
+  studentAnswer?: string;
+  correctAnswer?: string;
+  isCorrect: boolean;
+  scoreObtained: number;
+  scoreTotal: number;
+}
+
 export interface QuizAnswerDto {
   quizId?: string;
   answers: QuestionAnswerInfoDto[];
@@ -44,6 +60,14 @@ export interface QuizDto extends EntityDto<string> {
   quizTime: number;
   quizTryCount: number;
   leactureName?: string;
+}
+
+export interface QuizResultDetailDto {
+  quizId?: string;
+  quizTitle?: string;
+  studentScore: number;
+  totalScore: number;
+  questions: QuestionResultDto[];
 }
 
 export interface QuizResultDto {

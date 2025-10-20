@@ -25,6 +25,7 @@ chapterForm: FormGroup;
     this.chapterForm = this.fb.group({
       name: ['', Validators.required],
       courseId: ['', Validators.required],
+      isFree:[false]
     });
   }
 

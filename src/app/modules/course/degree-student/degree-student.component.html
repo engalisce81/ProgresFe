@@ -1,33 +1,54 @@
-@if (!isLoading && studentDegree) {
-  <div class="degree-container">
-    <div class="student-header">
-      <img [src]="studentDegree.logoUrl || 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSUpsDK5dkH7envHCdUECqq0XzCWK1Dv96XcQ&s'" 
-           alt="student" class="student-img">
-      <div class="student-info">
-        <h2>{{ studentDegree.name }}</h2>
-        <p class="muted">Student Degree Summary</p>
-      </div>
-    </div>
+@if (isLoading) {
+  <div class="loading">Loading student quizzes...</div>
+} @else if (studentLectures?.length) {
+  <div class="lectures-container">
+    @for (lecture of studentLectures; track lecture) {
+      <div class="lecture-card">
+        <h2 class="lecture-title">
+          🎓 {{ lecture.title }}
+        </h2>
 
-    @if (studentDegree.quizzes?.length) {
-      <div class="quiz-section">
-        @for (quiz of studentDegree.quizzes; track quiz) {
-          <div class="quiz-card">
-            <div class="quiz-header">
-              <h3>{{ quiz.quizName }}</h3>
-              <span class="lecture">{{ quiz.lectureName }}</span>
-            </div>
-            <div class="quiz-details">
-              <p><strong>Score:</strong> {{ quiz.quizScore }}%</p>
-              <p><strong>Tries:</strong> {{ quiz.tryCount }}</p>
-            </div>
+        @if (lecture.quizzes?.length) {
+          <div class="quiz-list">
+            @for (quiz of lecture.quizzes; track quiz) {
+              <div class="quiz-card">
+                <h3 class="quiz-title">{{ quiz.title }}</h3>
+
+                @if (quiz.questions?.length) {
+                  <div class="questions">
+                    @for (question of quiz.questions; track question) {
+                      <div class="question-block">
+                        <p class="question-title">
+                          <strong>Q:</strong> {{ question.title }} 
+                          <span class="score">({{ question.score }} pts)</span>
+                        </p>
+                        <p class="question-type">Type: {{ question.questionTypeName }}</p>
+
+                        <ul class="answers">
+                          @for (answer of question.answers; track answer) {
+                            <li [class.correct]="answer.isCorrect">
+                              {{ answer.answer }}
+                              @if (answer.isCorrect) {
+                                <span class="checkmark">✔</span>
+                              }
+                            </li>
+                          }
+                        </ul>
+                      </div>
+                    }
+                  </div>
+                } @else {
+                  <p class="muted">No questions found for this quiz.</p>
+                }
+              </div>
+            }
           </div>
+        } @else {
+          <p class="muted">No quizzes found for this lecture.</p>
         }
       </div>
-    } @else {
-      <p class="muted">No quizzes found for this student.</p>
     }
   </div>
 } @else {
-  <div class="loading">Loading student degree...</div>
+  <p class="muted">No data found for this student in this course.</p>
 }

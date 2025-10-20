@@ -43,7 +43,8 @@ export class UpdateLectureComponent {
       quizTime: [0, [Validators.required, Validators.min(1)]],
       quizTryCount: [0, [Validators.required, Validators.min(1)]],
       quizCount: [0, [Validators.required, Validators.min(1)]],
-      isVisible: [true]
+      isVisible: [true],
+      isFree:[false]
     });
   }
 
@@ -67,7 +68,8 @@ export class UpdateLectureComponent {
           quizTime: lec.data.quizTime,
           quizTryCount: lec.data.quizTryCount,
           quizCount: lec.data.quizCount,
-          isVisible: lec.data.isVisible
+          isVisible: lec.data.isVisible,
+          isFree:lec.data.isFree
         });
 
         this.existingPdfs = lec.data.pdfUrls || [];
@@ -159,7 +161,8 @@ export class UpdateLectureComponent {
       quizTryCount: this.lectureForm.value.quizTryCount,
       quizCount: this.lectureForm.value.quizCount,
       isVisible: this.lectureForm.value.isVisible,
-      pdfUrls: pdfUrls
+      pdfUrls: pdfUrls,
+      isFree: this.lectureForm.value.isFree
     };
 
     this.lectureService.update(this.lectureId, dto).subscribe({

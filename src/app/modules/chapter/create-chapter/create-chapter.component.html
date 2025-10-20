@@ -14,19 +14,15 @@
         <!-- Chapter Name -->
         <div class="form-group">
           <label for="name">Chapter Name *</label>
-          <input
-            id="name"
-            type="text"
-            formControlName="name"
-            class="form-control"
+          <input id="name" type="text" formControlName="name" class="form-control"
             [class.is-invalid]="chapterForm.get('name')?.invalid && chapterForm.get('name')?.touched"
             placeholder="Enter chapter name">
 
           @if(chapterForm.get('name')?.invalid && chapterForm.get('name')?.touched)
           {
-            <div class="error-message">
-              Chapter name is required
-            </div>
+          <div class="error-message">
+            Chapter name is required
+          </div>
           }
         </div>
       </div>
@@ -35,43 +31,44 @@
         <!-- Course Dropdown -->
         <div class="form-group">
           <label for="courseId">Course *</label>
-          <select
-            id="courseId"
-            formControlName="courseId"
-            class="form-control"
+          <select id="courseId" formControlName="courseId" class="form-control"
             [class.is-invalid]="chapterForm.get('courseId')?.invalid && chapterForm.get('courseId')?.touched">
             <option value="">-- Select Course --</option>
 
             @for(c of courses; track $index)
             {
-              <option [value]="c.id">{{ c.name }}</option>
+            <option [value]="c.id">{{ c.name }}</option>
             }
           </select>
 
           @if(chapterForm.get('courseId')?.invalid && chapterForm.get('courseId')?.touched)
           {
-            <div class="error-message">
-              Course is required
-            </div>
+          <div class="error-message">
+            Course is required
+          </div>
           }
         </div>
       </div>
+
+      <div class="form-row">
+        <!-- Is Free Checkbox -->
+        <div class="form-group checkbox-group">
+          <label>
+            <input type="checkbox" formControlName="isFree" />
+            Is Free Chapter
+          </label>
+        </div>
+      </div>
+
     </div>
 
     <!-- Form Actions -->
     <div class="form-actions">
-      <button
-        type="button"
-        routerLink="/chapters"
-        class="btn btn-secondary"
-        [disabled]="loading">
+      <button type="button" routerLink="/chapters" class="btn btn-secondary" [disabled]="loading">
         Cancel
       </button>
 
-      <button
-        type="submit"
-        class="btn btn-primary"
-        [disabled]="chapterForm.invalid || loading">
+      <button type="submit" class="btn btn-primary" [disabled]="chapterForm.invalid || loading">
         <span *ngIf="loading" class="spinner"></span>
         {{ loading ? 'Creating...' : 'Create Chapter' }}
       </button>
@@ -81,8 +78,8 @@
   <!-- Loading Overlay -->
   @if(loading)
   {
-    <div class="loading-overlay">
-      <div class="loading-spinner">Processing...</div>
-    </div>
+  <div class="loading-overlay">
+    <div class="loading-spinner">Processing...</div>
+  </div>
   }
 </div>

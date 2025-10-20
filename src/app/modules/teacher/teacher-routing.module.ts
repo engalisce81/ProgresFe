@@ -7,7 +7,7 @@ import { UpdateTeacherComponent } from './update-teacher/update-teacher.componen
 const routes: Routes = [
   {path:"" , pathMatch:'full' ,component:ListTeacherComponent},
   {path:"create" , pathMatch:'full' ,component:CreateTeacherComponent},
-  {path:"update:id" , pathMatch:'full' ,component:UpdateTeacherComponent}
+  {path:"update/:id" , pathMatch:'full' ,component:UpdateTeacherComponent}
 ];
 
 @NgModule({
