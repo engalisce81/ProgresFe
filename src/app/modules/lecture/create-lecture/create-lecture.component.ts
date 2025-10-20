@@ -37,7 +37,8 @@ export class CreateLectureComponent {
       quizTime: [0, [Validators.required, Validators.min(1)]],
       quizTryCount: [0, [Validators.required, Validators.min(1)]],
       quizCount: [0, [Validators.required, Validators.min(1)]],
-      isVisible: [true]
+      isVisible: [true],
+      isFree:[false]
     });
   }
 
@@ -113,7 +114,8 @@ export class CreateLectureComponent {
       quizTime: this.lectureForm.value.quizTime,
       quizTryCount: this.lectureForm.value.quizTryCount,
       quizCount: this.lectureForm.value.quizCount,
-      isVisible: this.lectureForm.value.isVisible
+      isVisible: this.lectureForm.value.isVisible,
+      isFree: this.lectureForm.value.isFree // ✅ أضفناها هنا
     };
 
     this.lectureService.create(dto).subscribe({

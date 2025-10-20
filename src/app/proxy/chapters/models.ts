@@ -5,6 +5,7 @@ export interface ChapterDto extends EntityDto<string> {
   name?: string;
   courseId?: string;
   courseName?: string;
+  isFree: boolean;
 }
 
 export interface CourseChaptersDto {
@@ -12,6 +13,9 @@ export interface CourseChaptersDto {
   chapterName?: string;
   courseId?: string;
   courseName?: string;
+  userId?: string;
+  userName?: string;
+  logoUrl?: string;
   lectureCount: number;
   lectures: LectureInfoDto[];
 }
@@ -19,4 +23,5 @@ export interface CourseChaptersDto {
 export interface CreateUpdateChapterDto {
   name?: string;
   courseId?: string;
+  isFree: boolean;
 }

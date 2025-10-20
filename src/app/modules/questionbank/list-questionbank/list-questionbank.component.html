@@ -1,0 +1,91 @@
+<div class="list-container" style="width: 100%;">
+
+  <!-- Delete confirmation -->
+  @if (showDeleteConfirm) {
+  <div class="delete-confirm-card">
+    <p>Are you sure you want to delete <strong>{{ questionBankToDelete.name }}</strong>?</p>
+    <div class="delete-confirm-actions">
+      <button class="btn btn-secondary" (click)="cancelDelete()">No</button>
+      <button class="btn btn-danger" (click)="deleteQuestionBank()">Yes</button>
+    </div>
+  </div>
+  }
+
+  <!-- Search and Create -->
+  <div class="toolbar">
+    <input
+      type="text"
+      [(ngModel)]="search"
+      placeholder="Search question banks..."
+      class="search-input"
+      (keyup.enter)="onSearchChange()"
+    />
+    <button class="btn btn-search" (click)="onSearchChange()" title="Search">
+      <i class="bi bi-search"></i>
+    </button>
+
+    <button routerLink="/questionbanks/create" class="btn btn-create" title="Create">
+      <i class="bi bi-plus-circle me-1"></i> Create
+    </button>
+  </div>
+
+  <!-- Loading -->
+  @if (loading) {
+  <div class="loading-container">
+    <div class="spinner"></div>
+    <p class="loading-text">Loading...</p>
+  </div>
+  }
+
+  <!-- Table -->
+  @if (!loading) {
+  @if (questionBanks.length > 0) {
+  <table class="table" style="width: 100%;">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Name</th>
+        <th>Course</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (qb of questionBanks; track qb.id; let i = $index) {
+      <tr>
+        <td>{{ (pageIndex - 1) * pageSize + i + 1 }}</td>
+        <td>{{ qb.name }}</td>
+        <td>{{ qb.courseName || '-' }}</td>
+        <td class="actions">
+          <button [routerLink]="['/questionbanks/update', qb.id]" class="btn btn-edit" title="Edit">
+            <i class="bi bi-pencil"></i>
+          </button>
+          <button (click)="confirmDelete(qb)" class="btn btn-delete" title="Delete">
+            <i class="bi bi-trash"></i>
+          </button>
+        </td>
+      </tr>
+      }
+    </tbody>
+  </table>
+
+  <!-- Pagination -->
+  @if (totalCount > pageSize) {
+  <div class="pagination">
+    <button class="btn btn-previous" [disabled]="pageIndex === 1" (click)="onPageChange(pageIndex - 1)">
+      Previous
+    </button>
+
+    <button class="btn btn-next" [disabled]="pageIndex === totalPages" (click)="onPageChange(pageIndex + 1)">
+      Next
+    </button>
+  </div>
+  }
+  }
+  @else {
+  <div class="no-data-message">
+    <p>No question banks found.</p>
+  </div>
+  }
+  }
+
+</div>

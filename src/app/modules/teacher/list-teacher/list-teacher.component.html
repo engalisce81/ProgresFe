@@ -10,7 +10,59 @@
         </div>
     </div>
     }
+<!-- 🔹 Password Reset Modal -->
+@if (showPasswordModal) {
+  <div class="modal-backdrop">
+    <div class="modal">
+      <h3>Reset Password for {{ selectedteacher.fullName }}</h3>
 
+      <!-- 🟣 New Password -->
+      <div class="form-group password-group">
+        <label>New Password</label>
+        <div class="password-wrapper">
+          <input
+            [type]="showNewPassword ? 'text' : 'password'"
+            [(ngModel)]="newPassword"
+            class="form-control"
+          />
+          <i
+            class="bi"
+            [ngClass]="showNewPassword ? 'bi-eye-slash' : 'bi-eye'"
+            (click)="toggleNewPassword()"
+          ></i>
+        </div>
+      </div>
+
+      <!-- 🟣 Confirm Password -->
+      <div class="form-group password-group">
+        <label>Confirm Password</label>
+        <div class="password-wrapper">
+          <input
+            [type]="showConfirmPassword ? 'text' : 'password'"
+            [(ngModel)]="confirmPassword"
+            class="form-control"
+          />
+          <i
+            class="bi"
+            [ngClass]="showConfirmPassword ? 'bi-eye-slash' : 'bi-eye'"
+            (click)="toggleConfirmPassword()"
+          ></i>
+        </div>
+      </div>
+
+      @if (passwordError) {
+        <p class="text-danger">{{ passwordError }}</p>
+      }
+
+      <div class="modal-actions">
+        <button class="btn btn-secondary" (click)="closePasswordModal()">Cancel</button>
+        <button class="btn btn-primary" (click)="resetPassword()" [disabled]="loading">
+          @if (loading) { Processing... } @else { Save }
+        </button>
+      </div>
+    </div>
+  </div>
+}
     <!-- Search and Create -->
     <div class="toolbar">
         <input type="text" [(ngModel)]="search" placeholder="Search teachers..." class="search-input"
@@ -61,6 +113,9 @@
                     <button (click)="confirmDelete(teacher)" class="btn btn-delete" title="Delete">
                         <i class="bi bi-trash"></i>
                     </button>
+                    <button (click)="openPasswordModal(teacher)" class="btn btn-warning" title="Reset Password">
+                  <i class="bi bi-key"></i>
+                </button>
                 </td>
             </tr>
             }

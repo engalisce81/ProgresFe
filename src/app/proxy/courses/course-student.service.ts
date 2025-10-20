@@ -28,6 +28,14 @@ export class CourseStudentService {
     { apiName: this.apiName,...config });
   
 
+  deleteAllStudentInAllCourses = (config?: Partial<Rest.Config>) =>
+    this.restService.request<any, void>({
+      method: 'DELETE',
+      url: '/api/app/course-student/all-student-in-all-courses',
+    },
+    { apiName: this.apiName,...config });
+  
+
   deleteAllStudentInCourseByCourseId = (courseId: string, config?: Partial<Rest.Config>) =>
     this.restService.request<any, void>({
       method: 'DELETE',
@@ -49,6 +57,15 @@ export class CourseStudentService {
       method: 'GET',
       url: '/api/app/course-student',
       params: { pageNumber, pageSize, isSubscribe, courseId, search },
+    },
+    { apiName: this.apiName,...config });
+  
+
+  getListStudents = (pageNumber: number, pageSize: number, isSubscribe: boolean, search: string, config?: Partial<Rest.Config>) =>
+    this.restService.request<any, PagedResultDto<CourseStudentDto>>({
+      method: 'GET',
+      url: '/api/app/course-student/students',
+      params: { pageNumber, pageSize, isSubscribe, search },
     },
     { apiName: this.apiName,...config });
   

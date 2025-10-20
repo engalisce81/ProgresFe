@@ -1,11 +1,13 @@
+import { NgClass } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
+import { AccountcustomService } from '@proxy/account-customs/accountcustom.service';
 import { TeacherDto, TeacherService } from '@proxy/teachers';
 
 @Component({
   selector: 'app-list-teacher',
-  imports: [FormsModule],
+  imports: [FormsModule,RouterLink ,NgClass],
   templateUrl: './list-teacher.component.html',
   styleUrl: './list-teacher.component.scss'
 })
@@ -17,19 +19,64 @@ teachers: TeacherDto[] = [];
   totalCount = 0;
   pageSize = 10;
   pageIndex = 1;
-
+  newPassword = '';
+  confirmPassword = '';
+  passwordError = '';
   // Delete confirmation state
   showDeleteConfirm = false;
   teacherToDelete!: TeacherDto;
+showPasswordModal = false;
+  selectedteacher!: TeacherDto;
 
   constructor(
     private teacherService: TeacherService,
+        private accountcustomService: AccountcustomService,
     private router: Router
   ) {}
 
   ngOnInit(): void {
     this.loadTeachers();
   }
+  openPasswordModal(teacher: TeacherDto): void {
+    this.selectedteacher = teacher;
+    this.newPassword = '';
+    this.confirmPassword = '';
+    this.passwordError = '';
+    this.showPasswordModal = true;
+  }
+  closePasswordModal(): void {
+    this.showPasswordModal = false;
+  }
+
+  // ✅ Reset password
+  resetPassword(): void {
+    if (!this.newPassword || !this.confirmPassword) {
+      this.passwordError = 'Please fill in both fields.';
+      return;
+    }
+    if (this.newPassword !== this.confirmPassword) {
+      this.passwordError = 'Passwords do not match.';
+      return;
+    }
+
+    this.passwordError = '';
+    this.loading = true;
+
+    this.accountcustomService
+      .resetPassword(this.selectedteacher.id!, this.newPassword)
+      .subscribe({
+        next: () => {
+          this.loading = false;
+          alert('Password changed successfully!');
+          this.showPasswordModal = false;
+        },
+        error: (err) => {
+          this.loading = false;
+          alert('Error changing password: ' + err.message);
+        }
+      });
+  }
+
 
   loadTeachers(): void {
     this.loading = true;
@@ -89,4 +136,14 @@ teachers: TeacherDto[] = [];
   get totalPages(): number {
     return Math.ceil(this.totalCount / this.pageSize);
   }
+    showNewPassword = false;
+showConfirmPassword = false;
+
+toggleNewPassword() {
+  this.showNewPassword = !this.showNewPassword;
+}
+
+toggleConfirmPassword() {
+  this.showConfirmPassword = !this.showConfirmPassword;
+}
 }

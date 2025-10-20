@@ -1,4 +1,5 @@
 import type { AuditedEntityDto, EntityDto } from '@abp/ng.core';
+import type { CourseChaptersDto } from '../chapters/models';
 
 export interface CourseDto extends AuditedEntityDto<string> {
   name?: string;
@@ -17,6 +18,9 @@ export interface CourseDto extends AuditedEntityDto<string> {
   subjectName?: string;
   isActive: boolean;
   isLifetime: boolean;
+  isPdf: boolean;
+  pdfUrl?: string;
+  introductionVideoUrl?: string;
   durationInDays?: number;
   infos: string[];
 }
@@ -29,12 +33,15 @@ export interface CourseInfoDto extends AuditedEntityDto<string> {
 
 export interface CourseInfoHomeDto {
   id?: string;
+  isPdf: boolean;
+  pdfUrl?: string;
   name?: string;
   description?: string;
   price: number;
   logoUrl?: string;
   userId?: string;
   userName?: string;
+  teacherLogoUrl?: string;
   rating: number;
   collegeId?: string;
   collegeName?: string;
@@ -45,8 +52,11 @@ export interface CourseInfoHomeDto {
   alreadyJoin: boolean;
   alreadyRequest: boolean;
   chapterCount: number;
+  lectureCount: number;
+  introductionVideoUrl?: string;
   durationInWeeks?: number;
   infos: string[];
+  courseChaptersDtos: CourseChaptersDto[];
 }
 
 export interface CourseStudentDto extends EntityDto<string> {
@@ -69,6 +79,9 @@ export interface CreateUpdateCourseDto {
   isActive: boolean;
   isLifetime: boolean;
   durationInDays?: number;
+  isPdf: boolean;
+  pdfUrl?: string;
+  introductionVideoUrl?: string;
   subjectId?: string;
   infos: string[];
 }

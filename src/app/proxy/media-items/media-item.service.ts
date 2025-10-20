@@ -1,7 +1,6 @@
 import { RestService, Rest } from '@abp/ng.core';
 import type { PagedResultDto } from '@abp/ng.core';
 import { Injectable } from '@angular/core';
-import type { IFormFile } from '../microsoft/asp-net-core/http/models';
 import type { ResponseApi } from '../response/models';
 
 @Injectable({
@@ -11,7 +10,7 @@ export class MediaItemService {
   apiName = 'Default';
   
 
-uploadImage(file: File, config?: Partial<Rest.Config>) {
+  uploadImage(file: File, config?: Partial<Rest.Config>) {
     const formData = new FormData();
     formData.append('file', file, file.name); // 'file' مطابق لاسم IFormFile في API
 

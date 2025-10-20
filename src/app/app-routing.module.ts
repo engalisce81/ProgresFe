@@ -47,6 +47,15 @@ const routes: Routes = [
     loadChildren: () => import('./modules/teacher/teacher.module').then(m => m.TeacherModule),
   },
 
+ {
+    path: 'enrollments',
+    loadChildren: () => import('./modules/enrollment/enrollment.module').then(m => m.EnrollmentModule),
+  },
+    {
+    path: 'questionbanks',
+    loadChildren: () => import('./modules/questionbank/questionbank.module').then(m => m.QuestionbankModule),
+  },
+
 
   {
     path: 'account',

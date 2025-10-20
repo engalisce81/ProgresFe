@@ -37,6 +37,7 @@ studentForm: FormGroup;
       universityId: ['', Validators.required],
       collegeId: ['', Validators.required],
       gradeLevelId: ['', Validators.required],
+     phoneNumber: [ '', [Validators.required, Validators.pattern(/^[0-9]{10,15}$/)]],
       accountTypeKey: [3],
       studentMobileIP: ['']
     });

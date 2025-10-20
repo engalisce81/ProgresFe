@@ -7,7 +7,7 @@ import { UniversityService, CollegeService } from '@proxy/universites';
 
 @Component({
   selector: 'app-update-student',
-  imports: [ReactiveFormsModule,RouterLink],
+  imports: [ReactiveFormsModule, RouterLink],
   templateUrl: './update-student.component.html',
   styleUrl: './update-student.component.scss'
 })
@@ -38,7 +38,8 @@ export class UpdateStudentComponent {
       collegeId: ['', Validators.required],
       gradeLevelId: ['', Validators.required],
       accountTypeKey: [3],
-      studentMobileIP: ['']
+      studentMobileIP: [''],
+      phoneNumber: ['']
     });
   }
 
@@ -82,7 +83,9 @@ export class UpdateStudentComponent {
           universityId: student.data.universityId,
           collegeId: student.data.collegeId,
           gradeLevelId: student.data.gradeLevelId,
-          studentMobileIP: student.data.studentMobileIP
+          studentMobileIP: student.data.studentMobileIP,
+          phoneNumber: student.data.phoneNumber,
+
         });
 
         // preload colleges and grade levels

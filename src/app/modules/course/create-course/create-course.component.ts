@@ -18,6 +18,8 @@ courseForm: FormGroup;
   loading = false;
   colleges: LookupDto[] = [];
   subjects: LookupDto[] = [];
+pdfFile: File | null = null;
+pdfFileName: string | null = null;
 
   logoFile: File | null = null;
   logoPreview: string | ArrayBuffer | null = null;
@@ -31,17 +33,21 @@ courseForm: FormGroup;
     private uploadService: MediaItemService
   ) {
     this.courseForm = this.fb.group({
-      name: ['', Validators.required],
-      title: ['', Validators.required],
-      description: [''],
-      price: [0, [Validators.required, Validators.min(0)]],
-      subjectId: ['', Validators.required],
-      isActive: [true],
-      isLifetime: [false],
-      durationInDays: [0],
-      logoFile: [null, Validators.required],
-      infos: this.fb.array([this.fb.control('', Validators.required)]) // لازم واحدة على الأقل
-    });
+  name: ['', Validators.required],
+  title: ['', Validators.required],
+  description: [''],
+  price: [0, [Validators.required, Validators.min(0)]],
+  subjectId: ['', Validators.required],
+  introductionVideoUrl:[""],
+  isActive: [true],
+  isLifetime: [false],
+  durationInDays: [0],
+  isPdf: [false], // ✅ جديد
+  logoFile: [""],
+  pdfFile: [""],
+  infos: this.fb.array([this.fb.control('', Validators.required)])
+});
+
   }
 
   ngOnInit(): void {
@@ -51,6 +57,15 @@ courseForm: FormGroup;
   get infos(): FormArray {
     return this.courseForm.get('infos') as FormArray;
   }
+onPdfSelected(event: Event) {
+  const input = event.target as HTMLInputElement;
+  if (!input.files?.length) return;
+
+  this.pdfFile = input.files[0];
+  this.pdfFileName = this.pdfFile.name;
+  this.courseForm.patchValue({ pdfFile: this.pdfFile });
+  this.courseForm.get('pdfFile')?.updateValueAndValidity();
+}
 
   addInfo() {
     this.infos.push(this.fb.control('', Validators.required));
@@ -82,44 +97,56 @@ courseForm: FormGroup;
     reader.onload = e => this.logoPreview = e.target?.result;
     reader.readAsDataURL(this.logoFile);
   }
+submit() {
+  if (this.courseForm.invalid) {
+    alert('Please fill all required fields.');
+    return;
+  }
 
-  submit() {
-    if (this.courseForm.invalid || !this.logoFile) {
-      alert('Please fill all required fields and select a logo.');
-      return;
-    }
+  const isPdf = this.courseForm.get('isPdf')?.value;
 
-    this.loading = true;
+  this.loading = true;
 
-    this.uploadService.uploadImage(this.logoFile).subscribe({
-      next: (res) => {
-        const dto: CreateUpdateCourseDto = {
-          ...this.courseForm.value,
-          logoUrl: res.data,
-          infos: this.infos.value.filter((i: string) => i.trim() !== '')
-        };
+  const uploadTasks: Promise<string>[] = [];
 
-        if (dto.infos.length === 0) {
-          this.loading = false;
-          alert('At least one info is required.');
-          return;
-        }
+  // ✅ رفع الصورة لو موجودة
+  if (this.logoFile) {
+    const logoUpload = this.uploadService.uploadImage(this.logoFile).toPromise().then(res => res.data);
+    uploadTasks.push(logoUpload);
+  } else {
+    uploadTasks.push(Promise.resolve(''));
+  }
 
-        this.courseService.create(dto).subscribe({
-          next: () => {
-            this.loading = false;
-            this.router.navigate(['/courses']);
-          },
-          error: (err) => {
-            this.loading = false;
-            alert('Error creating course: ' + err.message);
-          }
-        });
+  // ✅ رفع PDF لو هو كورس PDF
+  if (isPdf && this.pdfFile) {
+    const pdfUpload = this.uploadService.uploadImage(this.pdfFile).toPromise().then(res => res.data);
+    uploadTasks.push(pdfUpload);
+  } else {
+    uploadTasks.push(Promise.resolve(''));
+  }
+
+  Promise.all(uploadTasks).then(([logoUrl, pdfUrl]) => {
+    const dto: CreateUpdateCourseDto = {
+      ...this.courseForm.value,
+      logoUrl,
+      pdfUrl,
+      infos: this.infos.value.filter((i: string) => i.trim() !== '')
+    };
+
+    this.courseService.create(dto).subscribe({
+      next: () => {
+        this.loading = false;
+        this.router.navigate(['/courses']);
       },
       error: (err) => {
         this.loading = false;
-        alert('Error uploading logo: ' + err.message);
+        alert('Error creating course: ' + err.message);
       }
     });
-  }
+  }).catch(err => {
+    this.loading = false;
+    alert('Upload error: ' + err.message);
+  });
+}
+
 }

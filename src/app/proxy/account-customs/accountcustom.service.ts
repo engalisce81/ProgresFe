@@ -39,6 +39,15 @@ export class AccountcustomService {
     { apiName: this.apiName,...config });
   
 
+  resetPassword = (userId: string, newPassword: string, config?: Partial<Rest.Config>) =>
+    this.restService.request<any, void>({
+      method: 'POST',
+      url: `/api/app/accountcustom/reset-password/${userId}`,
+      params: { newPassword },
+    },
+    { apiName: this.apiName,...config });
+  
+
   sendNotificationToEmail = (input: CreateEmailDto, config?: Partial<Rest.Config>) =>
     this.restService.request<any, ResponseApi<EmailDto>>({
       method: 'POST',

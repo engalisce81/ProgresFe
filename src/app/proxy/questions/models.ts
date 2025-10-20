@@ -6,6 +6,11 @@ export interface CreateUpdateQuestionAnswerDto {
   questionId?: string;
 }
 
+export interface CreateUpdateQuestionBankDto {
+  name?: string;
+  courseId?: string;
+}
+
 export interface CreateUpdateQuestionDto {
   title?: string;
   questionTypeId?: string;
@@ -26,6 +31,11 @@ export interface QuestionAnswerPanelDto {
   id?: string;
   answer?: string;
   isCorrect: boolean;
+}
+
+export interface QuestionBankDto extends EntityDto<string> {
+  name?: string;
+  courseId?: string;
 }
 
 export interface QuestionDto extends EntityDto<string> {

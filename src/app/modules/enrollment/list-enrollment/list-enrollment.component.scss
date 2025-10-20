@@ -1,0 +1,270 @@
+/* ==============================
+   Root variables موجودة عندك
+============================== */
+
+/* ==============================
+   General container
+============================== */
+.subscribers-container {
+  padding: 2rem;
+  background: var(--bg-body);
+  min-height: 100vh;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+  h2 {
+    font-size: 1.8rem;
+    color: var(--violet-900);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  /* ==============================
+     Actions (top buttons + search)
+  ============================= */
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+
+    input[type='text'] {
+      padding: 0.5rem 0.75rem;
+      border-radius: var(--radius);
+      border: 1px solid #ccc;
+      flex: 1;
+      min-width: 180px;
+    }
+
+    button {
+      cursor: pointer;
+      border: none;
+      border-radius: var(--radius);
+      padding: 0.45rem 0.9rem;
+      font-weight: 600;
+      transition: all 0.3s ease;
+
+      &.btn-success {
+        background: var(--success);
+        color: #fff;
+
+        &:hover {
+          filter: brightness(1.1);
+        }
+      }
+
+      &.btn-warning {
+        background: var(--warning);
+        color: #fff;
+
+        &:hover {
+          filter: brightness(1.1);
+        }
+      }
+
+      &.btn-danger {
+        background: #dc2626;
+        color: #fff;
+
+        &:hover {
+          filter: brightness(1.1);
+        }
+      }
+
+      &.btn-primary {
+        background: var(--blue-500);
+        color: #fff;
+
+        &:hover {
+          filter: brightness(1.1);
+        }
+      }
+    }
+  }
+
+  /* ==============================
+     Loading
+  ============================= */
+  .loading-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    margin: 2rem 0;
+
+    .spinner {
+      width: 50px;
+      height: 50px;
+      border: 5px solid #ccc;
+      border-top-color: var(--purple-600);
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+
+    .loading-text {
+      color: var(--muted);
+      font-size: 1rem;
+    }
+  }
+
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+
+  /* ==============================
+     No data
+  ============================= */
+  .no-data {
+    text-align: center;
+    color: var(--muted);
+    font-size: 1.1rem;
+    margin: 2rem 0;
+  }
+
+  /* ==============================
+     Students grid
+  ============================= */
+  .students-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1rem;
+  }
+
+  .student-card {
+    background: var(--surface);
+    border-radius: var(--radius);
+    padding: 1rem;
+    box-shadow: var(--shadow-1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+    &:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-2);
+    }
+
+    img {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 0.75rem;
+      border: 2px solid var(--purple-600);
+    }
+
+    .info {
+      h3 {
+        font-size: 1.2rem;
+        color: var(--violet-900);
+        margin-bottom: 0.25rem;
+      }
+
+      p {
+        margin: 0.2rem 0;
+        color: var(--text);
+        font-size: 0.9rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.25rem;
+
+        i {
+          color: var(--purple-600);
+        }
+      }
+
+      .status {
+        &.active {
+          color: #16a34a;
+          font-weight: 600;
+        }
+
+        &.inactive {
+          color: #e11d48;
+          font-weight: 600;
+        }
+      }
+
+      .actions {
+        margin-top: 0.5rem;
+        display: flex;
+        gap: 0.5rem;
+        flex-wrap: wrap;
+        justify-content: center;
+
+        button {
+          font-size: 0.8rem;
+          padding: 0.35rem 0.7rem;
+        }
+      }
+    }
+  }
+
+  /* ==============================
+     Pagination
+  ============================= */
+  .pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    margin: 1.5rem 0;
+
+    button {
+      border-radius: var(--radius);
+      padding: 0.45rem 0.9rem;
+      transition: all 0.2s ease;
+
+      &:disabled {
+        cursor: not-allowed;
+        opacity: 0.6;
+      }
+    }
+  }
+
+  /* ==============================
+     Delete confirmation overlay
+  ============================= */
+  .overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.45);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+
+    .delete-confirm-card {
+      background: var(--surface);
+      padding: 2rem;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-2);
+      text-align: center;
+      max-width: 400px;
+
+      p {
+        margin-bottom: 1.5rem;
+        font-size: 1rem;
+        color: var(--text);
+      }
+
+      .delete-confirm-actions {
+        display: flex;
+        justify-content: space-around;
+
+        button {
+          width: 100px;
+        }
+      }
+    }
+  }
+}
