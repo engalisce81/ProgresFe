@@ -13,14 +13,13 @@
             @for (quiz of lecture.quizzes; track quiz) {
               <div class="quiz-card">
                 <h3 class="quiz-title">{{ quiz.title }}</h3>
-
                 @if (quiz.questions?.length) {
                   <div class="questions">
                     @for (question of quiz.questions; track question) {
                       <div class="question-block">
                         <p class="question-title">
                           <strong>Q:</strong> {{ question.title }} 
-                          <span class="score">({{ question.score }} pts)</span>
+                          <span class="score">{{ question.score }} </span>
                         </p>
                         <p class="question-type">Type: {{ question.questionTypeName }}</p>
 

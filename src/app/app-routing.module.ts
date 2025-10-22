@@ -51,11 +51,15 @@ const routes: Routes = [
     path: 'enrollments',
     loadChildren: () => import('./modules/enrollment/enrollment.module').then(m => m.EnrollmentModule),
   },
-    {
+  {
     path: 'questionbanks',
     loadChildren: () => import('./modules/questionbank/questionbank.module').then(m => m.QuestionbankModule),
   },
 
+  {
+    path: 'exams',
+    loadChildren: () => import('./modules/exam/exam.module').then(m => m.ExamModule),
+  },
 
   {
     path: 'account',

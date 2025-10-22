@@ -95,6 +95,15 @@ export class LectureService {
       body: input,
     },
     { apiName: this.apiName,...config });
+  
+
+  userTryCountByUserIdAndLecIdAndQuizId = (userId: string, lecId: string, quizId: string, config?: Partial<Rest.Config>) =>
+    this.restService.request<any, ResponseApi<number>>({
+      method: 'POST',
+      url: '/api/app/lecture/user-try-count',
+      params: { userId, lecId, quizId },
+    },
+    { apiName: this.apiName,...config });
 
   constructor(private restService: RestService) {}
 }

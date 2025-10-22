@@ -162,7 +162,7 @@ export class UpdateLectureComponent {
       quizCount: this.lectureForm.value.quizCount,
       isVisible: this.lectureForm.value.isVisible,
       pdfUrls: pdfUrls,
-      isFree: this.lectureForm.value.isFree
+      isFree: this.lectureForm.value.isFree,successQuizRate:80
     };
 
     this.lectureService.update(this.lectureId, dto).subscribe({

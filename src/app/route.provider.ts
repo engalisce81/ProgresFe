@@ -8,7 +8,7 @@ export const APP_ROUTE_PROVIDER = [
 function configureRoutes(routesService: RoutesService) {
   return () => {
     routesService.add([
-     {
+    {
       path: '/',
       name: 'Home',
       iconClass: 'fas fa-home',
@@ -93,9 +93,17 @@ function configureRoutes(routesService: RoutesService) {
       iconClass: 'fas fa-user-friends',
       order: 11,
       layout: eLayoutType.application,
+      requiredPolicy: 'Acadmy.CourseStudents.Edit'
+
+    },
+    {
+      path: 'exams',
+      name: 'Exams',
+      iconClass: 'fas fa-file-alt',
+      order: 12,
+      layout: eLayoutType.application,
       requiredPolicy: 'Acadmy.QuestionBanks',
     },
-    
     ]);
   };
 }
