@@ -4,6 +4,7 @@ export interface RegistercustomDto {
   userName?: string;
   password?: string;
   gender: boolean;
+  phoneNumber?: string;
   collegeId?: string;
   universityId?: string;
   gradeLevelId?: string;

@@ -116,6 +116,7 @@ export class CreateLectureComponent {
       quizCount: this.lectureForm.value.quizCount,
       isVisible: this.lectureForm.value.isVisible,
       isFree: this.lectureForm.value.isFree // ✅ أضفناها هنا
+      ,successQuizRate:80
     };
 
     this.lectureService.create(dto).subscribe({

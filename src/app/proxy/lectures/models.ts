@@ -11,6 +11,7 @@ export interface CreateUpdateLectureDto {
   quizTryCount: number;
   quizCount: number;
   isFree: boolean;
+  successQuizRate: number;
   pdfUrls: string[];
 }
 
@@ -27,6 +28,7 @@ export interface LectureDto extends EntityDto<string> {
   quizCount: number;
   isVisible: boolean;
   isFree: boolean;
+  successQuizRate: number;
   pdfUrls: string[];
 }
 
