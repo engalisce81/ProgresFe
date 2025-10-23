@@ -1,7 +1,7 @@
 import { PagedResultDto } from '@abp/ng.core';
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { CourseStudentDto, CourseStudentService, CreateUpdateCourseStudentDto } from '@proxy/courses';
+import { CourseStudentDto, CourseStudentService, CreateUpdateCourseStudentDto } from '@proxy/dev/acadmy/courses';
 
 @Component({
   selector: 'app-list-requestjoin',

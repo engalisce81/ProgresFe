@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AccountcustomService } from '@proxy/account-customs';
-import { LookupDto } from '@proxy/look-up';
-import { StudentService, CreateUpdateStudentDto } from '@proxy/students';
-import { UniversityService, CollegeService, GradeLevelService } from '@proxy/universites';
+import { AccountcustomService } from '@proxy/dev/acadmy/account-customs';
+import { LookupDto } from '@proxy/dev/acadmy/look-up';
+import { StudentService, CreateUpdateStudentDto } from '@proxy/dev/acadmy/students';
+import { UniversityService, CollegeService, GradeLevelService } from '@proxy/dev/acadmy/universites';
 
 @Component({
   selector: 'app-create-student',

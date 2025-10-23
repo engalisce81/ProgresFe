@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
-import { CourseService } from '@proxy/courses';
-import { ExamService, ExamDto, CreateUpdateExamDto } from '@proxy/exams';
-import { LookupDto } from '@proxy/look-up';
+import { CourseService } from '@proxy/dev/acadmy/courses';
+import { ExamService, CreateUpdateExamDto } from '@proxy/dev/acadmy/exams';
+import { LookupDto } from '@proxy/dev/acadmy/look-up';
+
 
 @Component({
   selector: 'app-update-exam',

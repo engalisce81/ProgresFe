@@ -1,8 +1,9 @@
 import { ConfigStateService } from '@abp/ng.core';
 import { Component } from '@angular/core';
 import { FormsModule, NgModel, ReactiveFormsModule } from '@angular/forms';
-import { HomeService } from '@proxy/homes';
-import { CollegeService } from '@proxy/universites';
+import { HomeService } from '@proxy/dev/acadmy/homes';
+import { CollegeService } from '@proxy/dev/acadmy/universites';
+
 import { LoginService } from 'src/app/service/loginService';
 
 @Component({

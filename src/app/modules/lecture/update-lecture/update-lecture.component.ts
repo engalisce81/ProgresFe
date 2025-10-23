@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
 import { Router, ActivatedRoute, RouterLink } from '@angular/router';
-import { ChapterService } from '@proxy/chapters';
-import { LectureService, CreateUpdateLectureDto, LectureDto } from '@proxy/lectures';
-import { LookupDto } from '@proxy/look-up';
-import { MediaItemService } from '@proxy/media-items';
-import { CourseService } from '@proxy/courses';
+import { ChapterService } from '@proxy/dev/acadmy/chapters';
+import { CourseService } from '@proxy/dev/acadmy/courses';
+import { LectureDto, LectureService, CreateUpdateLectureDto } from '@proxy/dev/acadmy/lectures';
+import { LookupDto } from '@proxy/dev/acadmy/look-up';
+import { MediaItemService } from '@proxy/dev/acadmy/media-items';
 
 @Component({
   selector: 'app-update-lecture',
@@ -34,7 +34,7 @@ export class UpdateLectureComponent {
     private route: ActivatedRoute,
     private router: Router
   ) {
-    this.lectureForm = this.fb.group({
+   this.lectureForm = this.fb.group({
       title: ['', Validators.required],
       content: ['', Validators.required],
       courseId: ['', Validators.required],
@@ -43,8 +43,9 @@ export class UpdateLectureComponent {
       quizTime: [0, [Validators.required, Validators.min(1)]],
       quizTryCount: [0, [Validators.required, Validators.min(1)]],
       quizCount: [0, [Validators.required, Validators.min(1)]],
+      successQuizRate: [0, [Validators.required, Validators.min(1), Validators.max(100)]], // ✅ أضفناها هنا
       isVisible: [true],
-      isFree:[false]
+      isFree: [false]
     });
   }
 
@@ -68,8 +69,9 @@ export class UpdateLectureComponent {
           quizTime: lec.data.quizTime,
           quizTryCount: lec.data.quizTryCount,
           quizCount: lec.data.quizCount,
+          successQuizRate: lec.data.successQuizRate ?? 0, // ✅ تعبئة القيمة
           isVisible: lec.data.isVisible,
-          isFree:lec.data.isFree
+          isFree: lec.data.isFree
         });
 
         this.existingPdfs = lec.data.pdfUrls || [];
@@ -160,9 +162,10 @@ export class UpdateLectureComponent {
       quizTime: this.lectureForm.value.quizTime,
       quizTryCount: this.lectureForm.value.quizTryCount,
       quizCount: this.lectureForm.value.quizCount,
+      successQuizRate: this.lectureForm.value.successQuizRate, // ✅ هنا كمان
       isVisible: this.lectureForm.value.isVisible,
       pdfUrls: pdfUrls,
-      isFree: this.lectureForm.value.isFree,successQuizRate:80
+      isFree: this.lectureForm.value.isFree
     };
 
     this.lectureService.update(this.lectureId, dto).subscribe({

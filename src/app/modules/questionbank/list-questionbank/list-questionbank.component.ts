@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormsModule,  } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
-import { QuestionBankDto, QuestionBankService } from '@proxy/questions';
+import { QuestionBankDto, QuestionBankService } from '@proxy/dev/acadmy/questions';
 
 @Component({
   selector: 'app-list-questionbank',

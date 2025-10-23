@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
-import { CollegeDto, CollegeService } from '@proxy/universites';
+import { CollegeDto, CollegeService } from '@proxy/dev/acadmy/universites';
 
 @Component({
   selector: 'app-list-college',

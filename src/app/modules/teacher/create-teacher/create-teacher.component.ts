@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
-import { LookupDto } from '@proxy/look-up';
-import { TeacherService, CreateUpdateTeacherDto } from '@proxy/teachers';
-import { UniversityService, CollegeService } from '@proxy/universites';
+import { LookupDto } from '@proxy/dev/acadmy/look-up';
+import { TeacherService, CreateUpdateTeacherDto } from '@proxy/dev/acadmy/teachers';
+import { UniversityService, CollegeService } from '@proxy/dev/acadmy/universites';
+
 
 @Component({
   selector: 'app-create-teacher',

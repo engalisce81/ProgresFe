@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ChartService } from '../service/chartServices';
-import { HomesDto, HomeService } from '@proxy/homes';
 import { LoginService } from '../service/loginService';
+import { HomesDto, HomeService } from '@proxy/dev/acadmy/homes';
 
 @Component({
   standalone: false,

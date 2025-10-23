@@ -2,9 +2,10 @@ import { NgClass } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { RegistercustomDto, AccountcustomService } from '@proxy/account-customs';
-import { LookupDto } from '@proxy/look-up';
-import { UniversityService, CollegeService } from '@proxy/universites';
+import { RegistercustomDto, AccountcustomService } from '@proxy/dev/acadmy/account-customs';
+import { LookupDto } from '@proxy/dev/acadmy/look-up';
+import { UniversityService, CollegeService } from '@proxy/dev/acadmy/universites';
+
 
 @Component({
   selector: 'app-register',
@@ -20,7 +21,8 @@ export class RegisterComponent {
     gender: true,
     universityId: '',
     collegeId: '',
-    accountTypeKey: 2
+    accountTypeKey: 2,
+    phoneNumber:''
   };
 
   universities: LookupDto[] = [];

@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
-import { ChapterDto, ChapterService } from '@proxy/chapters';
+import { ChapterDto, ChapterService } from '@proxy/dev/acadmy/chapters';
+
 
 @Component({
   selector: 'app-list-chapter',

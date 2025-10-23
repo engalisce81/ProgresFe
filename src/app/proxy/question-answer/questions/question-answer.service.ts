@@ -1,8 +1,8 @@
 import { RestService, Rest } from '@abp/ng.core';
 import type { PagedResultDto } from '@abp/ng.core';
 import { Injectable } from '@angular/core';
-import type { CreateUpdateQuestionAnswerDto, QuestionAnswerDto } from '../../questions/models';
-import type { ResponseApi } from '../../response/models';
+import type { CreateUpdateQuestionAnswerDto, QuestionAnswerDto } from '../../dev/acadmy/questions/models';
+import type { ResponseApi } from '../../dev/acadmy/response/models';
 
 @Injectable({
   providedIn: 'root',

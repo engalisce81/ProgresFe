@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
-import { GradeLevelService, CreateUpdateGradeLevelDto } from '@proxy/universites';
+import { GradeLevelService, CreateUpdateGradeLevelDto } from '@proxy/dev/acadmy/universites';
 
 @Component({
   selector: 'app-create-gradelevel',

@@ -69,6 +69,21 @@
           </select>
         </div>
       </div>
+<!-- Logo Upload -->
+<div class="form-row">
+  <div class="form-group">
+    <label for="logo">Question Image (optional)</label>
+    <input id="logo" type="file" accept="image/*" (change)="onFileSelected($event)" class="form-control">
+
+    <!-- ✅ عرض الصورة الحالية إن وُجدت -->
+    @if (existingLogoUrl) {
+      <div class="image-preview mt-2">
+        <label>Current Image:</label>
+        <img [src]="existingLogoUrl" alt="Current Question Image" style="max-height: 120px; border-radius: 8px;">
+      </div>
+    }
+  </div>
+</div>
 
       <!-- Score -->
       <div class="form-row">

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { GrowthOverYearDto, MemberDto } from '@proxy/homes';
+import { GrowthOverYearDto, MemberDto } from '@proxy/dev/acadmy/homes';
 import { Chart, registerables } from 'chart.js';
 
 Chart.register(...registerables);

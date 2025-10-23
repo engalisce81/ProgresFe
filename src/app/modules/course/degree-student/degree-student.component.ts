@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { StudentDegreeByCourseDto, CourseStudentService, CourseService } from '@proxy/courses';
-import { LectureWithQuizzesDto } from '@proxy/lectures';
+import { CourseService } from '@proxy/dev/acadmy/courses';
+import { LectureWithQuizzesDto } from '@proxy/dev/acadmy/lectures';
+
 
 @Component({
   selector: 'app-degree-student',

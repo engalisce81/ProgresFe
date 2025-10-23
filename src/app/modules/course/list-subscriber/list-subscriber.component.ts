@@ -1,7 +1,7 @@
 import { PagedResultDto } from '@abp/ng.core';
 import { Component } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
-import { CourseStudentDto, CourseStudentService } from '@proxy/courses';
+import { CourseStudentDto, CourseStudentService } from '@proxy/dev/acadmy/courses';
 
 @Component({
   selector: 'app-list-subscriber',

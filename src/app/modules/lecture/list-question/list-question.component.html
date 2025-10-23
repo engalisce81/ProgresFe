@@ -63,6 +63,7 @@
       <strong>
         <i class="bi bi-question-circle"></i> {{ question.title }}
       </strong>
+     
       <span class="score">
         <i class="bi bi-star-fill"></i> [{{ question.score }} pts]
       </span>
@@ -79,8 +80,12 @@
         </button>
       </div>
     </div>
-
+ @if (question.logoUrl && question.logoUrl.trim() !== '') {
+          <div class="question-image">
+            <img [src]="question.logoUrl" alt="Question Image" />
+          </div>}
     <!-- Answers -->
+     
     <ul class="answers">
       @for (ans of question.answers; track ans.id) {
       <li [ngClass]="ans.isCorrect ? 'correct' : 'incorrect'">

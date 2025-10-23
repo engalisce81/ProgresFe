@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
-import { UniversityService, CreateUpdateUniversityDto } from '@proxy/universites';
+import { UniversityService, CreateUpdateUniversityDto } from '@proxy/dev/acadmy/universites';
 
 @Component({
   selector: 'app-create-university',

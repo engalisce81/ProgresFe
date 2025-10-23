@@ -3,8 +3,8 @@ import { ConfirmationService } from '@abp/ng.theme.shared';
 import { NgClass } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { CourseStudentDto, CourseStudentService, CreateUpdateCourseStudentDto } from '@proxy/courses';
-import { CreateUpdateStudentDto } from '@proxy/students';
+import { CourseStudentDto, CreateUpdateCourseStudentDto, CourseStudentService } from '@proxy/dev/acadmy/courses';
+
 
 @Component({
   selector: 'app-list-enrollment',

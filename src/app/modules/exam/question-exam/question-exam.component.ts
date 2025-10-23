@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
-import { ExamQuestionsDto, ExamService, CreateUpdateExamQuestionDto } from '@proxy/exams';
-import { LookupDto } from '@proxy/look-up';
-import { QuestionBankService } from '@proxy/questions';
+import { ExamQuestionsDto, ExamService, CreateUpdateExamQuestionDto } from '@proxy/dev/acadmy/exams';
+import { LookupDto } from '@proxy/dev/acadmy/look-up';
+import { QuestionBankService } from '@proxy/dev/acadmy/questions';
+
 
 @Component({
   selector: 'app-question-exam',
