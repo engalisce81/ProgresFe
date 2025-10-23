@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, ReactiveFormsModule, FormArray, AbstractControl } from '@angular/forms';
 import { Router, ActivatedRoute, RouterLink } from '@angular/router';
-import { CourseDto, CourseService, CreateUpdateCourseDto } from '@proxy/courses';
-import { LookupDto } from '@proxy/look-up';
-import { MediaItemService } from '@proxy/media-items';
-import { CollegeService, SubjectService } from '@proxy/universites';
+import { CourseService, CreateUpdateCourseDto } from '@proxy/dev/acadmy/courses';
+import { LookupDto } from '@proxy/dev/acadmy/look-up';
+import { MediaItemService } from '@proxy/dev/acadmy/media-items';
+import { SubjectService } from '@proxy/dev/acadmy/universites';
+
 
 @Component({
   selector: 'app-update-course',

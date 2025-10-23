@@ -2,7 +2,7 @@ import { ConfigStateService } from '@abp/ng.core';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
-import { CourseDto, CourseService } from '@proxy/courses';
+import { CourseDto, CourseService } from '@proxy/dev/acadmy/courses';
 
 @Component({
   selector: 'app-list-course',

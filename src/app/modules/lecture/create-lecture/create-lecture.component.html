@@ -109,6 +109,23 @@
   </div>
 </div>}
 
+<!-- Success Quiz Rate -->
+<div class="form-row">
+  <div class="form-group">
+    <label for="successQuizRate">Success Quiz Rate (%) *</label>
+    <input id="successQuizRate"
+           type="number"
+           formControlName="successQuizRate"
+           class="form-control"
+           placeholder="Enter success rate (1-100)"
+           [class.is-invalid]="lectureForm.get('successQuizRate')?.invalid && lectureForm.get('successQuizRate')?.touched" />
+
+    @if (lectureForm.get('successQuizRate')?.invalid && lectureForm.get('successQuizRate')?.touched) {
+      <div class="error-message">Success rate must be between 1 and 100</div>
+    }
+  </div>
+</div>
+
       <!-- Quiz Settings -->
       <div class="form-row">
         <div class="form-group">

@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
-import { CourseService } from '@proxy/courses';
-import { LookupDto } from '@proxy/look-up';
-import { QuestionBankService, QuestionBankDto, CreateUpdateQuestionBankDto } from '@proxy/questions';
+import { CourseService } from '@proxy/dev/acadmy/courses';
+import { LookupDto } from '@proxy/dev/acadmy/look-up';
+import { QuestionBankService, CreateUpdateQuestionBankDto } from '@proxy/dev/acadmy/questions';
+
 
 @Component({
   selector: 'app-update-questionbank',

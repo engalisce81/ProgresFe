@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
-import { ChapterService, CreateUpdateChapterDto } from '@proxy/chapters';
-import { CourseService } from '@proxy/courses';
-import { LookupDto } from '@proxy/look-up';
+import { ChapterService, CreateUpdateChapterDto } from '@proxy/dev/acadmy/chapters';
+import { CourseService } from '@proxy/dev/acadmy/courses';
+import { LookupDto } from '@proxy/dev/acadmy/look-up';
 
 @Component({
   selector: 'app-create-chapter',

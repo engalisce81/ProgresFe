@@ -1,0 +1,18 @@
+import * as AccountCustoms from './account-customs';
+import * as Chapters from './chapters';
+import * as Courses from './courses';
+import * as Emails from './emails';
+import * as Exams from './exams';
+import * as Homes from './homes';
+import * as Lectures from './lectures';
+import * as LookUp from './look-up';
+import * as MediaItems from './media-items';
+import * as ProfileUsers from './profile-users';
+import * as Questions from './questions';
+import * as Quizzes from './quizzes';
+import * as Response from './response';
+import * as Students from './students';
+import * as Supports from './supports';
+import * as Teachers from './teachers';
+import * as Universites from './universites';
+export { AccountCustoms, Chapters, Courses, Emails, Exams, Homes, Lectures, LookUp, MediaItems, ProfileUsers, Questions, Quizzes, Response, Students, Supports, Teachers, Universites };

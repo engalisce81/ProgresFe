@@ -2,8 +2,9 @@ import { NgClass } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
-import { AccountcustomService } from '@proxy/account-customs/accountcustom.service';
-import { TeacherDto, TeacherService } from '@proxy/teachers';
+import { AccountcustomService } from '@proxy/dev/acadmy/account-customs';
+import { TeacherDto, TeacherService } from '@proxy/dev/acadmy/teachers';
+
 
 @Component({
   selector: 'app-list-teacher',

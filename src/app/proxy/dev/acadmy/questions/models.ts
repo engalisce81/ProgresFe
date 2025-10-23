@@ -17,6 +17,7 @@ export interface CreateUpdateQuestionDto {
   quizId?: string;
   questionBankId?: string;
   score: number;
+  logoUrl?: string;
   answers: CreateUpdateQuestionAnswerDto[];
 }
 
@@ -47,6 +48,7 @@ export interface QuestionDto extends EntityDto<string> {
   questionBankId?: string;
   questionBankName?: string;
   score: number;
+  logoUrl?: string;
   answers: QuestionAnswerDto[];
 }
 
@@ -56,6 +58,7 @@ export interface QuestionWithAnswersDto {
   score: number;
   questionTypeId?: string;
   questionTypeName?: string;
+  logoUrl?: string;
   answers: QuestionAnswerPanelDto[];
 }
 
@@ -77,5 +80,6 @@ export interface QuestionDetailesDto {
   score: number;
   questionType?: string;
   questionTypeKey: number;
+  logoUrl?: string;
   answers: QuestionAnswerDetailesDto[];
 }

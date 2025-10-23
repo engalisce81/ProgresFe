@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
 import { Router, ActivatedRoute, RouterLink } from '@angular/router';
-import { QuizService } from '@proxy/lectures';
-import { CreateUpdateQuizDto } from '@proxy/quizzes';
+import { QuizService } from '@proxy/dev/acadmy/lectures';
+import { CreateUpdateQuizDto } from '@proxy/dev/acadmy/quizzes';
+
 
 @Component({
   selector: 'app-update-quiz',

@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormArray, ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
-import { LectureWithQuizzesDto, LectureService, QuizService } from '@proxy/lectures';
-import { QuestionService, QuestionWithAnswersDto } from '@proxy/questions';
 import { BaseCoreModule } from "@abp/ng.core";
+import { LectureWithQuizzesDto, LectureService, QuizService } from '@proxy/dev/acadmy/lectures';
+import { QuestionService, QuestionWithAnswersDto } from '@proxy/dev/acadmy/questions';
 
 @Component({
   selector: 'app-list-question',

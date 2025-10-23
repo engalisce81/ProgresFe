@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormArray, ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
-import { LookupDto } from '@proxy/look-up';
-import { QuestionService, QuestionWithAnswersDto } from '@proxy/questions';
+import { LookupDto } from '@proxy/dev/acadmy/look-up';
+import { MediaItemService } from '@proxy/dev/acadmy/media-items/media-item.service';
+import { QuestionService } from '@proxy/dev/acadmy/questions';
+
 
 @Component({
   selector: 'app-update-question',
@@ -17,11 +19,14 @@ questionForm: FormGroup;
   questionBanks: LookupDto[] = [];
   lecId: string = '';
   questionId: string = '';
+  selectedFile?: File;
+  existingLogoUrl: string = ''; // ✅ الصورة الحالية إن وجدت
   loading = false;
 
   constructor(
     private fb: FormBuilder,
     private questionService: QuestionService,
+    private mediaService: MediaItemService,
     private route: ActivatedRoute,
     private router: Router
   ) {
@@ -31,6 +36,7 @@ questionForm: FormGroup;
       quizId: ['', Validators.required],
       questionBankId: [''],
       score: [1, [Validators.required, Validators.min(1)]],
+      logoUrl: [''], // ✅ أضفنا logoUrl
       answers: this.fb.array([])
     });
   }
@@ -45,12 +51,10 @@ questionForm: FormGroup;
     this.loadQuestion(); // ✅ تحميل بيانات السؤال
   }
 
-  // Getter للـ Answers
   get answers(): FormArray {
     return this.questionForm.get('answers') as FormArray;
   }
 
-  // إضافة إجابة
   addAnswer(answer: string = '', isCorrect: boolean = false) {
     const answerGroup = this.fb.group({
       answer: [answer, Validators.required],
@@ -59,48 +63,48 @@ questionForm: FormGroup;
     this.answers.push(answerGroup);
   }
 
-  // إزالة إجابة
   removeAnswer(index: number) {
     this.answers.removeAt(index);
   }
 
-  // تحميل الـ Question Types
   loadQuestionTypes() {
     this.questionService.getListQuestionTypes().subscribe(res => {
       this.questionTypes = res.items;
     });
   }
 
-  // تحميل الـ Quizzes
   loadQuizzes() {
     this.questionService.getListQuizzes(this.lecId).subscribe(res => {
       this.quizzes = res.items;
     });
   }
 
-  // تحميل الـ Question Banks
   loadQuestionBanks() {
     this.questionService.getListQuestionBanks().subscribe(res => {
       this.questionBanks = res.items;
     });
   }
 
-  // ✅ تحميل السؤال الحالي
+  // ✅ تحميل بيانات السؤال
   loadQuestion() {
     this.loading = true;
     this.questionService.get(this.questionId).subscribe({
       next: (res) => {
+        const data = res.data;
+        this.existingLogoUrl = data.logoUrl || ''; // ✅ نحفظ الصورة القديمة
+
         this.questionForm.patchValue({
-          title: res.data.title,
-          questionTypeId: res.data.questionTypeId,
-          quizId: res.data.quizId,
-          questionBankId: res.data.questionBankId,
-          score: res.data.score
+          title: data.title,
+          questionTypeId: data.questionTypeId,
+          quizId: data.quizId,
+          questionBankId: data.questionBankId,
+          score: data.score,
+          logoUrl: data.logoUrl || ''
         });
 
         this.answers.clear();
-        res.data.answers.forEach(a => this.addAnswer(a.answer ?? '', a.isCorrect));
-        if (res.data.answers.length === 0) this.addAnswer();
+        data.answers.forEach(a => this.addAnswer(a.answer ?? '', a.isCorrect));
+        if (data.answers.length === 0) this.addAnswer();
 
         this.loading = false;
       },
@@ -111,12 +115,44 @@ questionForm: FormGroup;
     });
   }
 
-  // ✅ تحديث السؤال
+  // ✅ عند اختيار صورة جديدة
+  onFileSelected(event: any) {
+    const file = event.target.files[0];
+    if (file) {
+      this.selectedFile = file;
+    }
+  }
+
+  // ✅ عند الحفظ (تحديث)
   submit() {
     if (this.questionForm.invalid) return;
-
     this.loading = true;
-    this.questionService.update(this.questionId, this.questionForm.value).subscribe({
+
+    const dto = this.questionForm.value;
+
+    // لو المستخدم اختار صورة جديدة نرفعها أولاً
+    if (this.selectedFile) {
+      this.mediaService.uploadImage(this.selectedFile).subscribe({
+        next: (res) => {
+          dto.logoUrl = res.data || ''; // ✅ استخدم الصورة الجديدة
+          this.updateQuestion(dto);
+        },
+        error: (err) => {
+          console.error('Error uploading image', err);
+          dto.logoUrl = this.existingLogoUrl || ''; // لو فشل الرفع، نحتفظ القديمة
+          this.updateQuestion(dto);
+        }
+      });
+    } else {
+      // لو مفيش صورة جديدة، استخدم القديمة
+      dto.logoUrl = this.existingLogoUrl || '';
+      this.updateQuestion(dto);
+    }
+  }
+
+  // ✅ دالة تحديث السؤال فعليًا
+  private updateQuestion(dto: any) {
+    this.questionService.update(this.questionId, dto).subscribe({
       next: () => {
         console.log('Question updated');
         this.loading = false;

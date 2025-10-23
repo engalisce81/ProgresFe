@@ -1,4 +1,4 @@
-import type { CreateUpdateLectureDto, LectureDto, LectureWithQuizzesDto } from './models';
+import type { CreateUpdateLectureDto, LectureDto, LectureTryDto, LectureWithQuizzesDto } from './models';
 import { RestService, Rest } from '@abp/ng.core';
 import type { PagedResultDto } from '@abp/ng.core';
 import { Injectable } from '@angular/core';
@@ -79,6 +79,15 @@ export class LectureService {
     { apiName: this.apiName,...config });
   
 
+  getUserTryCountByUserIdAndLecIdAndQuizId = (userId: string, lecId: string, quizId: string, config?: Partial<Rest.Config>) =>
+    this.restService.request<any, ResponseApi<LectureTryDto>>({
+      method: 'GET',
+      url: '/api/app/lecture/user-try-count',
+      params: { userId, lecId, quizId },
+    },
+    { apiName: this.apiName,...config });
+  
+
   markQuiz = (quizId: string, score: number, config?: Partial<Rest.Config>) =>
     this.restService.request<any, ResponseApi<QuizStudentDto>>({
       method: 'POST',
@@ -93,15 +102,6 @@ export class LectureService {
       method: 'PUT',
       url: `/api/app/lecture/${id}`,
       body: input,
-    },
-    { apiName: this.apiName,...config });
-  
-
-  userTryCountByUserIdAndLecIdAndQuizId = (userId: string, lecId: string, quizId: string, config?: Partial<Rest.Config>) =>
-    this.restService.request<any, ResponseApi<number>>({
-      method: 'POST',
-      url: '/api/app/lecture/user-try-count',
-      params: { userId, lecId, quizId },
     },
     { apiName: this.apiName,...config });
 

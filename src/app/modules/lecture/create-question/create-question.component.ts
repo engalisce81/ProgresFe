@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormArray, ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
-import { LookupDto } from '@proxy/look-up/models';
-import { QuestionService } from '@proxy/questions';
+import { LookupDto } from '@proxy/dev/acadmy/look-up';
+import { MediaItemService } from '@proxy/dev/acadmy/media-items/media-item.service';
+import { QuestionService } from '@proxy/dev/acadmy/questions';
+
 
 @Component({
   selector: 'app-create-question',
@@ -11,18 +13,22 @@ import { QuestionService } from '@proxy/questions';
   styleUrl: './create-question.component.scss'
 })
 export class CreateQuestionComponent implements OnInit {
-   questionForm: FormGroup;
+  questionForm: FormGroup;
   questionTypes: LookupDto[] = [];
   quizzes: LookupDto[] = [];
   questionBanks: LookupDto[] = [];
   lecId: string = '';
   quizId: string = '';
+  selectedFile?: File;
+
 
   loading = false;
 
   constructor(
     private fb: FormBuilder,
     private questionService: QuestionService,
+        private mediaService: MediaItemService,
+
     private route: ActivatedRoute,
     private router: Router
   ) {
@@ -32,6 +38,7 @@ export class CreateQuestionComponent implements OnInit {
       quizId: [''], // هيتم تعيينها من الـ param
       questionBankId: [''],
       score: [1, [Validators.required, Validators.min(1)]],
+      logoUrl: [''],
       answers: this.fb.array([])
     });
   }
@@ -96,23 +103,47 @@ export class CreateQuestionComponent implements OnInit {
       this.questionBanks = res.items;
     });
   }
-
+  // ✅ عند اختيار صورة
+  onFileSelected(event: any) {
+    const file = event.target.files[0];
+    if (file) {
+      this.selectedFile = file;
+    }
+  }
   // Submit
   submit() {
     if (this.questionForm.invalid) return;
-
     this.loading = true;
+
     const dto = this.questionForm.value;
 
+    // لو المستخدم رفع صورة
+    if (this.selectedFile) {
+      this.mediaService.uploadImage(this.selectedFile).subscribe({
+        next: (res) => {
+          dto.logoUrl = res.data || ''; // لو الصورة اتحمّلت، نحط الرابط
+          this.createQuestion(dto);
+        },
+        error: (err) => {
+          console.error('Error uploading image', err);
+          dto.logoUrl = ''; // لو فشل الرفع، نحطها فاضية
+          this.createQuestion(dto);
+        }
+      });
+    } else {
+      // مفيش صورة
+      dto.logoUrl = '';
+      this.createQuestion(dto);
+    }
+  }
+  private createQuestion(dto: any) {
     this.questionService.create(dto).subscribe({
-      next: res => {
+      next: (res) => {
         console.log('Question created', res);
         this.loading = false;
-
-        // ✅ العودة لقائمة الأسئلة الخاصة بالـ quiz
-        this.router.navigate(['/lectures/questions', this.lecId ]);
+        this.router.navigate(['/lectures/questions', this.lecId]);
       },
-      error: err => {
+      error: (err) => {
         console.error('Error creating question', err);
         this.loading = false;
       }

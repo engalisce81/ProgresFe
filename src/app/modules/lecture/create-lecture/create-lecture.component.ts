@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
-import { ChapterService } from '@proxy/chapters';
-import { CourseService } from '@proxy/courses';
-import { LectureService, CreateUpdateLectureDto } from '@proxy/lectures';
-import { LookupDto } from '@proxy/look-up';
-import { MediaItemService } from '@proxy/media-items/media-item.service';
+import { ChapterService } from '@proxy/dev/acadmy/chapters';
+import { CourseService } from '@proxy/dev/acadmy/courses';
+import { LectureService, CreateUpdateLectureDto } from '@proxy/dev/acadmy/lectures';
+import { LookupDto } from '@proxy/dev/acadmy/look-up';
+import { MediaItemService } from '@proxy/dev/acadmy/media-items';
+
 
 @Component({
   selector: 'app-create-lecture',
@@ -28,18 +29,20 @@ export class CreateLectureComponent {
     private courseService: CourseService,
     private router: Router
   ) {
-    this.lectureForm = this.fb.group({
-      title: ['', Validators.required],
-      content: ['', Validators.required],
-      courseId: ['', Validators.required],
-      chapterId: [{ value: '', disabled: true }, Validators.required],
-      videoUrl: [''],
-      quizTime: [0, [Validators.required, Validators.min(1)]],
-      quizTryCount: [0, [Validators.required, Validators.min(1)]],
-      quizCount: [0, [Validators.required, Validators.min(1)]],
-      isVisible: [true],
-      isFree:[false]
-    });
+   this.lectureForm = this.fb.group({
+  title: ['', Validators.required],
+  content: ['', Validators.required],
+  courseId: ['', Validators.required],
+  chapterId: [{ value: '', disabled: true }, Validators.required],
+  videoUrl: [''],
+  quizTime: [0, [Validators.required, Validators.min(1)]],
+  quizTryCount: [0, [Validators.required, Validators.min(1)]],
+  quizCount: [0, [Validators.required, Validators.min(1)]],
+  successQuizRate: [0, [Validators.required, Validators.min(1), Validators.max(100)]], // ✅ تمت الإضافة
+  isVisible: [true],
+  isFree: [false]
+});
+
   }
 
   ngOnInit(): void {
@@ -106,18 +109,19 @@ export class CreateLectureComponent {
 
   private createLecture(pdfUrls: string[]) {
     const dto: CreateUpdateLectureDto = {
-      title: this.lectureForm.value.title,
-      chapterId: this.lectureForm.value.chapterId,
-      content: this.lectureForm.value.content || '',
-      videoUrl: this.lectureForm.value.videoUrl || '',
-      pdfUrls: pdfUrls,
-      quizTime: this.lectureForm.value.quizTime,
-      quizTryCount: this.lectureForm.value.quizTryCount,
-      quizCount: this.lectureForm.value.quizCount,
-      isVisible: this.lectureForm.value.isVisible,
-      isFree: this.lectureForm.value.isFree // ✅ أضفناها هنا
-      ,successQuizRate:80
-    };
+  title: this.lectureForm.value.title,
+  chapterId: this.lectureForm.value.chapterId,
+  content: this.lectureForm.value.content || '',
+  videoUrl: this.lectureForm.value.videoUrl || '',
+  pdfUrls: pdfUrls,
+  quizTime: this.lectureForm.value.quizTime,
+  quizTryCount: this.lectureForm.value.quizTryCount,
+  quizCount: this.lectureForm.value.quizCount,
+  successQuizRate: this.lectureForm.value.successQuizRate, // ✅ هنا
+  isVisible: this.lectureForm.value.isVisible,
+  isFree: this.lectureForm.value.isFree
+};
+
 
     this.lectureService.create(dto).subscribe({
       next: () => {

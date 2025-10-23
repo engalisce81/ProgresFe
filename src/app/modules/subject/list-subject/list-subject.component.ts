@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
-import { SubjectDto, SubjectService } from '@proxy/universites';
+import { SubjectDto, SubjectService } from '@proxy/dev/acadmy/universites';
 
 @Component({
   selector: 'app-list-subject',

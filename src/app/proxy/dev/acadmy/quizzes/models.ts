@@ -7,6 +7,7 @@ export interface QuizInfoDto {
   questionsCount: number;
   quizTryCount: number;
   tryedCount: number;
+  isSucces: boolean;
   alreadyAnswer: boolean;
 }
 
@@ -14,6 +15,14 @@ export interface QuizWithQuestionsDto {
   id?: string;
   title?: string;
   questions: QuestionWithAnswersDto[];
+}
+
+export interface AnswerResultDto {
+  answerId?: string;
+  answerText?: string;
+  selectText?: string;
+  isCorrect: boolean;
+  isSelected: boolean;
 }
 
 export interface CreateUpdateQuizDto {
@@ -34,11 +43,10 @@ export interface LectureQuizResultDto {
 export interface QuestionResultDto {
   questionId?: string;
   questionText?: string;
-  studentAnswer?: string;
-  correctAnswer?: string;
-  isCorrect: boolean;
   scoreObtained: number;
   scoreTotal: number;
+  logoUrl?: string;
+  answers: AnswerResultDto[];
 }
 
 export interface QuizAnswerDto {
@@ -74,6 +82,9 @@ export interface QuizResultDto {
   quizId?: string;
   totalScore: number;
   studentScore: number;
+  myTryCount: number;
+  lectureTryCount: number;
+  isSuccesful: boolean;
 }
 
 export interface QuizStudentDto {

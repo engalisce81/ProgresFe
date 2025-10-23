@@ -41,6 +41,14 @@ export interface LectureInfoDto {
   quiz: QuizInfoDto;
 }
 
+export interface LectureTryDto {
+  myTryCount: number;
+  lectureTryCount: number;
+  successQuizRate: number;
+  myScoreRate: number;
+  isSucces: boolean;
+}
+
 export interface LectureWithQuizzesDto {
   id?: string;
   title?: string;

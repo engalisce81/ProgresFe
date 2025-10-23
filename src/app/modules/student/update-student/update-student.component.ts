@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
-import { LookupDto } from '@proxy/look-up';
-import { StudentService, StudentDto, CreateUpdateStudentDto } from '@proxy/students';
-import { UniversityService, CollegeService } from '@proxy/universites';
+import { LookupDto } from '@proxy/dev/acadmy/look-up';
+import { StudentService, CreateUpdateStudentDto } from '@proxy/dev/acadmy/students';
+import { UniversityService, CollegeService } from '@proxy/dev/acadmy/universites';
+
 
 @Component({
   selector: 'app-update-student',

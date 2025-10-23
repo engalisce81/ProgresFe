@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, RouterLink } from '@angular/router';
-import { GradeLevelDto, GradeLevelService } from '@proxy/universites';
+import { GradeLevelDto, GradeLevelService } from '@proxy/dev/acadmy/universites';
 
 @Component({
   selector: 'app-list-gradelevel',

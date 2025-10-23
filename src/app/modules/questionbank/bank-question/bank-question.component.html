@@ -1,0 +1,30 @@
+@if (loading) {
+  <div class="loading-container">
+    <div class="spinner"></div>
+    <p class="loading-text">Loading questions...</p>
+  </div>
+} @else {
+  <div class="question-list">
+    <h2><i class="bi bi-database"></i> Bank Questions</h2>
+
+    @for (q of questions; track q.id) {
+      <div class="question-card">
+        <h3>{{ q.tittle }}</h3>
+        <p>Type: {{ q.questionType }}</p>
+          @if (q.logoUrl && q.logoUrl.trim() !== '') {
+          <div class="question-image">
+            <img [src]="q.logoUrl" alt="Question Image" />
+          </div>
+        }
+        <ul>
+          @for (ans of q.questionAnswers; track ans.answerId) {
+            <li [ngClass]="ans.isSelected ? 'selected' : ''">
+              {{ ans.answer }}
+           
+            </li>
+          }
+        </ul>
+      </div>
+    }
+  </div>
+}

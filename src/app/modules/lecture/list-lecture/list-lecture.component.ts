@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
-import { CourseService } from '@proxy/courses';
-import { LectureDto, LectureService } from '@proxy/lectures';
+import { LectureDto, LectureService } from '@proxy/dev/acadmy/lectures';
+
 
 @Component({
   selector: 'app-list-lecture',
