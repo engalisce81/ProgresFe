@@ -24,4 +24,5 @@ export interface StudentDto {
   gradeLevelId?: string;
   accountTypeKey: number;
   studentMobileIP?: string;
+  coursesName: string[];
 }

@@ -59,6 +59,12 @@ export interface CourseInfoHomeDto {
   courseChaptersDtos: CourseChaptersDto[];
 }
 
+export interface CourseLookupDto {
+  courseId?: string;
+  name?: string;
+  isSelect: boolean;
+}
+
 export interface CourseStudentDto extends EntityDto<string> {
   userId?: string;
   name?: string;
@@ -95,6 +101,11 @@ export interface CreateUpdateCourseStudentDto {
   userId?: string;
   courseId?: string;
   isSubscibe: boolean;
+}
+
+export interface CreateUpdateStudentCoursesDto {
+  userId?: string;
+  courseIds: string[];
 }
 
 export interface StudentDegreeByCourseDto {
