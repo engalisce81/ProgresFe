@@ -2897,6 +2897,140 @@
               },
               "allowAnonymous": false,
               "implementFrom": "Dev.Acadmy.Courses.CourseStudentAppService"
+            },
+            "AssignStudentToCoursesByInput": {
+              "uniqueName": "AssignStudentToCoursesByInput",
+              "name": "AssignStudentToCourses",
+              "httpMethod": "POST",
+              "url": "api/app/course-student/assign-student-to-courses",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "input",
+                  "typeAsString": "Dev.Acadmy.Courses.CreateUpdateStudentCoursesDto, Dev.Acadmy.Application.Contracts",
+                  "type": "Dev.Acadmy.Courses.CreateUpdateStudentCoursesDto",
+                  "typeSimple": "Dev.Acadmy.Courses.CreateUpdateStudentCoursesDto",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "input",
+                  "name": "input",
+                  "jsonName": null,
+                  "type": "Dev.Acadmy.Courses.CreateUpdateStudentCoursesDto",
+                  "typeSimple": "Dev.Acadmy.Courses.CreateUpdateStudentCoursesDto",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "Body",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "System.Void",
+                "typeSimple": "System.Void"
+              },
+              "allowAnonymous": false,
+              "implementFrom": "Dev.Acadmy.Courses.CourseStudentAppService"
+            },
+            "GetListCoursesToAssginToStudentAsyncBySearchAndPageNumberAndPageSizeAndUserId": {
+              "uniqueName": "GetListCoursesToAssginToStudentAsyncBySearchAndPageNumberAndPageSizeAndUserId",
+              "name": "GetListCoursesToAssginToStudentAsync",
+              "httpMethod": "GET",
+              "url": "api/app/course-student/courses-to-assgin-to-student/{userId}",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "search",
+                  "typeAsString": "System.String, System.Private.CoreLib",
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                },
+                {
+                  "name": "pageNumber",
+                  "typeAsString": "System.Int32, System.Private.CoreLib",
+                  "type": "System.Int32",
+                  "typeSimple": "number",
+                  "isOptional": false,
+                  "defaultValue": null
+                },
+                {
+                  "name": "pageSize",
+                  "typeAsString": "System.Int32, System.Private.CoreLib",
+                  "type": "System.Int32",
+                  "typeSimple": "number",
+                  "isOptional": false,
+                  "defaultValue": null
+                },
+                {
+                  "name": "userId",
+                  "typeAsString": "System.Guid, System.Private.CoreLib",
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "search",
+                  "name": "search",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": ""
+                },
+                {
+                  "nameOnMethod": "pageNumber",
+                  "name": "pageNumber",
+                  "jsonName": null,
+                  "type": "System.Int32",
+                  "typeSimple": "number",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": ""
+                },
+                {
+                  "nameOnMethod": "pageSize",
+                  "name": "pageSize",
+                  "jsonName": null,
+                  "type": "System.Int32",
+                  "typeSimple": "number",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": ""
+                },
+                {
+                  "nameOnMethod": "userId",
+                  "name": "userId",
+                  "jsonName": null,
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "Volo.Abp.Application.Dtos.PagedResultDto<Dev.Acadmy.Courses.CourseLookupDto>",
+                "typeSimple": "Volo.Abp.Application.Dtos.PagedResultDto<Dev.Acadmy.Courses.CourseLookupDto>"
+              },
+              "allowAnonymous": false,
+              "implementFrom": "Dev.Acadmy.Courses.CourseStudentAppService"
             }
           }
         },
@@ -10768,6 +10902,51 @@
         }
       ]
     },
+    "Dev.Acadmy.Courses.CourseLookupDto": {
+      "baseType": null,
+      "isEnum": false,
+      "enumNames": null,
+      "enumValues": null,
+      "genericArguments": null,
+      "properties": [
+        {
+          "name": "CourseId",
+          "jsonName": null,
+          "type": "System.Guid",
+          "typeSimple": "string",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        },
+        {
+          "name": "Name",
+          "jsonName": null,
+          "type": "System.String",
+          "typeSimple": "string",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        },
+        {
+          "name": "IsSelect",
+          "jsonName": null,
+          "type": "System.Boolean",
+          "typeSimple": "boolean",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        }
+      ]
+    },
     "Dev.Acadmy.Courses.CourseStudentDto": {
       "baseType": "Volo.Abp.Application.Dtos.EntityDto<System.Guid>",
       "isEnum": false,
@@ -11107,6 +11286,39 @@
           "jsonName": null,
           "type": "System.Boolean",
           "typeSimple": "boolean",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        }
+      ]
+    },
+    "Dev.Acadmy.Courses.CreateUpdateStudentCoursesDto": {
+      "baseType": null,
+      "isEnum": false,
+      "enumNames": null,
+      "enumValues": null,
+      "genericArguments": null,
+      "properties": [
+        {
+          "name": "UserId",
+          "jsonName": null,
+          "type": "System.Guid",
+          "typeSimple": "string",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        },
+        {
+          "name": "CourseIds",
+          "jsonName": null,
+          "type": "[System.Guid]",
+          "typeSimple": "[string]",
           "isRequired": false,
           "minLength": null,
           "maxLength": null,
@@ -11590,6 +11802,18 @@
         },
         {
           "name": "QuestionType",
+          "jsonName": null,
+          "type": "System.String",
+          "typeSimple": "string",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        },
+        {
+          "name": "logoUrl",
           "jsonName": null,
           "type": "System.String",
           "typeSimple": "string",
@@ -14010,6 +14234,18 @@
           "regex": null
         },
         {
+          "name": "QuizSuccesRate",
+          "jsonName": null,
+          "type": "System.Int32",
+          "typeSimple": "number",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        },
+        {
           "name": "Questions",
           "jsonName": null,
           "type": "[Dev.Acadmy.Quizzes.QuestionResultDto]",
@@ -14514,6 +14750,18 @@
           "jsonName": null,
           "type": "System.String",
           "typeSimple": "string",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        },
+        {
+          "name": "CoursesName",
+          "jsonName": null,
+          "type": "[System.String]",
+          "typeSimple": "[string]",
           "isRequired": false,
           "minLength": null,
           "maxLength": null,

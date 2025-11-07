@@ -1,14 +1,16 @@
 import { NgClass } from '@angular/common';
 import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { AccountcustomService } from '@proxy/dev/acadmy/account-customs';
+import { CourseStudentService } from '@proxy/dev/acadmy/courses';
+import { CourseLookupDto, CreateUpdateStudentCoursesDto } from '@proxy/dev/acadmy/courses/models';
 import { StudentDto, StudentService } from '@proxy/dev/acadmy/students';
 
 
 @Component({
   selector: 'app-list-student',
-  imports: [FormsModule,RouterLink ,NgClass],
+  imports: [FormsModule,RouterLink ,NgClass ,ReactiveFormsModule],
   templateUrl: './list-student.component.html',
   styleUrl: './list-student.component.scss'
 })
@@ -31,11 +33,17 @@ students: StudentDto[] = [];
   newPassword = '';
   confirmPassword = '';
   passwordError = '';
-
+  showAssignCoursesModal = false;
+courses: CourseLookupDto[] = [];
+courseSearch = '';
+coursePageSize = 10;
+coursePageIndex = 1;
+courseTotalCount = 0;
   constructor(
     private studentService: StudentService,
     private accountcustomService: AccountcustomService,
-    private router: Router
+    private router: Router,
+    private courseStudentService:CourseStudentService
   ) {}
 
   ngOnInit(): void {
@@ -151,6 +159,69 @@ toggleNewPassword() {
 
 toggleConfirmPassword() {
   this.showConfirmPassword = !this.showConfirmPassword;
+}
+
+
+
+// فتح Modal
+openAssignCoursesModal(student: StudentDto) {
+  this.selectedStudent = student;
+  this.courseSearch = '';
+  this.coursePageIndex = 1;
+  this.loadCourses();
+  this.showAssignCoursesModal = true;
+}
+
+// إغلاق Modal
+closeAssignCoursesModal() {
+  this.showAssignCoursesModal = false;
+}
+
+// جلب الكورسات من السيرفر
+loadCourses() {
+  this.loading = true;
+  this.courseStudentService
+    .getListCoursesToAssginToStudent(this.courseSearch, this.coursePageIndex, this.coursePageSize, this.selectedStudent.id!)
+    .subscribe({
+      next: (res) => {
+        this.courses = res.items;
+        this.courseTotalCount = res.totalCount;
+        this.loading = false;
+      },
+      error: (err) => {
+        console.error('Error loading courses:', err);
+        this.loading = false;
+      }
+    });
+}
+
+// Pagination
+get courseTotalPages() {
+  return Math.ceil(this.courseTotalCount / this.coursePageSize);
+}
+onCoursePageChange(page: number) {
+  this.coursePageIndex = page;
+  this.loadCourses();
+}
+
+// Assign الكورسات للطالب
+assignCoursesToStudent() {
+  const input: CreateUpdateStudentCoursesDto = {
+    userId: this.selectedStudent.id!,
+    courseIds: this.courses.filter(c => c.isSelect).map(c => c.courseId!)
+  };
+  this.loading = true;
+  this.courseStudentService.assignStudentToCoursesByInput(input).subscribe({
+    next: () => {
+      this.loading = false;
+      this.showAssignCoursesModal = false;
+      this.loadStudents();
+    },
+    error: (err) => {
+      this.loading = false;
+      alert('Error assigning courses: ' + err.message);
+    }
+  });
 }
 
 }

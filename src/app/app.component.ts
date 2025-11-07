@@ -39,6 +39,16 @@ export class AppComponent implements OnInit {
         component:LogoutComponent,
         key: eThemeLeptonXComponents.NavItems,
       });
+      this.replaceableComponents.add({
+        component:LogoutComponent,
+        key: eThemeLeptonXComponents.MobileUserProfile
+      });
+
+      
+      this.replaceableComponents.add({
+        component:EmptyLayoutComponent,
+        key: eThemeLeptonXComponents.MobileLanguageSelection
+      });
     }
   }
 }

@@ -75,6 +75,7 @@ export interface QuizResultDetailDto {
   quizTitle?: string;
   studentScore: number;
   totalScore: number;
+  quizSuccesRate: number;
   questions: QuestionResultDto[];
 }
 

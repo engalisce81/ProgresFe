@@ -1,4 +1,4 @@
-import type { CourseStudentDto, CreateUpdateCourseStudentDto, StudentDegreeByCourseDto } from './models';
+import type { CourseLookupDto, CourseStudentDto, CreateUpdateCourseStudentDto, CreateUpdateStudentCoursesDto, StudentDegreeByCourseDto } from './models';
 import { RestService, Rest } from '@abp/ng.core';
 import type { PagedResultDto } from '@abp/ng.core';
 import { Injectable } from '@angular/core';
@@ -9,6 +9,15 @@ import type { ResponseApi } from '../response/models';
 })
 export class CourseStudentService {
   apiName = 'Default';
+  
+
+  assignStudentToCoursesByInput = (input: CreateUpdateStudentCoursesDto, config?: Partial<Rest.Config>) =>
+    this.restService.request<any, void>({
+      method: 'POST',
+      url: '/api/app/course-student/assign-student-to-courses',
+      body: input,
+    },
+    { apiName: this.apiName,...config });
   
 
   create = (input: CreateUpdateCourseStudentDto, config?: Partial<Rest.Config>) =>
@@ -57,6 +66,15 @@ export class CourseStudentService {
       method: 'GET',
       url: '/api/app/course-student',
       params: { pageNumber, pageSize, isSubscribe, courseId, search },
+    },
+    { apiName: this.apiName,...config });
+  
+
+  getListCoursesToAssginToStudent = (search: string, pageNumber: number, pageSize: number, userId: string, config?: Partial<Rest.Config>) =>
+    this.restService.request<any, PagedResultDto<CourseLookupDto>>({
+      method: 'GET',
+      url: `/api/app/course-student/courses-to-assgin-to-student/${userId}`,
+      params: { search, pageNumber, pageSize },
     },
     { apiName: this.apiName,...config });
   

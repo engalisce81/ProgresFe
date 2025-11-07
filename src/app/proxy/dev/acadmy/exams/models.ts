@@ -32,7 +32,7 @@ export interface ExamQuestionsDto {
   id?: string;
   tittle?: string;
   questionType?: string;
+  logoUrl?: string;
   isSelected: boolean;
-  logoUrl:string,
   questionAnswers: ExamQuestionAnswerDto[];
 }

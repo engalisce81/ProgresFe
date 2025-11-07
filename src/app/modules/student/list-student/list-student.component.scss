@@ -129,3 +129,53 @@
 .password-wrapper i:hover {
   color: var(--violet-900);
 }
+/* ---------------- Buttons Icons ---------------- */
+.btn-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  margin-right: 5px;
+  border-radius: 50%;
+  color: #fff;
+  font-size: 1.1rem;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.btn-icon.whatsapp {
+  background-color: #25D366;
+}
+
+.btn-icon.whatsapp:hover {
+  background-color: #1ebe5d;
+}
+
+.btn-icon.telegram {
+  background-color: #0088cc;
+}
+
+.btn-icon.telegram:hover {
+  background-color: #0077b3;
+}
+
+/* ---------------- Courses Badges ---------------- */
+.courses-cell {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.course-badge {
+  background-color: #e0f0ff;
+  color: #0366d6;
+  padding: 3px 8px;
+  border-radius: 12px;
+  font-size: 0.85rem;
+  white-space: nowrap;
+}
+.icon-connect{
+  display:flex;
+  gap:5px;
+}

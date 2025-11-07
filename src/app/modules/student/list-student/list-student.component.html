@@ -96,6 +96,8 @@
             <th>Full Name</th>
             <th>Username</th>
             <th>Gender</th>
+            <th>Conecet</th>
+            <th>Courses</th>
             <th>Actions</th>
           </tr>
         </thead>
@@ -106,6 +108,30 @@
               <td>{{ student.fullName }}</td>
               <td>{{ student.userName }}</td>
               <td>{{ student.gender ? 'Male' : 'Female' }}</td>
+              <td  class="icon-connect">
+                <!-- WhatsApp Icon -->
+                <a class="btn-icon whatsapp" 
+                  [href]="'https://wa.me/2' + student.phoneNumber" 
+                  target="_blank" rel="noopener noreferrer" title="WhatsApp">
+                  <i class="bi bi-whatsapp"></i>
+                </a>
+
+                <!-- Telegram Icon -->
+                <a class="btn-icon telegram" 
+                  [href]="'https://t.me/+2' + student.phoneNumber" 
+                  target="_blank" rel="noopener noreferrer" title="Telegram">
+                  <i class="bi bi-telegram"></i>
+                </a>
+              </td>
+
+<td>
+  <div class="courses-cell">
+    @for (cname of student.coursesName; track $index) {
+      <span class="course-badge">{{ cname }}</span>
+    }
+  </div>
+</td>
+
               <td class="actions">
                 <button [routerLink]="['/students/update', student.id]" class="btn btn-edit" title="Edit">
                   <i class="bi bi-pencil"></i>
@@ -119,6 +145,12 @@
                 <button (click)="openPasswordModal(student)" class="btn btn-warning" title="Reset Password">
                   <i class="bi bi-key"></i>
                 </button>
+
+                <!-- Assign Courses Button -->
+                <button (click)="openAssignCoursesModal(student)" class="btn btn-info" title="Assign Courses">
+                  <i class="bi bi-book"></i>
+                </button>
+
               </td>
             </tr>
           }
@@ -152,3 +184,46 @@
   }
 
 </div>
+
+<!-- 🔹 Assign Courses Modal -->
+@if (showAssignCoursesModal) {
+  <div class="modal-backdrop">
+    <div class="modal">
+      <h3>Assign Courses for {{ selectedStudent.fullName }}</h3>
+
+      <!-- Search -->
+      <div class="form-group">
+        <input type="text" [(ngModel)]="courseSearch" placeholder="Search courses..." class="form-control"
+          (keyup.enter)="loadCourses()" />
+        <button class="btn btn-search" (click)="loadCourses()">Search</button>
+      </div>
+
+      <!-- Courses List -->
+      <div class="courses-list" style="max-height: 300px; overflow-y: auto;">
+        @for (course of courses; track $index) {
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" [(ngModel)]="course.isSelect" id="{{ course.courseId }}">
+            <label class="form-check-label" for="{{ course.courseId }}">
+              {{ course.name }}
+            </label>
+          </div>
+        }
+      </div>
+
+      <!-- Pagination -->
+      @if(courseTotalCount > coursePageSize){
+        <div  class="pagination">
+          <button [disabled]="coursePageIndex === 1" (click)="onCoursePageChange(coursePageIndex - 1)">Previous</button>
+          <button [disabled]="coursePageIndex === courseTotalPages" (click)="onCoursePageChange(coursePageIndex + 1)">Next</button>
+        </div>
+      }
+
+      <div class="modal-actions">
+        <button class="btn btn-secondary" (click)="closeAssignCoursesModal()">Cancel</button>
+        <button class="btn btn-primary" (click)="assignCoursesToStudent()" [disabled]="loading">
+          @if (loading) { Processing... } @else { Assign }
+        </button>
+      </div>
+    </div>
+  </div>
+}
