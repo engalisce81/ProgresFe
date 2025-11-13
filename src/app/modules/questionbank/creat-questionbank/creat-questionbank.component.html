@@ -59,7 +59,7 @@
       </button>
 
       <button type="submit" class="btn btn-primary" [disabled]="questionBankForm.invalid || loading">
-        <span *ngIf="loading" class="spinner"></span>
+        @if(loading){<span  class="spinner"></span>}
         {{ loading ? 'Creating...' : 'Create Question Bank' }}
       </button>
     </div>

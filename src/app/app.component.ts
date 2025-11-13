@@ -39,16 +39,17 @@ export class AppComponent implements OnInit {
         component:LogoutComponent,
         key: eThemeLeptonXComponents.NavItems,
       });
-      this.replaceableComponents.add({
+ 
+     /* this.replaceableComponents.add({
         component:LogoutComponent,
-        key: eThemeLeptonXComponents.MobileUserProfile
-      });
+        key: eThemeLeptonXComponents.MobileNavbar
+      });*/
 
       
-      this.replaceableComponents.add({
-        component:EmptyLayoutComponent,
+     /* this.replaceableComponents.add({
+        component:LogoutComponent,
         key: eThemeLeptonXComponents.MobileLanguageSelection
-      });
+      });*/
     }
   }
 }

@@ -32,7 +32,6 @@
           <select id="courseId" formControlName="courseId" class="form-control"
             [class.is-invalid]="questionBankForm.get('courseId')?.invalid && questionBankForm.get('courseId')?.touched">
             <option value="">-- Select Course --</option>
-
             @for(c of courses; track $index)
             {
             <option [value]="c.id">{{ c.name }}</option>
@@ -55,7 +54,7 @@
       </button>
 
       <button type="submit" class="btn btn-primary" [disabled]="questionBankForm.invalid || loading">
-        <span *ngIf="loading" class="spinner"></span>
+       @if(loading){ <span  class="spinner"></span>}
         {{ loading ? 'Updating...' : 'Update Question Bank' }}
       </button>
     </div>
