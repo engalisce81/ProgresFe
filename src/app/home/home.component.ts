@@ -9,7 +9,7 @@ import { HomesDto, HomeService } from '@proxy/dev/acadmy/homes';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit  {
   homeData?: HomesDto;
   stats: any[] = [];
   loading = false; // حالة التحميل
@@ -31,6 +31,9 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
     this.loadHomeData();
   }
+ngOnDestroy() {
+  this.chartService.destroyAllCharts();
+}
 
 
   private loadHomeData() {
