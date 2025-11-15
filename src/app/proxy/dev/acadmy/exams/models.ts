@@ -20,6 +20,7 @@ export interface ExamDto extends EntityDto<string> {
   score: number;
   isActive: boolean;
   courseId?: string;
+  courseName:string;
 }
 
 export interface ExamQuestionAnswerDto {

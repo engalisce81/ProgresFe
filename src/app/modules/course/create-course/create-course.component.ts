@@ -35,7 +35,7 @@ pdfFileName: string | null = null;
     this.courseForm = this.fb.group({
   name: ['', Validators.required],
   title: ['', Validators.required],
-  description: [''],
+  description: ['' ,Validators.required],
   price: [0, [Validators.required, Validators.min(0)]],
   subjectId: ['', Validators.required],
   introductionVideoUrl:[""],
