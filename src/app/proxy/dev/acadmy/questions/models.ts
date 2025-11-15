@@ -37,6 +37,7 @@ export interface QuestionAnswerPanelDto {
 export interface QuestionBankDto extends EntityDto<string> {
   name?: string;
   courseId?: string;
+  courseName?:string;
 }
 
 export interface QuestionDto extends EntityDto<string> {

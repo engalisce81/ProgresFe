@@ -44,6 +44,7 @@
         <tr>
           <th>#</th>
           <th>Name</th>
+          <th>Course</th>
           <th>Time (min)</th>
           <th>Score</th>
           <th>Active</th>
@@ -55,6 +56,7 @@
         <tr>
           <td>{{ (pageIndex - 1) * pageSize + i + 1 }}</td>
           <td>{{ exam.name }}</td>
+          <td>{{exam.courseName}}</td>
           <td>{{ exam.timeExam }}</td>
           <td>{{ exam.score }}</td>
           <td>
