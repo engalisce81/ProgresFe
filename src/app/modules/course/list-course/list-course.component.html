@@ -42,6 +42,8 @@
             <th>#</th>
             <th>Name</th>
             <th>Title</th>
+            <th>Introduction</th>
+            <th>Pdf</th>
             <th>College</th>
             <th>Subject</th>
             <th>Actions</th>
@@ -51,8 +53,27 @@
           @for (course of courses; track course.id; let i = $index){
             <tr>
               <td>{{ (pageIndex - 1) * pageSize + i + 1 }}</td>
-              <td>{{ course.name }}</td>
+              <td class="student-cell">
+                <img 
+                  [src]="course.logoUrl || '/assets/default-avatar.png'" 
+                  class="student-avatar" 
+                  alt="Student Image"
+                />
+
+  {{ course.name }}
+</td>
               <td>{{ course.title }}</td>
+              <td>
+  <a [href]="course.introductionVideoUrl" target="_blank" class="icon-link youtube">
+    <i class="bi bi-youtube"></i>
+  </a>
+</td>
+<td>
+  @if(course.isPdf){
+  <a [href]="course.pdfUrl" target="_blank" class="icon-link pdf">
+          <i class="bi bi-file-earmark-pdf"></i> {{ $index + 1 }}
+        </a>}@else {no pdfs}
+</td>
               <td>{{ course.collegeName }}</td>
               <td>{{ course.subjectName }}</td>
               <td class="actions">

@@ -22,4 +22,5 @@ export interface TeacherDto {
   gradeLevelId?: string;
   accountTypeKey: number;
   studentMobileIP?: string;
+  logoUrl?: string;
 }

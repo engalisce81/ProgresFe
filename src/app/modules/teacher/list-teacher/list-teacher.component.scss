@@ -129,3 +129,15 @@
 .password-wrapper i:hover {
   color: var(--violet-900);
 }
+.student-cell {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.student-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+}

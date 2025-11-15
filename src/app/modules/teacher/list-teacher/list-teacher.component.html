@@ -102,7 +102,15 @@
             @for (teacher of teachers; track teacher.id; let i = $index) {
             <tr>
                 <td>{{ (pageIndex - 1) * pageSize + i + 1 }}</td>
-                <td>{{ teacher.fullName }}</td>
+                <td class="student-cell">
+                <img 
+                  [src]="teacher.logoUrl || '/assets/default-avatar.png'" 
+                  class="student-avatar" 
+                  alt="Student Image"
+                />
+
+  {{ teacher.fullName }}
+</td>
                 <td>{{ teacher.userName }}</td>
                 <td>{{ teacher.phoneNumber || '-' }}</td>
                 <td>{{ teacher.gender ? 'Male' : 'Female' }}</td>

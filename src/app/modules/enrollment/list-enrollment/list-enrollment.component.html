@@ -41,7 +41,21 @@
                 <p><i class="bi bi-envelope"></i> {{ student.email }}</p>
                 <p><i class="bi bi-calendar"></i> {{ student.creationTime }}</p>
                 <p><i class="bi bi-journal-bookmark"></i> {{ student.courseName }}</p>
+                <p>
+                     <!-- WhatsApp Icon -->
+                <a class="btn-icon whatsapp" 
+                  [href]="'https://wa.me/2' + student.phoneNumber" 
+                  target="_blank" rel="noopener noreferrer" title="WhatsApp">
+                  <i class="bi bi-whatsapp"></i>
+                </a>
 
+                <!-- Telegram Icon -->
+                <a class="btn-icon telegram" 
+                  [href]="'https://t.me/+2' + student.phoneNumber" 
+                  target="_blank" rel="noopener noreferrer" title="Telegram">
+                  <i class="bi bi-telegram"></i>
+                </a>
+                </p>
                 <p>
                     Status:
                     <span class="status" [ngClass]="student.isSubscibe ? 'active' : 'inactive'">

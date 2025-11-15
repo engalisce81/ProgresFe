@@ -4408,6 +4408,21 @@
               },
               "allowAnonymous": false,
               "implementFrom": "Dev.Acadmy.ProfileUsers.ProfileUserAppService"
+            },
+            "GetTeacherProfileAsync": {
+              "uniqueName": "GetTeacherProfileAsync",
+              "name": "GetTeacherProfileAsync",
+              "httpMethod": "GET",
+              "url": "api/app/profile-user/teacher-profile",
+              "supportedVersions": [],
+              "parametersOnMethod": [],
+              "parameters": [],
+              "returnValue": {
+                "type": "Dev.Acadmy.ProfileUsers.UserInfoDto",
+                "typeSimple": "Dev.Acadmy.ProfileUsers.UserInfoDto"
+              },
+              "allowAnonymous": false,
+              "implementFrom": "Dev.Acadmy.ProfileUsers.ProfileUserAppService"
             }
           }
         },
@@ -11049,6 +11064,18 @@
           "minimum": null,
           "maximum": null,
           "regex": null
+        },
+        {
+          "name": "PhoneNumber",
+          "jsonName": null,
+          "type": "System.String",
+          "typeSimple": "string",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
         }
       ]
     },
@@ -12924,6 +12951,30 @@
           "minimum": null,
           "maximum": null,
           "regex": null
+        },
+        {
+          "name": "LectureCount",
+          "jsonName": null,
+          "type": "System.Int32",
+          "typeSimple": "number",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        },
+        {
+          "name": "ChapterCount",
+          "jsonName": null,
+          "type": "System.Int32",
+          "typeSimple": "number",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
         }
       ]
     },
@@ -14758,6 +14809,18 @@
           "regex": null
         },
         {
+          "name": "LogoUrl",
+          "jsonName": null,
+          "type": "System.String",
+          "typeSimple": "string",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        },
+        {
           "name": "CoursesName",
           "jsonName": null,
           "type": "[System.String]",
@@ -15095,6 +15158,18 @@
         },
         {
           "name": "StudentMobileIP",
+          "jsonName": null,
+          "type": "System.String",
+          "typeSimple": "string",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        },
+        {
+          "name": "LogoUrl",
           "jsonName": null,
           "type": "System.String",
           "typeSimple": "string",

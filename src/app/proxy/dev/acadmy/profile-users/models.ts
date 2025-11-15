@@ -21,4 +21,6 @@ export interface UserInfoDto {
   accountTypeId?: string;
   accountTypeKey?: string;
   accountTypeName?: string;
+  lectureCount: number;
+  chapterCount: number;
 }
