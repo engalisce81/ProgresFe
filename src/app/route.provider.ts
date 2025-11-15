@@ -104,6 +104,14 @@ function configureRoutes(routesService: RoutesService) {
       layout: eLayoutType.application,
       requiredPolicy: 'Acadmy.QuestionBanks',
     },
+     {
+      path: 'profile',
+      name: 'Profile',
+      iconClass: 'fas fa-user-circle',
+      order: 12,
+      layout: eLayoutType.application,
+      requiredPolicy: 'Acadmy.QuestionBanks',
+    },
     ]);
   };
 }

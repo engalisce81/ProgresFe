@@ -10,6 +10,14 @@ export class ProfileUserService {
   apiName = 'Default';
   
 
+  getTeacherProfile = (config?: Partial<Rest.Config>) =>
+    this.restService.request<any, UserInfoDto>({
+      method: 'GET',
+      url: '/api/app/profile-user/teacher-profile',
+    },
+    { apiName: this.apiName,...config });
+  
+
   getUserInfo = (deviceIp: string, config?: Partial<Rest.Config>) =>
     this.restService.request<any, ResponseApi<UserInfoDto>>({
       method: 'GET',

@@ -1,4 +1,4 @@
-import { RestService, Rest } from '@abp/ng.core';
+ import { RestService, Rest } from '@abp/ng.core';
 import type { PagedResultDto } from '@abp/ng.core';
 import { Injectable } from '@angular/core';
 import { ResponseApi } from '@proxy/dev/acadmy/response';

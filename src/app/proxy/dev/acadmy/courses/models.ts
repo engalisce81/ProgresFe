@@ -74,6 +74,7 @@ export interface CourseStudentDto extends EntityDto<string> {
   courseId?: string;
   courseName?: string;
   isSubscibe: boolean;
+  phoneNumber?: string;
 }
 
 export interface CreateUpdateCourseDto {

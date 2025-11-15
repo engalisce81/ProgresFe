@@ -64,20 +64,26 @@
         <td>{{lec.courseName}}</td>
 
         <td>{{lec.content}}</td>
-        <td> <a [href]="lec.videoUrl" target="_blank"> video </a></td>
-      <td>
+     <td>
+  <a [href]="lec.videoUrl" target="_blank" class="icon-link youtube">
+    <i class="bi bi-youtube"></i>
+  </a>
+</td>
+
+<td>
   @if (lec.pdfUrls && lec.pdfUrls.length > 0) {
-    <span>
+    <span class="pdf-list">
       @for (pdf of lec.pdfUrls; track $index) {
-        <a [href]="pdf" target="_blank">Pdf {{ $index + 1 }}</a>
-        @if ($index < lec.pdfUrls.length - 1) { <span>, </span> }
+        <a [href]="pdf" target="_blank" class="icon-link pdf">
+          <i class="bi bi-file-earmark-pdf"></i> {{ $index + 1 }}
+        </a>
       }
     </span>
   }
-  @else {
-    <span>No PDFs</span>
-  }
 </td>
+
+
+
 
         <td>{{lec.quizTime}}</td>
         <td>{{lec.quizTryCount}}</td>
